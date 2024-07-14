@@ -14,6 +14,8 @@ import {
   HiUserGroup,
   HiUsers,
 } from "react-icons/hi";
+import SemInput from "../components/semInput";
+import SemSelect from "../components/semSelect";
 
 const Signup = () => {
   return (
@@ -27,210 +29,109 @@ const Signup = () => {
           onSubmit={() => console.log("test")}
         >
           <div className="basis-4/12 mr-5">
-            <div className="my-2">
-              <div className="mb-2 block">
-                <Label
-                  className="text-white"
-                  htmlFor="firstName"
-                  value="First Name"
-                />
-              </div>
-              <TextInput
-                id="firstName"
-                icon={HiUser}
-                type="text"
-                placeholder="Enter your first name"
-                required
-              />
-            </div>
-            <div className="my-2">
-              <div className="mb-2 block">
-                <Label
-                  className="text-white"
-                  htmlFor="middleName"
-                  value="Middle Name"
-                />
-              </div>
-              <TextInput
-                icon={HiUser}
-                id="middleName"
-                type="text"
-                placeholder="Enter your middle name"
-                required
-              />
-            </div>
-            <div className="my-2">
-              <div className="mb-2 block">
-                <Label
-                  className="text-white"
-                  htmlFor="lastName"
-                  value="Last Name"
-                />
-              </div>
-              <TextInput
-                icon={HiUser}
-                id="lastName"
-                type="text"
-                placeholder="Enter your last name"
-                required
-              />
-            </div>
-            <div className="my-2">
-              <div className="mb-2 block">
-                <Label
-                  className="text-white"
-                  htmlFor="birthDate"
-                  value="Birth Date"
-                />
-              </div>
-              <TextInput
-                icon={HiCalendar}
-                id="birthDate"
-                type="date"
-                placeholder="Enter your last name"
-                required
-              />
-            </div>
-            <div className="my-2">
-              <div className="mb-2 block">
-                <Label
-                  className="text-white"
-                  htmlFor="contact"
-                  value="Contact Number"
-                />
-              </div>
-              <TextInput
-                icon={HiPhone}
-                addon="+63"
-                id="contact"
-                type="text"
-                placeholder="Enter your contact number"
-                required
-              />
-            </div>
+            <SemInput
+              id={"firstName"}
+              label={"First Name"}
+              placeholder={"Enter your first name"}
+              icon={HiUser}
+            />
+            <SemInput
+              id={"middleName"}
+              label={"Middle Name"}
+              placeholder={"Enter your middle name"}
+              icon={HiUser}
+            />
+            <SemInput
+              id={"lastName"}
+              label={"Last Name"}
+              placeholder={"Enter your last name"}
+              icon={HiUser}
+            />
+            <SemInput
+              id={"birthDate"}
+              label={"Birth Date"}
+              icon={HiCalendar}
+              type={"date"}
+            />
+            <SemInput
+              id={"contact"}
+              label={"Contact Number"}
+              icon={HiPhone}
+              addOn="+63"
+            />
           </div>
           <div className="basis-4/12 mr-5">
-            <div className="my-2">
-              <div className="mb-2 block">
-                <Label className="text-white" htmlFor="gender" value="Gender" />
-              </div>
-              <Select icon={HiUsers} required id="gender" size={"is-large"}>
-                <option>Select your gender</option>
-                <option>Male</option>
-                <option>Female</option>
-                <option>Other</option>
-              </Select>
-            </div>
+            <SemSelect
+              label={"Gender"}
+              icon={HiUsers}
+              id={"gender"}
+              data={["Male", "Female", "Other"]}
+            />
 
-            <div className="my-2">
-              <div className="mb-2 block">
-                <Label className="text-white" htmlFor="email" value="Email" />
-              </div>
-              <TextInput
-                icon={HiMail}
-                id="email"
-                type="text"
-                placeholder="Enter your email"
-                required
-              />
-            </div>
-            <div className="my-2">
-              <div className="mb-2 block">
-                <Label
-                  className="text-white"
-                  htmlFor="address"
-                  value="Address"
-                />
-              </div>
-              <TextInput
-                icon={HiLocationMarker}
-                id="address"
-                type="text"
-                placeholder="Enter your Address"
-                required
-              />
-            </div>
-            <div className="my-2">
-              <div className="mb-2 block">
-                <Label
-                  className="text-white"
-                  htmlFor="password"
-                  value="Password"
-                />
-              </div>
-              <TextInput
-                icon={HiLockClosed}
-                id="password"
-                type="text"
-                placeholder="Enter your password"
-                required
-              />
-            </div>
-            <div className="my-2">
-              <div className="mb-2 block">
-                <Label
-                  className="text-white"
-                  htmlFor="confirmPassword"
-                  value="Confirm Password"
-                />
-              </div>
-              <TextInput
-                icon={HiLockClosed}
-                id="confirmPassword"
-                type="text"
-                placeholder="Confrim Password"
-                required
-              />
-            </div>
+            <SemInput
+              id={"email"}
+              label={"Email"}
+              placeholder={"Enter your email"}
+              icon={HiMail}
+            />
+            <SemInput
+              id={"address"}
+              label={"Address"}
+              placeholder={"Enter your address"}
+              icon={HiLocationMarker}
+            />
+            <SemInput
+              id={"password"}
+              label={"Password"}
+              placeholder={"Enter your password"}
+              icon={HiLockClosed}
+              type={"password"}
+            />
+            <SemInput
+              id={"confirmPassword"}
+              label={"Confirm Password"}
+              placeholder={"Confirm your password"}
+              icon={HiLockClosed}
+              type={"password"}
+            />
           </div>
           <div className="basis-4/12 mr-5">
-            <div className="my-2">
-              <div className="mb-2 block">
-                <Label
-                  className="text-white"
-                  htmlFor="role"
-                  value="User type"
-                />
-              </div>
-              <Select icon={HiUserGroup} required id="role" size={"is-large"}>
-                <option>Select your role</option>
-                <option>Admin</option>
-                <option>Department Supply Coordinator</option>
-              </Select>
-            </div>
-            <div className="my-2">
-              <div className="mb-2 block">
-                <Label
-                  className="text-white"
-                  htmlFor="offices"
-                  value="Office"
-                />
-              </div>
-              <Select
-                icon={HiOfficeBuilding}
-                required
-                id="offices"
-                size={"is-large"}
+            <SemSelect
+              label={"User Type"}
+              icon={HiUserGroup}
+              id={"role"}
+              data={[
+                "Please select your role",
+                "Department Supply Coordinator",
+                "Admin",
+              ]}
+            />
+            <SemSelect
+              label={"Offices"}
+              icon={HiOfficeBuilding}
+              id={"role"}
+              data={[
+                "Please select office",
+                "Department Supply Coordinator",
+                "Admin",
+              ]}
+            />
+
+            <div className="submit-wrapper mt-10">
+              <Button
+                type="submit"
+                gradientMonochrome="info"
+                className="w-full "
               >
-                <option>Select your office</option>
-                <option>Male</option>
-                <option>Female</option>
-                <option>Other</option>
-              </Select>
+                <HiUserAdd className="mr-2 h-5 w-5" />
+                Create Account
+              </Button>
+              <HR.Text />
+              <Button gradientMonochrome="success" className="w-full">
+                <HiLogin className="mr-2 h-5 w-5" />
+                Login
+              </Button>
             </div>
-            <Button
-              type="submit"
-              gradientMonochrome="info"
-              className="w-full mt-10"
-            >
-              <HiUserAdd className="mr-2 h-5 w-5" />
-              Create Account
-            </Button>
-            <HR.Text />
-            <Button gradientMonochrome="success" className="w-full">
-              <HiLogin className="mr-2 h-5 w-5" />
-              Login
-            </Button>
           </div>
         </form>
       </div>
