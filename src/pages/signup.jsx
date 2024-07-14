@@ -20,15 +20,15 @@ import SemSelect from "../components/semSelect";
 const Signup = () => {
   return (
     <div className="w-100 min-h-screen bg-slate-950 flex justify-center items-center">
-      <div className="content bg-slate-800 min-h-5/6 w-5/6 rounded-lg p-10">
+      <div className="content bg-slate-800 min-h-5/6 w-5/6 rounded-lg p-10 my-5">
         <div className="title">
           <h1 className="text-white text-4xl font-bold">Account Creation</h1>
         </div>
         <form
-          className="forms flex flex-row mt-5"
+          className="forms flex flex-row flex-wrap lg:flex-nowrap mt-5"
           onSubmit={() => console.log("test")}
         >
-          <div className="basis-4/12 mr-5">
+          <div className="basis-full lg:basis-4/12 mr-5">
             <SemInput
               id={"firstName"}
               label={"First Name"}
@@ -60,7 +60,7 @@ const Signup = () => {
               addOn="+63"
             />
           </div>
-          <div className="basis-4/12 mr-5">
+          <div className="basis-full lg:basis-4/12 mr-5">
             <SemSelect
               label={"Gender"}
               icon={HiUsers}
@@ -95,7 +95,7 @@ const Signup = () => {
               type={"password"}
             />
           </div>
-          <div className="basis-4/12 mr-5">
+          <div className="basis-full lg:basis-4/12 mr-5">
             <SemSelect
               label={"User Type"}
               icon={HiUserGroup}
