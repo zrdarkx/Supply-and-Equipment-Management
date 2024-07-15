@@ -1,14 +1,14 @@
 import { Label, Select } from "flowbite-react";
 
-const SemSelect = ({ data, label, id, icon }) => {
+const SemSelect = ({ data, label, id, icon, event, name }) => {
   return (
     <div className="my-2">
       <div className="mb-2 block">
         <Label className="text-white" htmlFor={id} value={label} />
       </div>
-      <Select icon={icon} required id={id}>
+      <Select name={name} onChange={event} icon={icon} required id={id}>
         {data.map((item) => {
-          return <option>{item}</option>;
+          return <option value={item}>{item}</option>;
         })}
       </Select>
     </div>

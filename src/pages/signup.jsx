@@ -1,14 +1,12 @@
-import { Button, HR, Label, Select, TextInput } from "flowbite-react";
+import { Button, HR } from "flowbite-react";
 import {
   HiCalendar,
-  HiGlobe,
   HiLocationMarker,
   HiLockClosed,
   HiLogin,
   HiMail,
   HiOfficeBuilding,
   HiPhone,
-  HiShoppingCart,
   HiUser,
   HiUserAdd,
   HiUserGroup,
@@ -16,8 +14,35 @@ import {
 } from "react-icons/hi";
 import SemInput from "../components/semInput";
 import SemSelect from "../components/semSelect";
+import { useState } from "react";
 
 const Signup = () => {
+  const [forms, setForms] = useState({
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    birthDate: "",
+    contact: "",
+    gender: "",
+    email: "",
+    address: "",
+    password: "",
+    confirmPassword: "",
+    role: "",
+    office: "",
+  });
+
+  const handleUpdateForm = (event) => {
+    const { name, value } = event.target;
+    const newForms = { ...forms, [name]: value };
+    setForms(newForms);
+  };
+
+  const handleSubmitForm = (event) => {
+    event.preventDefault();
+    console.log(forms);
+  };
+
   return (
     <div className="w-100 min-h-screen bg-slate-950 flex justify-center items-center">
       <div className="content bg-slate-800 min-h-5/6 w-5/6 rounded-lg p-10 my-5">
@@ -26,7 +51,7 @@ const Signup = () => {
         </div>
         <form
           className="forms flex flex-row flex-wrap lg:flex-nowrap mt-5"
-          onSubmit={() => console.log("test")}
+          onSubmit={handleSubmitForm}
         >
           <div className="basis-full lg:basis-4/12 mr-5">
             <SemInput
@@ -34,30 +59,41 @@ const Signup = () => {
               label={"First Name"}
               placeholder={"Enter your first name"}
               icon={HiUser}
+              event={handleUpdateForm}
+              name={"firstName"}
             />
             <SemInput
               id={"middleName"}
               label={"Middle Name"}
               placeholder={"Enter your middle name"}
               icon={HiUser}
+              event={handleUpdateForm}
+              name={"middleName"}
             />
             <SemInput
               id={"lastName"}
               label={"Last Name"}
               placeholder={"Enter your last name"}
               icon={HiUser}
+              event={handleUpdateForm}
+              name={"lastName"}
             />
             <SemInput
               id={"birthDate"}
               label={"Birth Date"}
               icon={HiCalendar}
               type={"date"}
+              event={handleUpdateForm}
+              name={"birthDate"}
             />
             <SemInput
               id={"contact"}
               label={"Contact Number"}
               icon={HiPhone}
               addOn="+63"
+              placeholder={"Enter your contact number"}
+              event={handleUpdateForm}
+              name={"contact"}
             />
           </div>
           <div className="basis-full lg:basis-4/12 mr-5">
@@ -65,20 +101,27 @@ const Signup = () => {
               label={"Gender"}
               icon={HiUsers}
               id={"gender"}
-              data={["Male", "Female", "Other"]}
+              data={["Please select your gender", "Male", "Female", "Other"]}
+              event={handleUpdateForm}
+              name="gender"
             />
 
             <SemInput
+              type={"email"}
               id={"email"}
               label={"Email"}
               placeholder={"Enter your email"}
               icon={HiMail}
+              event={handleUpdateForm}
+              name="email"
             />
             <SemInput
               id={"address"}
               label={"Address"}
               placeholder={"Enter your address"}
               icon={HiLocationMarker}
+              event={handleUpdateForm}
+              name="address"
             />
             <SemInput
               id={"password"}
@@ -86,6 +129,8 @@ const Signup = () => {
               placeholder={"Enter your password"}
               icon={HiLockClosed}
               type={"password"}
+              event={handleUpdateForm}
+              name="password"
             />
             <SemInput
               id={"confirmPassword"}
@@ -93,6 +138,8 @@ const Signup = () => {
               placeholder={"Confirm your password"}
               icon={HiLockClosed}
               type={"password"}
+              event={handleUpdateForm}
+              name="confirmPassword"
             />
           </div>
           <div className="basis-full lg:basis-4/12 mr-5">
@@ -105,6 +152,8 @@ const Signup = () => {
                 "Department Supply Coordinator",
                 "Admin",
               ]}
+              event={handleUpdateForm}
+              name="role"
             />
             <SemSelect
               label={"Offices"}
@@ -115,6 +164,8 @@ const Signup = () => {
                 "Department Supply Coordinator",
                 "Admin",
               ]}
+              event={handleUpdateForm}
+              name="office"
             />
 
             <div className="submit-wrapper mt-10">
