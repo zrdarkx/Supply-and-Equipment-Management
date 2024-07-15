@@ -4,8 +4,23 @@ import SemInput from "../components/semInput";
 import SemTitle from "../components/semTitle";
 import { Button, HR } from "flowbite-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Login = () => {
+  const [forms, setForms] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleUpdateForm = (event) => {
+    const { name, value } = event.target;
+    setForms((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleSubmitForm = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <div className="w-full bg-slate-950 min-h-screen flex flex-row">
       <div className="basis-6/12 hidden lg:flex justify-center items-center">
@@ -16,7 +31,7 @@ const Login = () => {
           <div className="title-wrapper m-10">
             <SemTitle title={"Login"} />
           </div>
-          <form className="form-wrapper m-10">
+          <form className="form-wrapper m-10" onSubmit={handleSubmitForm}>
             <div className="my-3">
               <SemInput
                 label={"Email"}
@@ -24,6 +39,7 @@ const Login = () => {
                 name={"email"}
                 placeholder={"Please enter your email"}
                 icon={HiMail}
+                event={handleUpdateForm}
               />
             </div>
             <div className="my-3">
@@ -33,6 +49,7 @@ const Login = () => {
                 name={"password"}
                 placeholder={"Please enter your password"}
                 icon={HiLockClosed}
+                event={handleUpdateForm}
               />
             </div>
             <div className="submit-wrapper mt-10">
