@@ -23,13 +23,13 @@ const Login = () => {
 
   return (
     <div className="w-full bg-slate-950 min-h-screen flex flex-row">
-      <div className="basis-6/12 hidden lg:flex justify-center items-center">
+      <div className="basis-6/12 hidden lg:flex justify-center items-center flex-col">
         <LandingAnimation />
       </div>
       <div className="basis-full lg:basis-6/12 flex justify-center items-center ">
         <div className="content bg-slate-800 min-h-5/6 w-4/6 rounded-lg">
           <div className="title-wrapper m-10">
-            <SemTitle title={"Login"} />
+            <SemTitle color={"white"} title={"Login"} />
           </div>
           <form className="form-wrapper m-10" onSubmit={handleSubmitForm}>
             <div className="my-3">
