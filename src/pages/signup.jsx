@@ -15,6 +15,8 @@ import {
 import SemInput from "../components/semInput";
 import SemSelect from "../components/semSelect";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import SemTitle from "../components/semTitle";
 
 const Signup = () => {
   const [forms, setForms] = useState({
@@ -40,15 +42,12 @@ const Signup = () => {
 
   const handleSubmitForm = (event) => {
     event.preventDefault();
-    console.log(forms);
   };
 
   return (
     <div className="w-100 min-h-screen bg-slate-950 flex justify-center items-center">
       <div className="content bg-slate-800 min-h-5/6 w-5/6 rounded-lg p-10 my-5">
-        <div className="title">
-          <h1 className="text-white text-4xl font-bold">Account Creation</h1>
-        </div>
+        <SemTitle title={"Account Creation"} />
         <form
           className="forms flex flex-row flex-wrap lg:flex-nowrap mt-5"
           onSubmit={handleSubmitForm}
@@ -178,10 +177,12 @@ const Signup = () => {
                 Create Account
               </Button>
               <HR.Text />
-              <Button gradientMonochrome="success" className="w-full">
-                <HiLogin className="mr-2 h-5 w-5" />
-                Login
-              </Button>
+              <Link to={"/login"}>
+                <Button gradientMonochrome="success" className="w-full">
+                  <HiLogin className="mr-2 h-5 w-5" />
+                  Login
+                </Button>
+              </Link>
             </div>
           </div>
         </form>
