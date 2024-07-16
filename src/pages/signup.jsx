@@ -15,8 +15,10 @@ import {
 import SemInput from "../components/semInput";
 import SemSelect from "../components/semSelect";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SemTitle from "../components/semTitle";
+import useAddUser from "../hooks/useAddUser";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const [forms, setForms] = useState({
@@ -34,6 +36,11 @@ const Signup = () => {
     office: "",
   });
 
+  const [error, setError] = useState();
+
+  const { addUser } = useAddUser();
+  const navigation = useNavigate();
+
   const handleUpdateForm = (event) => {
     const { name, value } = event.target;
     const newForms = { ...forms, [name]: value };
@@ -42,6 +49,20 @@ const Signup = () => {
 
   const handleSubmitForm = (event) => {
     event.preventDefault();
+    const res = addUser(forms);
+    setError(res);
+    if (res.error) {
+      toast.error(res.message);
+    }
+    if (!res.error) {
+      toast.promise(new Promise((resolve) => setTimeout(resolve, 3000)), {
+        pending: "Signing up, please wait...",
+        success: res.message,
+      });
+      setTimeout(() => {
+        navigation("/login");
+      }, 4000);
+    }
   };
 
   return (
@@ -130,6 +151,7 @@ const Signup = () => {
               type={"password"}
               event={handleUpdateForm}
               name="password"
+              color={error?.error ? "failure" : "info"}
             />
             <SemInput
               id={"confirmPassword"}
@@ -139,6 +161,7 @@ const Signup = () => {
               type={"password"}
               event={handleUpdateForm}
               name="confirmPassword"
+              color={error?.error ? "failure" : "info"}
             />
           </div>
           <div className="basis-full lg:basis-4/12 mr-5">

@@ -4,7 +4,7 @@ const SemSelect = ({ data, label, id, icon, event, name }) => {
   return (
     <div className="my-2">
       <div className="mb-2 block">
-        <Label className="text-white" htmlFor={id} value={label} />
+        <Label color={"info"} htmlFor={id} value={label} />
       </div>
       <Select name={name} onChange={event} icon={icon} required id={id}>
         {data.map((item) => {

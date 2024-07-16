@@ -9,11 +9,12 @@ const SemInput = ({
   addOn,
   event,
   name,
+  color,
 }) => {
   return (
     <div className="my-2">
       <div className="mb-2 block">
-        <Label className="text-white" htmlFor={id} value={label} />
+        <Label color={color ? color : "info"} htmlFor={id} value={label} />
       </div>
       <TextInput
         name={name}
@@ -24,6 +25,7 @@ const SemInput = ({
         type={type}
         placeholder={placeholder}
         required
+        color={color}
       />
     </div>
   );
