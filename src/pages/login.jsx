@@ -5,12 +5,19 @@ import SemTitle from "../components/semTitle";
 import { Button, HR } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import useValidateUser from "../hooks/useValidateUser";
+import { toast } from "react-toastify";
+import { useStore } from "zustand";
+import { useSemStore } from "../zustand/store";
 
 const Login = () => {
   const [forms, setForms] = useState({
     email: "",
     password: "",
   });
+
+  const { validateUser } = useValidateUser();
+  const { currentUser, setCurrentUser } = useSemStore();
 
   const handleUpdateForm = (event) => {
     const { name, value } = event.target;
@@ -19,7 +26,14 @@ const Login = () => {
 
   const handleSubmitForm = (event) => {
     event.preventDefault();
+    const res = validateUser(forms);
+    if (!res) {
+      toast.error("Email or Password is incorrect.");
+    }
+    setCurrentUser(res);
   };
+
+  console.log(currentUser);
 
   return (
     <div className="w-full bg-slate-950 min-h-screen flex flex-row">
