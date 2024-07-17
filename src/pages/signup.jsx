@@ -39,6 +39,7 @@ const Signup = () => {
 
   const [error, setError] = useState();
 
+  // Hooks
   const { addUser } = useAddUser();
   const { offices } = useGetOffices();
   const navigation = useNavigate();
