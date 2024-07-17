@@ -7,22 +7,26 @@ import { useState } from "react";
 import { Button } from "flowbite-react";
 import useAddSupply from "../hooks/useAddSupply";
 import { toast } from "react-toastify";
+import useGetSupply from "../hooks/useGetSupply";
+import { SemSupplyTable } from "../components/semSupplyTable";
+import { ConfirmationModal } from "../components/confirmationModal";
+import useDeleteSupply from "../hooks/useDeleteSupply";
+import { SUPPLY_DEFAULT_VALUE } from "../utils/constant";
+import useUpdateSupply from "../hooks/useUpdateSupply";
 
 const Supply = () => {
   const [supplyModal, setSupplyModal] = useState(false);
-  const [forms, setForms] = useState({
-    name: "",
-    quantity: "",
-    unit: "",
-    unitCost: "",
-    description: "",
-    estimatedUsefulLife: "",
-    inventoryNumber: "",
-  });
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [selectedSupply, setSelectedSupply] = useState(null);
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [forms, setForms] = useState(SUPPLY_DEFAULT_VALUE);
 
   // Hooks
 
   const { addSupply } = useAddSupply();
+  const { deleteSupply } = useDeleteSupply();
+  const { updateSupply } = useUpdateSupply();
+  const { data } = useGetSupply();
 
   // Local Fucntion
 
@@ -32,23 +36,47 @@ const Supply = () => {
     setForms(newForms);
   };
 
-  const handleAddSupply = () => {
-    addSupply(forms);
-    setSupplyModal(false);
-    toast.success("Supply added successfully.");
+  const handleSubmit = () => {
+    if (!isUpdate) {
+      addSupply(forms);
+      setSupplyModal(false);
+      toast.success("Supply added successfully.");
+    } else {
+      updateSupply(forms);
+      setSupplyModal(false);
+      toast.success("Supply updated successfully.");
+    }
+  };
+
+  const handleDeleteSupply = () => {
+    deleteSupply(selectedSupply.id);
+    setDeleteModal(false);
+    toast.success("Deleted successfully.");
+  };
+
+  const handleSelectedSupplyUpdate = (data) => {
+    setForms(data);
+    setIsUpdate(true);
+  };
+
+  const handleAddingSupply = () => {
+    setSupplyModal(true);
+    setIsUpdate(false);
+    setForms(SUPPLY_DEFAULT_VALUE);
   };
 
   return (
     <DashboardLayout>
       <SemModal
         size="5xl"
-        title="Add Supply"
+        title={isUpdate ? "Update Supply" : "Add Supply"}
         open={supplyModal}
         handleClose={() => setSupplyModal(false)}
       >
         <div className="flex flex-row">
           <div className="basis-6/12 mx-3">
             <SemInput
+              value={forms.name}
               color={"gray"}
               name={"name"}
               label="Name"
@@ -56,6 +84,7 @@ const Supply = () => {
               event={handleUpdateForm}
             />
             <SemInput
+              value={forms.quantity}
               name={"quantity"}
               color={"gray"}
               label="Quantity"
@@ -63,6 +92,7 @@ const Supply = () => {
               event={handleUpdateForm}
             />
             <SemInput
+              value={forms.unit}
               name={"unit"}
               color={"gray"}
               label="Unit"
@@ -70,6 +100,7 @@ const Supply = () => {
               event={handleUpdateForm}
             />
             <SemInput
+              value={forms.unitCost}
               name={"unitCost"}
               color={"gray"}
               label="Unit Cost"
@@ -79,6 +110,7 @@ const Supply = () => {
           </div>
           <div className="basis-6/12">
             <SemInput
+              value={forms.description}
               name={"description"}
               color={"gray"}
               label="Description"
@@ -86,6 +118,7 @@ const Supply = () => {
               event={handleUpdateForm}
             />
             <SemInput
+              value={forms.estimatedUsefulLife}
               name={"estimatedUsefulLife"}
               color={"gray"}
               label="Estimated Useful Life"
@@ -93,6 +126,7 @@ const Supply = () => {
               event={handleUpdateForm}
             />
             <SemInput
+              value={forms.inventoryNumber}
               name={"inventoryNumber"}
               color={"gray"}
               label="Inventory Number"
@@ -103,19 +137,31 @@ const Supply = () => {
         </div>
 
         <Button
-          onClick={handleAddSupply}
+          onClick={handleSubmit}
           gradientMonochrome="info"
           className="w-full mt-5"
         >
-          Add Supply
+          {isUpdate ? "Update Supply" : "Add Supply"}
         </Button>
       </SemModal>
+      <ConfirmationModal
+        open={deleteModal}
+        event={handleDeleteSupply}
+        handleClose={() => setDeleteModal(false)}
+      />
       <div className="office-wrapper p-5">
         <ContentHeader
           title="Supply"
           Icon={HiOutlineTable}
-          event={() => setSupplyModal(true)}
+          event={handleAddingSupply}
           tooltip={"Add supply to the system"}
+        />
+        <SemSupplyTable
+          handleSelectedSupplyUpdate={handleSelectedSupplyUpdate}
+          setSupplyModal={setSupplyModal}
+          setSelectedSupply={setSelectedSupply}
+          setDeleteModal={setDeleteModal}
+          data={data}
         />
       </div>
     </DashboardLayout>

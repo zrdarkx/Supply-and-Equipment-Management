@@ -10,6 +10,7 @@ const SemInput = ({
   event,
   name,
   color,
+  value,
 }) => {
   return (
     <div className="my-2">
@@ -26,6 +27,7 @@ const SemInput = ({
         placeholder={placeholder}
         required
         color={color}
+        value={value}
       />
     </div>
   );
