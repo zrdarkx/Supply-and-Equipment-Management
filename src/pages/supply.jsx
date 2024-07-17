@@ -13,8 +13,12 @@ import { ConfirmationModal } from "../components/confirmationModal";
 import useDeleteSupply from "../hooks/useDeleteSupply";
 import { SUPPLY_DEFAULT_VALUE } from "../utils/constant";
 import useUpdateSupply from "../hooks/useUpdateSupply";
+import Loading from "../components/loading";
+import NoData from "../components/noData";
 
 const Supply = () => {
+  //State
+
   const [supplyModal, setSupplyModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [selectedSupply, setSelectedSupply] = useState(null);
@@ -26,7 +30,7 @@ const Supply = () => {
   const { addSupply } = useAddSupply();
   const { deleteSupply } = useDeleteSupply();
   const { updateSupply } = useUpdateSupply();
-  const { data } = useGetSupply();
+  const { data, loading } = useGetSupply();
 
   // Local Fucntion
 
@@ -156,13 +160,22 @@ const Supply = () => {
           event={handleAddingSupply}
           tooltip={"Add supply to the system"}
         />
-        <SemSupplyTable
-          handleSelectedSupplyUpdate={handleSelectedSupplyUpdate}
-          setSupplyModal={setSupplyModal}
-          setSelectedSupply={setSelectedSupply}
-          setDeleteModal={setDeleteModal}
-          data={data}
-        />
+
+        {loading && <Loading />}
+
+        {!loading && data.length <= 0 && (
+          <NoData title={"There's no supply, please add one."} />
+        )}
+
+        {!loading && data.length >= 1 && (
+          <SemSupplyTable
+            handleSelectedSupplyUpdate={handleSelectedSupplyUpdate}
+            setSupplyModal={setSupplyModal}
+            setSelectedSupply={setSelectedSupply}
+            setDeleteModal={setDeleteModal}
+            data={data}
+          />
+        )}
       </div>
     </DashboardLayout>
   );
