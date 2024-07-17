@@ -3,7 +3,7 @@ import LandingAnimation from "../components/landingAnimation";
 import SemInput from "../components/semInput";
 import SemTitle from "../components/semTitle";
 import { Button, HR } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useValidateUser from "../hooks/useValidateUser";
 import { toast } from "react-toastify";
@@ -16,8 +16,10 @@ const Login = () => {
     password: "",
   });
 
+  // Hooks
   const { validateUser } = useValidateUser();
   const { currentUser, setCurrentUser } = useSemStore();
+  const navigation = useNavigate();
 
   const handleUpdateForm = (event) => {
     const { name, value } = event.target;
@@ -29,11 +31,11 @@ const Login = () => {
     const res = validateUser(forms);
     if (!res) {
       toast.error("Email or Password is incorrect.");
+      return;
     }
     setCurrentUser(res);
+    navigation("/dashboard");
   };
-
-  console.log(currentUser);
 
   return (
     <div className="w-full bg-slate-950 min-h-screen flex flex-row">
@@ -64,6 +66,7 @@ const Login = () => {
                 placeholder={"Please enter your password"}
                 icon={HiLockClosed}
                 event={handleUpdateForm}
+                type={"password"}
               />
             </div>
             <div className="submit-wrapper mt-10">
