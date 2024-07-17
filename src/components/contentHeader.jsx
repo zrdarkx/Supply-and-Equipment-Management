@@ -1,4 +1,4 @@
-import { HiOfficeBuilding } from "react-icons/hi";
+import { HiOfficeBuilding, HiPlus } from "react-icons/hi";
 import SemTitle from "./semTitle";
 import { Button, Tooltip } from "flowbite-react";
 
@@ -12,6 +12,7 @@ const ContentHeader = ({ event, title, Icon, tooltip }) => {
       <div className="button-wrapper flex flex-row">
         <Tooltip content={tooltip}>
           <Button onClick={event} gradientMonochrome="info">
+            <HiPlus color="white" className="mr-2 h-5 w-5" />
             Add {title}
           </Button>
         </Tooltip>

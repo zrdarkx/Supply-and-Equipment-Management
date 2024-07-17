@@ -6,10 +6,10 @@ const DashboardLayout = ({ children }) => {
   const [isOpen, setOpen] = useState(false);
 
   return (
-    <div className="w-full min-h-screen bg-slate-950">
+    <div className="w-full min-h-screen bg-slate-950 pb-10">
       <SemSidebar isOpen={isOpen} handleClose={() => setOpen(false)} />
       <DashboardHeader handleOpenSidebar={() => setOpen(true)} />
-      <div className="container mx-auto min-h-96 w-5/6 bg-slate-800 rounded-lg">
+      <div className="container mx-auto min-h-96 w-5/6 bg-slate-800 rounded-lg pb-10">
         {children}
       </div>
     </div>

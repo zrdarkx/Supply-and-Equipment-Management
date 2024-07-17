@@ -11,21 +11,44 @@ import useGetOffices from "../hooks/useGetOffices";
 import { SemOfficesTable } from "../components/semOfficesTable";
 import useDeleteOffice from "../hooks/useDeleteOffice";
 import ContentHeader from "../components/contentHeader";
+import { ConfirmationModal } from "../components/confirmationModal";
+import useUpdateOffice from "../hooks/useUpdateOffice";
+import NoData from "../components/noData";
 
 const Offices = () => {
   const [addOfficeModal, setAddOfficeModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [selectedOffice, setSelectedOffice] = useState(null);
   const [office, setOffice] = useState("");
 
+  // CRUD OFFICE
   const { addOffice } = useAddOffice();
-  const { offices } = useGetOffices();
   const { deleteOffice } = useDeleteOffice();
+  const { updateOffice } = useUpdateOffice();
+  const { offices } = useGetOffices();
+
+  const handleOfficeEvent = () => {
+    if (selectedOffice) {
+      updateOffice(selectedOffice, office);
+      setAddOfficeModal(false);
+      setSelectedOffice(null);
+      toast.success("Updated office name successfully");
+    } else {
+      addOffice(office);
+      setAddOfficeModal(false);
+      toast.success("Added office successfully");
+    }
+  };
 
   return (
     <DashboardLayout>
       <SemModal
-        title="Add Office"
+        title={selectedOffice ? "Update office name" : "Add office"}
         open={addOfficeModal}
-        handleClose={() => setAddOfficeModal(false)}
+        handleClose={() => {
+          setAddOfficeModal(false);
+          setSelectedOffice(null);
+        }}
       >
         <SemInput
           event={(event) => setOffice(event.target.value)}
@@ -34,17 +57,24 @@ const Offices = () => {
           placeholder="Enter office name"
         />
         <Button
-          onClick={() => {
-            addOffice(office);
-            setAddOfficeModal(false);
-            toast.success("Added office successfully");
-          }}
-          gradientMonochrome="info"
+          onClick={handleOfficeEvent}
+          gradientMonochrome={selectedOffice ? "info" : "info"}
           className="w-full mt-5"
         >
-          Add Office
+          {selectedOffice ? "Update office name" : "Add Office"}
         </Button>
       </SemModal>
+      <ConfirmationModal
+        open={deleteModal}
+        handleClose={() => {
+          setDeleteModal(false);
+          setSelectedOffice(null);
+        }}
+        event={() => {
+          deleteOffice(selectedOffice);
+          setDeleteModal(false);
+        }}
+      />
       <div className="office-wrapper p-5">
         <ContentHeader
           title="Offices"
@@ -52,7 +82,16 @@ const Offices = () => {
           event={() => setAddOfficeModal(true)}
           tooltip={"Add office to the system"}
         />
-        <SemOfficesTable deleteOffice={deleteOffice} data={offices} />
+        {offices.length <= 0 ? (
+          <NoData title={"There's no office, please add one."} />
+        ) : (
+          <SemOfficesTable
+            setAddOfficeModal={setAddOfficeModal}
+            setDeleteModal={setDeleteModal}
+            setSelectedOffice={setSelectedOffice}
+            data={offices}
+          />
+        )}
       </div>
     </DashboardLayout>
   );
