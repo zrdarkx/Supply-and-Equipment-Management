@@ -34,7 +34,7 @@ const Login = () => {
       return;
     }
     setCurrentUser(res);
-    navigation("/dashboard");
+    navigation("/records");
   };
 
   return (

@@ -5,6 +5,7 @@ import {
   HiFolder,
   HiInbox,
   HiLogout,
+  HiOfficeBuilding,
   HiOutlineServer,
   HiShoppingBag,
   HiTable,
@@ -25,8 +26,8 @@ const SemSidebar = ({ isOpen, handleClose }) => {
               <Sidebar.Item href="#" icon={HiOutlineServer}>
                 Transaction
               </Sidebar.Item>
-              <Sidebar.Item href="#" icon={HiFolder}>
-                Records
+              <Sidebar.Item href="offices" icon={HiOfficeBuilding}>
+                Offices
               </Sidebar.Item>
 
               <Sidebar.Item href="login" icon={HiLogout}>
