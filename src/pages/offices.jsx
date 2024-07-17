@@ -41,6 +41,10 @@ const Offices = () => {
     }
   };
 
+  const handleUpdateOfficeForm = (data) => {
+    setOffice(data.officeName);
+  };
+
   return (
     <DashboardLayout>
       <SemModal
@@ -52,6 +56,7 @@ const Offices = () => {
         }}
       >
         <SemInput
+          value={office}
           event={(event) => setOffice(event.target.value)}
           color={"info"}
           label="Office Name"
@@ -80,13 +85,17 @@ const Offices = () => {
         <ContentHeader
           title="Offices"
           Icon={HiOfficeBuilding}
-          event={() => setAddOfficeModal(true)}
+          event={() => {
+            setAddOfficeModal(true);
+            setOffice("");
+          }}
           tooltip={"Add office to the system"}
         />
 
         {loading && <Loading />}
         {!loading && offices.length >= 1 && (
           <SemOfficesTable
+            handleUpdateOfficeForm={handleUpdateOfficeForm}
             setAddOfficeModal={setAddOfficeModal}
             setDeleteModal={setDeleteModal}
             setSelectedOffice={setSelectedOffice}

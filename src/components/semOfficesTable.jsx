@@ -7,6 +7,7 @@ export function SemOfficesTable({
   setSelectedOffice,
   setDeleteModal,
   setAddOfficeModal,
+  handleUpdateOfficeForm,
 }) {
   return (
     <div className="overflow-x-auto">
@@ -50,6 +51,7 @@ export function SemOfficesTable({
                           onClick={() => {
                             setSelectedOffice(item.id);
                             setAddOfficeModal(true);
+                            handleUpdateOfficeForm(item);
                           }}
                           gradientMonochrome="lime"
                         >
