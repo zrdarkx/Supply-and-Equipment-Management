@@ -7,9 +7,6 @@ const SemModal = ({ open, handleClose, children, title }) => {
         <h1>{title}</h1>
       </Modal.Header>
       <Modal.Body>{children}</Modal.Body>
-      <Modal.Footer>
-        <Button className="w-full">Submit</Button>
-      </Modal.Footer>
     </Modal>
   );
 };
