@@ -1,19 +1,23 @@
-import { Button, TextInput, Tooltip } from "flowbite-react";
+import { Button, Tooltip } from "flowbite-react";
 import SemTitle from "../components/semTitle";
 import DashboardLayout from "../layout/dashboardLayout";
-import { SemTable } from "../components/semTable";
 import SemModal from "../components/semModal";
 import { useState } from "react";
 import SemInput from "../components/semInput";
 import { HiOfficeBuilding } from "react-icons/hi";
 import useAddOffice from "../hooks/useAddOffice";
 import { toast } from "react-toastify";
+import useGetOffices from "../hooks/useGetOffices";
+import { SemOfficesTable } from "../components/semOfficesTable";
+import useDeleteOffice from "../hooks/useDeleteOffice";
 
 const Offices = () => {
   const [addOfficeModal, setAddOfficeModal] = useState(false);
   const [office, setOffice] = useState("");
 
   const { addOffice } = useAddOffice();
+  const { offices } = useGetOffices();
+  const { deleteOffice } = useDeleteOffice();
 
   return (
     <DashboardLayout>
@@ -57,7 +61,7 @@ const Offices = () => {
             </Tooltip>
           </div>
         </div>
-        <SemTable />
+        <SemOfficesTable deleteOffice={deleteOffice} data={offices} />
       </div>
     </DashboardLayout>
   );
