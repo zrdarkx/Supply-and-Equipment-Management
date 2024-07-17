@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import useGetOffices from "../hooks/useGetOffices";
 import { SemOfficesTable } from "../components/semOfficesTable";
 import useDeleteOffice from "../hooks/useDeleteOffice";
+import ContentHeader from "../components/contentHeader";
 
 const Offices = () => {
   const [addOfficeModal, setAddOfficeModal] = useState(false);
@@ -44,23 +45,13 @@ const Offices = () => {
           Add Office
         </Button>
       </SemModal>
-      <div className="records-wrapper p-5">
-        <div className="content-header p-10 flex flex-row justify-between items-center">
-          <div className="wrapper flex flex-row items-center">
-            <SemTitle title={"Offices"} color={"white"} />
-            <HiOfficeBuilding className="ml-3" color="white" size={30} />
-          </div>
-          <div className="button-wrapper flex flex-row">
-            <Tooltip content="Add office to the system">
-              <Button
-                onClick={() => setAddOfficeModal(true)}
-                gradientMonochrome="info"
-              >
-                Add Office
-              </Button>
-            </Tooltip>
-          </div>
-        </div>
+      <div className="office-wrapper p-5">
+        <ContentHeader
+          title="Offices"
+          Icon={HiOfficeBuilding}
+          event={() => setAddOfficeModal(true)}
+          tooltip={"Add office to the system"}
+        />
         <SemOfficesTable deleteOffice={deleteOffice} data={offices} />
       </div>
     </DashboardLayout>
