@@ -7,12 +7,15 @@ import {
   HiLogout,
   HiOfficeBuilding,
   HiOutlineServer,
+  HiOutlineTable,
   HiShoppingBag,
   HiTable,
   HiUser,
   HiViewBoards,
+  HiViewGrid,
 } from "react-icons/hi";
 import SemTitle from "./semTitle";
+import { Link } from "react-router-dom";
 
 const SemSidebar = ({ isOpen, handleClose }) => {
   return (
@@ -23,16 +26,32 @@ const SemSidebar = ({ isOpen, handleClose }) => {
         <Sidebar>
           <Sidebar.Items>
             <Sidebar.ItemGroup>
-              <Sidebar.Item href="#" icon={HiOutlineServer}>
-                Transaction
-              </Sidebar.Item>
-              <Sidebar.Item href="offices" icon={HiOfficeBuilding}>
-                Offices
-              </Sidebar.Item>
+              <Link to={"/transaction"}>
+                <Sidebar.Item className="my-3" icon={HiOutlineServer}>
+                  Transaction
+                </Sidebar.Item>
+              </Link>
+              <Link to={"/offices"}>
+                <Sidebar.Item className="my-3" icon={HiOfficeBuilding}>
+                  Offices
+                </Sidebar.Item>
+              </Link>
+              <Link to={"/supply"}>
+                <Sidebar.Item className="my-3" icon={HiOutlineTable}>
+                  Supply
+                </Sidebar.Item>
+              </Link>
+              <Link to={"/equipment"}>
+                <Sidebar.Item className="my-3" icon={HiViewGrid}>
+                  Equipment
+                </Sidebar.Item>
+              </Link>
 
-              <Sidebar.Item href="login" icon={HiLogout}>
-                Logout
-              </Sidebar.Item>
+              <Link to={"/login"}>
+                <Sidebar.Item href="login" icon={HiLogout}>
+                  Logout
+                </Sidebar.Item>
+              </Link>
             </Sidebar.ItemGroup>
           </Sidebar.Items>
         </Sidebar>

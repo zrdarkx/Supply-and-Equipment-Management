@@ -19,6 +19,7 @@ import { Link, useNavigate } from "react-router-dom";
 import SemTitle from "../components/semTitle";
 import useAddUser from "../hooks/useAddUser";
 import { toast } from "react-toastify";
+import useGetOffices from "../hooks/useGetOffices";
 
 const Signup = () => {
   const [forms, setForms] = useState({
@@ -39,6 +40,7 @@ const Signup = () => {
   const [error, setError] = useState();
 
   const { addUser } = useAddUser();
+  const { offices } = useGetOffices();
   const navigation = useNavigate();
 
   const handleUpdateForm = (event) => {
@@ -177,18 +179,17 @@ const Signup = () => {
               event={handleUpdateForm}
               name="role"
             />
-            <SemSelect
-              label={"Offices"}
-              icon={HiOfficeBuilding}
-              id={"role"}
-              data={[
-                "Please select office",
-                "Department Supply Coordinator",
-                "Admin",
-              ]}
-              event={handleUpdateForm}
-              name="office"
-            />
+            {forms.role == "Department Supply Coordinator" && (
+              <SemSelect
+                offices={true}
+                label={"Offices"}
+                icon={HiOfficeBuilding}
+                id={"role"}
+                data={offices}
+                event={handleUpdateForm}
+                name="office"
+              />
+            )}
 
             <div className="submit-wrapper mt-10">
               <Button
