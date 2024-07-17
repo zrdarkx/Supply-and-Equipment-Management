@@ -1,4 +1,4 @@
-import { Button, Tooltip } from "flowbite-react";
+import { Button, Progress, Spinner, Tooltip } from "flowbite-react";
 import SemTitle from "../components/semTitle";
 import DashboardLayout from "../layout/dashboardLayout";
 import SemModal from "../components/semModal";
@@ -14,6 +14,7 @@ import ContentHeader from "../components/contentHeader";
 import { ConfirmationModal } from "../components/confirmationModal";
 import useUpdateOffice from "../hooks/useUpdateOffice";
 import NoData from "../components/noData";
+import Loading from "../components/loading";
 
 const Offices = () => {
   const [addOfficeModal, setAddOfficeModal] = useState(false);
@@ -25,7 +26,7 @@ const Offices = () => {
   const { addOffice } = useAddOffice();
   const { deleteOffice } = useDeleteOffice();
   const { updateOffice } = useUpdateOffice();
-  const { offices } = useGetOffices();
+  const { offices, loading } = useGetOffices();
 
   const handleOfficeEvent = () => {
     if (selectedOffice) {
@@ -82,15 +83,18 @@ const Offices = () => {
           event={() => setAddOfficeModal(true)}
           tooltip={"Add office to the system"}
         />
-        {offices.length <= 0 ? (
-          <NoData title={"There's no office, please add one."} />
-        ) : (
+
+        {loading && <Loading />}
+        {!loading && offices.length >= 1 && (
           <SemOfficesTable
             setAddOfficeModal={setAddOfficeModal}
             setDeleteModal={setDeleteModal}
             setSelectedOffice={setSelectedOffice}
             data={offices}
           />
+        )}
+        {!loading && offices.length <= 0 && (
+          <NoData title={"There's no office, please add one."} />
         )}
       </div>
     </DashboardLayout>
