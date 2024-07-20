@@ -15,6 +15,7 @@ const DashboardHeader = ({ handleOpenSidebar }) => {
         size={30}
         color="white"
       />
+
       <div className="user-wrapper  flex-row flex items-center">
         <div className="wrapper mr-10">
           <p className="text-blue-500 text-xs lg:text-sm">Logged in as</p>

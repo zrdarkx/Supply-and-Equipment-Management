@@ -153,7 +153,7 @@ const Supply = () => {
         event={handleDeleteSupply}
         handleClose={() => setDeleteModal(false)}
       />
-      <div className="office-wrapper p-5">
+      <div className="wrapper p-5">
         <ContentHeader
           title="Supply"
           Icon={HiOutlineTable}
