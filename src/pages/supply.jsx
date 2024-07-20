@@ -11,10 +11,10 @@ import useGetSupply from "../hooks/useGetSupply";
 import { SemSupplyTable } from "../components/semSupplyTable";
 import { ConfirmationModal } from "../components/confirmationModal";
 import useDeleteSupply from "../hooks/useDeleteSupply";
-import { SUPPLY_DEFAULT_VALUE } from "../utils/constant";
 import useUpdateSupply from "../hooks/useUpdateSupply";
 import Loading from "../components/loading";
 import NoData from "../components/noData";
+import { SUPPLY_DEFAULT_VALUE } from "../utils/constant";
 
 const Supply = () => {
   //State

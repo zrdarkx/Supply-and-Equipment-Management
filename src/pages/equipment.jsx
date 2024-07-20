@@ -2,11 +2,7 @@ import SemTitle from "../components/semTitle";
 import DashboardLayout from "../layout/dashboardLayout";
 
 const Equipment = () => {
-  return (
-    <DashboardLayout>
-      <SemTitle title={"Equipment"} color={"white"} />
-    </DashboardLayout>
-  );
+  return <SemTitle title={"Equipment"} color={"white"} />;
 };
 
 export default Equipment;
