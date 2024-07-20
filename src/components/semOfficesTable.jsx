@@ -14,16 +14,16 @@ export function SemOfficesTable({
       {data && (
         <Table striped>
           <Table.Head>
-            <Table.HeadCell className="bg-transparent text-white bg-blue-500">
+            <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
               Office ID
             </Table.HeadCell>
-            <Table.HeadCell className="bg-transparent text-white bg-blue-500">
+            <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
               Office Name
             </Table.HeadCell>
-            <Table.HeadCell className="bg-transparent text-white bg-blue-500">
+            <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
               Created At
             </Table.HeadCell>
-            <Table.HeadCell className="bg-transparent text-white bg-blue-500">
+            <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
               Action
             </Table.HeadCell>
           </Table.Head>
@@ -34,16 +34,16 @@ export function SemOfficesTable({
 
               return (
                 <Table.Row key={item.id}>
-                  <Table.Cell className="bg-slate-800 rounded-lg border text-white border-white">
+                  <Table.Cell className="bg-slate-800  text-white">
                     {item.id}
                   </Table.Cell>{" "}
-                  <Table.Cell className="bg-slate-800 rounded-lg border text-white border-white">
+                  <Table.Cell className="bg-slate-800  text-white font-bold">
                     {item.officeName}
                   </Table.Cell>{" "}
-                  <Table.Cell className="bg-slate-800 rounded-lg border text-white border-white">
+                  <Table.Cell className="bg-slate-800  text-white">
                     {date}
                   </Table.Cell>{" "}
-                  <Table.Cell className="bg-slate-800 rounded-lg border text-white border-white">
+                  <Table.Cell className="bg-slate-800  text-white">
                     <div className="flex flex-row justify-center items-center">
                       <Tooltip content="Update office name">
                         <Button

@@ -34,7 +34,7 @@ const Login = () => {
       return;
     }
     setCurrentUser(res);
-    navigation("/transaction");
+    navigation("/master-records");
   };
 
   return (

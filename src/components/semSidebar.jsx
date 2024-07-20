@@ -16,6 +16,7 @@ import {
 } from "react-icons/hi";
 import SemTitle from "./semTitle";
 import { Link } from "react-router-dom";
+import { HiReceiptPercent } from "react-icons/hi2";
 
 const SemSidebar = ({ isOpen, handleClose }) => {
   return (
@@ -31,19 +32,9 @@ const SemSidebar = ({ isOpen, handleClose }) => {
                   Transaction
                 </Sidebar.Item>
               </Link>
-              <Link to={"/offices"}>
-                <Sidebar.Item className="my-3" icon={HiOfficeBuilding}>
-                  Offices
-                </Sidebar.Item>
-              </Link>
-              <Link to={"/supply"}>
-                <Sidebar.Item className="my-3" icon={HiOutlineTable}>
-                  Supply
-                </Sidebar.Item>
-              </Link>
-              <Link to={"/equipment"}>
-                <Sidebar.Item className="my-3" icon={HiViewGrid}>
-                  Equipment
+              <Link to={"/master-records"}>
+                <Sidebar.Item className="my-3" icon={HiFolder}>
+                  Master Records
                 </Sidebar.Item>
               </Link>
 

@@ -1,13 +1,9 @@
 import { HiPlus } from "react-icons/hi";
 import { Button, Tooltip } from "flowbite-react";
-import { TableTabs } from "./tableTabs";
 
 const ContentHeader = ({ event, title, Icon, tooltip }) => {
   return (
-    <div className="content-header flex flex-row justify-between items-center">
-      <div className="py-0">
-        <TableTabs />
-      </div>
+    <div className="content-header flex flex-row justify-end items-center mb-3">
       <div className="wrapper">
         <Tooltip content={tooltip}>
           <Button onClick={event} gradientMonochrome="info">

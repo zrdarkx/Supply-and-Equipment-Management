@@ -8,6 +8,7 @@ import Offices from "./pages/offices";
 import Transaction from "./pages/transcation";
 import Supply from "./pages/supply";
 import Equipment from "./pages/equipment";
+import MasterRecords from "./pages/masterRecords";
 
 function App() {
   const { currentUser } = useSemStore();
@@ -17,6 +18,8 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/master-records" element={<MasterRecords />} />
+
         <Route
           path="/transaction"
           element={true ? <Transaction /> : <Login />}

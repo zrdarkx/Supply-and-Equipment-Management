@@ -51,7 +51,7 @@ export function SemSupplyTable({
                   <Table.Cell className="bg-slate-800  text-white">
                     {item.inventoryNumber}
                   </Table.Cell>{" "}
-                  <Table.Cell className="bg-slate-800  text-white">
+                  <Table.Cell className="bg-slate-800  text-white font-bold">
                     {item.name}
                   </Table.Cell>{" "}
                   <Table.Cell className="bg-slate-800  text-white">

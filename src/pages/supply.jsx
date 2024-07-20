@@ -1,10 +1,10 @@
-import { HiOutlineTable } from "react-icons/hi";
+import { HiOfficeBuilding, HiOutlineTable, HiViewGrid } from "react-icons/hi";
 import ContentHeader from "../components/contentHeader";
 import DashboardLayout from "../layout/dashboardLayout";
 import SemModal from "../components/semModal";
 import SemInput from "../components/semInput";
 import { useState } from "react";
-import { Button } from "flowbite-react";
+import { Button, Tabs } from "flowbite-react";
 import useAddSupply from "../hooks/useAddSupply";
 import { toast } from "react-toastify";
 import useGetSupply from "../hooks/useGetSupply";
@@ -70,7 +70,8 @@ const Supply = () => {
   };
 
   return (
-    <DashboardLayout>
+    <>
+      {/* SUPPLY MODAL */}
       <SemModal
         size="5xl"
         title={isUpdate ? "Update Supply" : "Add Supply"}
@@ -153,6 +154,7 @@ const Supply = () => {
         event={handleDeleteSupply}
         handleClose={() => setDeleteModal(false)}
       />
+
       <div className="wrapper p-5">
         <ContentHeader
           title="Supply"
@@ -177,7 +179,7 @@ const Supply = () => {
           />
         )}
       </div>
-    </DashboardLayout>
+    </>
   );
 };
 

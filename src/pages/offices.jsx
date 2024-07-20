@@ -46,7 +46,7 @@ const Offices = () => {
   };
 
   return (
-    <DashboardLayout>
+    <>
       <SemModal
         title={selectedOffice ? "Update office name" : "Add office"}
         open={addOfficeModal}
@@ -106,7 +106,7 @@ const Offices = () => {
           <NoData title={"There's no office, please add one."} />
         )}
       </div>
-    </DashboardLayout>
+    </>
   );
 };
 
