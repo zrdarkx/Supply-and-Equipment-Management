@@ -12,14 +12,16 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={currentUser ? <MasterRecords /> : <Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/master-records" element={<MasterRecords />} />
+        <Route
+          path="/master-records"
+          element={currentUser ? <MasterRecords /> : <Login />}
+        />
 
         <Route
           path="/transaction"
-          element={true ? <Transaction /> : <Login />}
+          element={currentUser ? <Transaction /> : <Login />}
         />
       </Routes>
       <ToastContainer />

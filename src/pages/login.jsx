@@ -4,10 +4,9 @@ import SemInput from "../components/semInput";
 import SemTitle from "../components/semTitle";
 import { Button, HR } from "flowbite-react";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useValidateUser from "../hooks/useValidateUser";
 import { toast } from "react-toastify";
-import { useStore } from "zustand";
 import { useSemStore } from "../zustand/store";
 import ScreenLoading from "../components/screenLoading";
 
@@ -38,14 +37,20 @@ const Login = () => {
       if (!res) {
         toast.error("Email or Password is incorrect.");
         setLoading(false);
-
         return;
       }
       setCurrentUser(res);
+      localStorage.setItem("user", JSON.stringify(res));
       navigation("/master-records");
       setLoading(false);
     }, 2000);
   };
+
+  useEffect(() => {
+    const output = localStorage.getItem("user");
+    const data = JSON.parse(output);
+    setCurrentUser(data);
+  }, []);
 
   return (
     <div className="w-full bg-slate-950 min-h-screen flex flex-row">

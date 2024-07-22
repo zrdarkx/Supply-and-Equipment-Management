@@ -63,7 +63,7 @@ const Signup = () => {
         success: res.message,
       });
       setTimeout(() => {
-        navigation("/login");
+        navigation("/");
       }, 4000);
     }
   };
@@ -202,7 +202,7 @@ const Signup = () => {
                 Create Account
               </Button>
               <HR.Text />
-              <Link to={"/login"}>
+              <Link to={"/"}>
                 <Button gradientMonochrome="success" className="w-full">
                   <HiLogin className="mr-2 h-5 w-5" />
                   Login
