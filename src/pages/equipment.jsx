@@ -2,7 +2,7 @@ import { HiOutlineTable } from "react-icons/hi";
 import ContentHeader from "../components/contentHeader";
 import SemModal from "../components/semModal";
 import SemInput from "../components/semInput";
-import NoData from "../components/semInput";
+import NoData from "../components/noData";
 import Loading from "../components/semInput";
 
 import { useState } from "react";
@@ -14,16 +14,19 @@ import useGetEquipment from "../hooks/useGetEquipment";
 import { SemEquipmentTable } from "../components/semEquipmentModal";
 import { ConfirmationModal } from "../components/confirmationModal";
 import useDeleteEquipment from "../hooks/useDeleteEquipment";
+import useUpdateEquipment from "../hooks/useUpdateEquipment";
 
 const Equipment = () => {
   const [forms, setForms] = useState(EQUIPMENT_DEFAULT_VALUE);
   const [equipModal, setEquipModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [selectedEquip, setSelectedEquip] = useState(null);
+  const [isUpdate, setIsUpdate] = useState(false);
 
   // HOOKS
 
   const { addEquipment } = useAddEquipment();
+  const { updateEquipment } = useUpdateEquipment();
   const { deleteEquipment } = useDeleteEquipment();
   const { data, loading } = useGetEquipment();
 
@@ -34,8 +37,14 @@ const Equipment = () => {
   };
 
   const handleSubmit = () => {
-    addEquipment(forms);
-    toast.success("Equipment Added.");
+    if (isUpdate) {
+      updateEquipment(forms);
+      toast.success("Equipment Updated.");
+    } else {
+      addEquipment(forms);
+      toast.success("Equipment Added.");
+    }
+
     setEquipModal(false);
   };
 
@@ -44,11 +53,15 @@ const Equipment = () => {
     setDeleteModal(false);
   };
 
+  const handleUpdateEquipForm = (item) => {
+    setForms(item);
+  };
+
   return (
     <>
       <SemModal
         size="5xl"
-        title={false ? "Update Equipment" : "Add Equipment"}
+        title={isUpdate ? "Update Equipment" : "Add Equipment"}
         open={equipModal}
         handleClose={() => setEquipModal(false)}
       >
@@ -101,7 +114,7 @@ const Equipment = () => {
               value={forms.propertyNumber}
               name={"propertyNumber"}
               color={"gray"}
-              label="Inventory Number"
+              label="Property Number"
               placeholder="Enter inventory number"
               event={handleUpdateForm}
             />
@@ -113,7 +126,7 @@ const Equipment = () => {
           gradientMonochrome="info"
           className="w-full mt-5 py-2"
         >
-          {false ? "Update Equipment" : "Add Equipment"}
+          {isUpdate ? "Update Equipment" : "Add Equipment"}
         </Button>
       </SemModal>
       <ConfirmationModal
@@ -127,7 +140,11 @@ const Equipment = () => {
           title="Equipment"
           Icon={HiOutlineTable}
           tooltip={"Add equipmente to the system"}
-          event={() => setEquipModal(true)}
+          event={() => {
+            setEquipModal(true);
+            setIsUpdate(false);
+            setForms(EQUIPMENT_DEFAULT_VALUE);
+          }}
         />
 
         {loading && <Loading />}
@@ -138,8 +155,9 @@ const Equipment = () => {
 
         {!loading && data.length >= 1 && (
           <SemEquipmentTable
-            // handleSelectedSupplyUpdate={handleSelectedSupplyUpdate}
-            // setSupplyModal={setSupplyModal}
+            handleUpdateEquipForm={handleUpdateEquipForm}
+            setIsUpdate={setIsUpdate}
+            setEquipModal={setEquipModal}
             setSelectedEquip={setSelectedEquip}
             setDeleteModal={setDeleteModal}
             data={data}

@@ -4,8 +4,9 @@ export function SemEquipmentTable({
   data,
   setSelectedEquip,
   setDeleteModal,
-  setSupplyModal,
-  handleSelectedSupplyUpdate,
+  setEquipModal,
+  setIsUpdate,
+  handleUpdateEquipForm,
 }) {
   return (
     <div className="overflow-x-auto ">
@@ -73,8 +74,9 @@ export function SemEquipmentTable({
                         <Dropdown.Item
                           key={"update"}
                           onClick={() => {
-                            setSupplyModal(true);
-                            handleSelectedSupplyUpdate(item);
+                            setEquipModal(true);
+                            handleUpdateEquipForm(item);
+                            setIsUpdate(true);
                           }}
                         >
                           Update
