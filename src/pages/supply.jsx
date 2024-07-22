@@ -144,7 +144,7 @@ const Supply = () => {
         <Button
           onClick={handleSubmit}
           gradientMonochrome="info"
-          className="w-full mt-5"
+          className="w-full mt-5 py-2"
         >
           {isUpdate ? "Update Supply" : "Add Supply"}
         </Button>

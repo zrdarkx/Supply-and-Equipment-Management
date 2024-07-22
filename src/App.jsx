@@ -24,9 +24,6 @@ function App() {
           path="/transaction"
           element={true ? <Transaction /> : <Login />}
         />
-        <Route path="/offices" element={true ? <Offices /> : <Login />} />
-        <Route path="/supply" element={true ? <Supply /> : <Login />} />
-        <Route path="/equipment" element={true ? <Equipment /> : <Login />} />
       </Routes>
       <ToastContainer />
     </>

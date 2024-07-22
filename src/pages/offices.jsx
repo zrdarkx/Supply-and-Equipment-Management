@@ -65,7 +65,7 @@ const Offices = () => {
         <Button
           onClick={handleOfficeEvent}
           gradientMonochrome={selectedOffice ? "info" : "info"}
-          className="w-full mt-5"
+          className="w-full mt-5 py-2"
         >
           {selectedOffice ? "Update office name" : "Add Office"}
         </Button>
