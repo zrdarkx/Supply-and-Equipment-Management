@@ -1,16 +1,108 @@
 import { HiOutlineTable } from "react-icons/hi";
 import ContentHeader from "../components/contentHeader";
-import SemTitle from "../components/semTitle";
-import DashboardLayout from "../layout/dashboardLayout";
+import SemModal from "../components/semModal";
+import SemInput from "../components/semInput";
+import { useState } from "react";
+import { EQUIPMENT_DEFAULT_VALUE } from "../utils/constant";
+import { Button } from "flowbite-react";
+import useAddEquipment from "../hooks/useAddEquipment";
 
 const Equipment = () => {
+  const [forms, setForms] = useState(EQUIPMENT_DEFAULT_VALUE);
+  const [equipModal, setEquipModal] = useState(false);
+
+  // HOOKS
+
+  const { addEquipment } = useAddEquipment();
+
+  const handleUpdateForm = (event) => {
+    const { name, value } = event.target;
+    const newForms = { ...forms, [name]: value };
+    setForms(newForms);
+  };
+
+  const handleSubmit = () => {
+    addEquipment(forms);
+  };
+
   return (
     <>
+      <SemModal
+        size="5xl"
+        title={false ? "Update Equipment" : "Add Equipment"}
+        open={equipModal}
+        handleClose={() => setEquipModal(false)}
+      >
+        <div className="flex flex-row">
+          <div className="basis-6/12 mx-3">
+            <SemInput
+              value={forms.name}
+              color={"gray"}
+              name={"name"}
+              label="Name"
+              placeholder="Enter name"
+              event={handleUpdateForm}
+            />
+            <SemInput
+              value={forms.quantity}
+              name={"quantity"}
+              color={"gray"}
+              label="Quantity"
+              placeholder="Enter quantity"
+              event={handleUpdateForm}
+            />
+            <SemInput
+              value={forms.unit}
+              name={"unit"}
+              color={"gray"}
+              label="Unit"
+              placeholder="Enter unit"
+              event={handleUpdateForm}
+            />
+            <SemInput
+              value={forms.unitCost}
+              name={"unitCost"}
+              color={"gray"}
+              label="Unit Cost"
+              placeholder="Enter unit cost"
+              event={handleUpdateForm}
+            />
+          </div>
+          <div className="basis-6/12">
+            <SemInput
+              value={forms.description}
+              name={"description"}
+              color={"gray"}
+              label="Description"
+              placeholder="Enter description"
+              event={handleUpdateForm}
+            />
+
+            <SemInput
+              value={forms.propertyNumber}
+              name={"propertyNumber"}
+              color={"gray"}
+              label="Inventory Number"
+              placeholder="Enter inventory number"
+              event={handleUpdateForm}
+            />
+          </div>{" "}
+        </div>
+
+        <Button
+          onClick={handleSubmit}
+          gradientMonochrome="info"
+          className="w-full mt-5 py-2"
+        >
+          {false ? "Update Equipment" : "Add Equipment"}
+        </Button>
+      </SemModal>
       <div className="wrapper p-5">
         <ContentHeader
           title="Equipment"
           Icon={HiOutlineTable}
           tooltip={"Add equipmente to the system"}
+          event={() => setEquipModal(true)}
         />
 
         {/* {loading && <Loading />}
