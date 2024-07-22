@@ -9,12 +9,15 @@ import useValidateUser from "../hooks/useValidateUser";
 import { toast } from "react-toastify";
 import { useStore } from "zustand";
 import { useSemStore } from "../zustand/store";
+import ScreenLoading from "../components/screenLoading";
 
 const Login = () => {
   const [forms, setForms] = useState({
     email: "",
     password: "",
   });
+
+  const [loading, setLoading] = useState(false);
 
   // Hooks
   const { validateUser } = useValidateUser();
@@ -28,17 +31,26 @@ const Login = () => {
 
   const handleSubmitForm = (event) => {
     event.preventDefault();
-    const res = validateUser(forms);
-    if (!res) {
-      toast.error("Email or Password is incorrect.");
-      return;
-    }
-    setCurrentUser(res);
-    navigation("/master-records");
+
+    setLoading(true);
+    setTimeout(() => {
+      const res = validateUser(forms);
+      if (!res) {
+        toast.error("Email or Password is incorrect.");
+        setLoading(false);
+
+        return;
+      }
+      setCurrentUser(res);
+      navigation("/master-records");
+      setLoading(false);
+    }, 2000);
   };
 
   return (
     <div className="w-full bg-slate-950 min-h-screen flex flex-row">
+      {loading && <ScreenLoading />}
+
       <div className="basis-6/12 hidden lg:flex justify-center items-center flex-col">
         <LandingAnimation />
       </div>
