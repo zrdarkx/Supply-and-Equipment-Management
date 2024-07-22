@@ -2,18 +2,30 @@ import { HiOutlineTable } from "react-icons/hi";
 import ContentHeader from "../components/contentHeader";
 import SemModal from "../components/semModal";
 import SemInput from "../components/semInput";
+import NoData from "../components/semInput";
+import Loading from "../components/semInput";
+
 import { useState } from "react";
 import { EQUIPMENT_DEFAULT_VALUE } from "../utils/constant";
 import { Button } from "flowbite-react";
 import useAddEquipment from "../hooks/useAddEquipment";
+import { toast } from "react-toastify";
+import useGetEquipment from "../hooks/useGetEquipment";
+import { SemEquipmentTable } from "../components/semEquipmentModal";
+import { ConfirmationModal } from "../components/confirmationModal";
+import useDeleteEquipment from "../hooks/useDeleteEquipment";
 
 const Equipment = () => {
   const [forms, setForms] = useState(EQUIPMENT_DEFAULT_VALUE);
   const [equipModal, setEquipModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [selectedEquip, setSelectedEquip] = useState(null);
 
   // HOOKS
 
   const { addEquipment } = useAddEquipment();
+  const { deleteEquipment } = useDeleteEquipment();
+  const { data, loading } = useGetEquipment();
 
   const handleUpdateForm = (event) => {
     const { name, value } = event.target;
@@ -23,6 +35,13 @@ const Equipment = () => {
 
   const handleSubmit = () => {
     addEquipment(forms);
+    toast.success("Equipment Added.");
+    setEquipModal(false);
+  };
+
+  const handleDeleteEquip = () => {
+    deleteEquipment(selectedEquip.id);
+    setDeleteModal(false);
   };
 
   return (
@@ -97,6 +116,12 @@ const Equipment = () => {
           {false ? "Update Equipment" : "Add Equipment"}
         </Button>
       </SemModal>
+      <ConfirmationModal
+        open={deleteModal}
+        event={handleDeleteEquip}
+        handleClose={() => setDeleteModal(false)}
+      />
+
       <div className="wrapper p-5">
         <ContentHeader
           title="Equipment"
@@ -105,21 +130,21 @@ const Equipment = () => {
           event={() => setEquipModal(true)}
         />
 
-        {/* {loading && <Loading />}
+        {loading && <Loading />}
 
         {!loading && data.length <= 0 && (
           <NoData title={"There's no supply, please add one."} />
         )}
 
         {!loading && data.length >= 1 && (
-          <SemSupplyTable
-            handleSelectedSupplyUpdate={handleSelectedSupplyUpdate}
-            setSupplyModal={setSupplyModal}
-            setSelectedSupply={setSelectedSupply}
+          <SemEquipmentTable
+            // handleSelectedSupplyUpdate={handleSelectedSupplyUpdate}
+            // setSupplyModal={setSupplyModal}
+            setSelectedEquip={setSelectedEquip}
             setDeleteModal={setDeleteModal}
             data={data}
           />
-        )} */}
+        )}
       </div>
     </>
   );
