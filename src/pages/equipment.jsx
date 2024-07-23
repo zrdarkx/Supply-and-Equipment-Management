@@ -23,7 +23,7 @@ const Equipment = ({ cart }) => {
   const [deleteModal, setDeleteModal] = useState(false);
   const [selectedEquip, setSelectedEquip] = useState(null);
   const [isUpdate, setIsUpdate] = useState(false);
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState("");
 
   // HOOKS
 
@@ -61,6 +61,14 @@ const Equipment = ({ cart }) => {
   const handleUpdateEquipForm = (item) => {
     setForms(item);
   };
+
+  const query = data.filter((item) => {
+    const itemName = item?.name.toLowerCase();
+    const itemSearch = search?.toLowerCase();
+    if (itemName.startsWith(itemSearch)) {
+      return item;
+    }
+  });
 
   return (
     <>
@@ -166,7 +174,7 @@ const Equipment = ({ cart }) => {
             setEquipModal={setEquipModal}
             setSelectedEquip={setSelectedEquip}
             setDeleteModal={setDeleteModal}
-            data={cart ? cartEquipment : data}
+            data={cart ? cartEquipment : query}
             cart={cart}
           />
         )}
