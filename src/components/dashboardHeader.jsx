@@ -5,8 +5,9 @@ import { FaUser, FaUserCircle } from "react-icons/fa";
 import { Badge, Tooltip } from "flowbite-react";
 
 const DashboardHeader = ({ handleOpenSidebar, setCartModal }) => {
-  const { currentUser } = useSemStore();
+  const { currentUser, cartSupply, cartEquipment } = useSemStore();
   const isAdmin = currentUser.role == "Admin";
+  const totalCartLength = cartSupply.length + cartEquipment.length;
   return (
     <div className="header-wrapper flex items-center justify-between p-8 lg:mx-10">
       <HiMenu
@@ -36,7 +37,7 @@ const DashboardHeader = ({ handleOpenSidebar, setCartModal }) => {
                 size={30}
                 color="white"
               />
-              <Badge>2</Badge>
+              <Badge>{totalCartLength}</Badge>
             </div>
           </Tooltip>
         )}

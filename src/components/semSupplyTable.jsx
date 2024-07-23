@@ -1,6 +1,7 @@
 import { Button, Dropdown, Table, Tooltip } from "flowbite-react";
 import { HiOutlineCog, HiOutlinePlusCircle, HiTrash } from "react-icons/hi";
 import { useSemStore } from "../zustand/store";
+import { toast } from "react-toastify";
 
 export function SemSupplyTable({
   data,
@@ -18,6 +19,9 @@ export function SemSupplyTable({
     if (!isAdded) {
       const newItem = [...cartSupply, item];
       setCartSupply(newItem);
+      toast.success("Successfull added to cart.", { position: "bottom-right" });
+    } else {
+      toast.info("it's already in your cart.", { position: "bottom-right" });
     }
   };
 
