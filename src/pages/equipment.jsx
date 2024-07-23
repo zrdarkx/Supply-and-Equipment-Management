@@ -23,9 +23,7 @@ const Equipment = ({ cart }) => {
   const [deleteModal, setDeleteModal] = useState(false);
   const [selectedEquip, setSelectedEquip] = useState(null);
   const [isUpdate, setIsUpdate] = useState(false);
-
-  const { currentUser } = useSemStore();
-  const isAdmin = currentUser.role == "Admin";
+  const [search, setSearch] = useState();
 
   // HOOKS
 
@@ -143,18 +141,17 @@ const Equipment = ({ cart }) => {
       />
 
       <div className="wrapper p-5">
-        {isAdmin && (
-          <ContentHeader
-            title="Equipment"
-            Icon={HiOutlineTable}
-            tooltip={"Add equipmente to the system"}
-            event={() => {
-              setEquipModal(true);
-              setIsUpdate(false);
-              setForms(EQUIPMENT_DEFAULT_VALUE);
-            }}
-          />
-        )}
+        <ContentHeader
+          setSearch={setSearch}
+          title="Equipment"
+          Icon={HiOutlineTable}
+          tooltip={"Add equipmente to the system"}
+          event={() => {
+            setEquipModal(true);
+            setIsUpdate(false);
+            setForms(EQUIPMENT_DEFAULT_VALUE);
+          }}
+        />
 
         {loading && <Loading />}
 

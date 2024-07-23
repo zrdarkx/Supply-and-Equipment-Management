@@ -25,9 +25,7 @@ const Supply = ({ cart }) => {
   const [selectedSupply, setSelectedSupply] = useState(null);
   const [isUpdate, setIsUpdate] = useState(false);
   const [forms, setForms] = useState(SUPPLY_DEFAULT_VALUE);
-
-  const { currentUser } = useSemStore();
-  const isAdmin = currentUser.role == "Admin";
+  const [search, setSearch] = useState("");
 
   // Hooks
 
@@ -73,6 +71,14 @@ const Supply = ({ cart }) => {
     setIsUpdate(false);
     setForms(SUPPLY_DEFAULT_VALUE);
   };
+
+  const query = data.filter((item) => {
+    const itemName = item?.name.toLowerCase();
+    const itemSearch = search?.toLowerCase();
+    if (itemName.startsWith(itemSearch)) {
+      return item;
+    }
+  });
 
   return (
     <>
@@ -161,14 +167,13 @@ const Supply = ({ cart }) => {
       />
 
       <div className="wrapper p-5">
-        {isAdmin && (
-          <ContentHeader
-            title="Supply"
-            Icon={HiOutlineTable}
-            event={handleAddingSupply}
-            tooltip={"Add supply to the system"}
-          />
-        )}
+        <ContentHeader
+          setSearch={setSearch}
+          title="Supply"
+          Icon={HiOutlineTable}
+          event={handleAddingSupply}
+          tooltip={"Add supply to the system"}
+        />
 
         {loading && <Loading />}
 
@@ -182,7 +187,7 @@ const Supply = ({ cart }) => {
             setSupplyModal={setSupplyModal}
             setSelectedSupply={setSelectedSupply}
             setDeleteModal={setDeleteModal}
-            data={cart ? cartSupply : data}
+            data={cart ? cartSupply : query}
             cart={cart}
           />
         )}
