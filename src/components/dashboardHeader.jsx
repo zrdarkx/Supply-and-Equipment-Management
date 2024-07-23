@@ -4,7 +4,7 @@ import { useSemStore } from "../zustand/store";
 import { FaUser, FaUserCircle } from "react-icons/fa";
 import { Badge, Tooltip } from "flowbite-react";
 
-const DashboardHeader = ({ handleOpenSidebar }) => {
+const DashboardHeader = ({ handleOpenSidebar, setCartModal }) => {
   const { currentUser } = useSemStore();
   const isAdmin = currentUser.role == "Admin";
   return (
@@ -31,7 +31,11 @@ const DashboardHeader = ({ handleOpenSidebar }) => {
         ) : (
           <Tooltip content={"Your item cart"}>
             <div className="flex cursor-pointer">
-              <HiShoppingCart size={30} color="white" />
+              <HiShoppingCart
+                onClick={() => setCartModal(true)}
+                size={30}
+                color="white"
+              />
               <Badge>2</Badge>
             </div>
           </Tooltip>

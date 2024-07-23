@@ -11,13 +11,13 @@ import { Button } from "flowbite-react";
 import useAddEquipment from "../hooks/useAddEquipment";
 import { toast } from "react-toastify";
 import useGetEquipment from "../hooks/useGetEquipment";
-import { SemEquipmentTable } from "../components/semEquipmentModal";
+import { SemEquipmentTable } from "../components/semEquipmentTable";
 import { ConfirmationModal } from "../components/confirmationModal";
 import useDeleteEquipment from "../hooks/useDeleteEquipment";
 import useUpdateEquipment from "../hooks/useUpdateEquipment";
 import { useSemStore } from "../zustand/store";
 
-const Equipment = () => {
+const Equipment = ({ cart }) => {
   const [forms, setForms] = useState(EQUIPMENT_DEFAULT_VALUE);
   const [equipModal, setEquipModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
@@ -33,6 +33,7 @@ const Equipment = () => {
   const { updateEquipment } = useUpdateEquipment();
   const { deleteEquipment } = useDeleteEquipment();
   const { data, loading } = useGetEquipment();
+  const { cartEquipment } = useSemStore();
 
   // LOCAL FUNCTION
 
@@ -168,7 +169,8 @@ const Equipment = () => {
             setEquipModal={setEquipModal}
             setSelectedEquip={setSelectedEquip}
             setDeleteModal={setDeleteModal}
-            data={data}
+            data={cart ? cartEquipment : data}
+            cart={cart}
           />
         )}
       </div>

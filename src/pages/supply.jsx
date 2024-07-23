@@ -17,7 +17,7 @@ import NoData from "../components/noData";
 import { SUPPLY_DEFAULT_VALUE } from "../utils/constant";
 import { useSemStore } from "../zustand/store";
 
-const Supply = () => {
+const Supply = ({ cart }) => {
   //State
 
   const [supplyModal, setSupplyModal] = useState(false);
@@ -28,12 +28,14 @@ const Supply = () => {
 
   const { currentUser } = useSemStore();
   const isAdmin = currentUser.role == "Admin";
+
   // Hooks
 
   const { addSupply } = useAddSupply();
   const { deleteSupply } = useDeleteSupply();
   const { updateSupply } = useUpdateSupply();
   const { data, loading } = useGetSupply();
+  const { cartSupply } = useSemStore();
 
   // Local Fucntion
 
@@ -180,7 +182,8 @@ const Supply = () => {
             setSupplyModal={setSupplyModal}
             setSelectedSupply={setSelectedSupply}
             setDeleteModal={setDeleteModal}
-            data={data}
+            data={cart ? cartSupply : data}
+            cart={cart}
           />
         )}
       </div>

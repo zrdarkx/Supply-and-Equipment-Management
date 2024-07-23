@@ -8,9 +8,18 @@ export function SemSupplyTable({
   setDeleteModal,
   setSupplyModal,
   handleSelectedSupplyUpdate,
+  cart,
 }) {
-  const { currentUser } = useSemStore();
+  const { currentUser, setCartSupply, cartSupply } = useSemStore();
   const isAdmin = currentUser.role == "Admin";
+
+  const handleAddCart = (item) => {
+    const isAdded = cartSupply.includes(item);
+    if (!isAdded) {
+      const newItem = [...cartSupply, item];
+      setCartSupply(newItem);
+    }
+  };
 
   return (
     <div className="overflow-x-auto ">
@@ -42,9 +51,11 @@ export function SemSupplyTable({
               Estimated Useful Life
             </Table.HeadCell>
 
-            <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Action
-            </Table.HeadCell>
+            {!cart && (
+              <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
+                Action
+              </Table.HeadCell>
+            )}
           </Table.Head>
           <Table.Body className="divide-y">
             {data.map((item, index) => {
@@ -109,10 +120,13 @@ export function SemSupplyTable({
                       </div>
                     </Table.Cell>
                   )}
-                  {!isAdmin && (
+                  {!isAdmin && !cart && (
                     <Table.Cell className="bg-slate-800 rounded-lg text-white ">
                       <Tooltip content="Add this item to your cart">
-                        <Button gradientMonochrome="info">
+                        <Button
+                          gradientMonochrome="info"
+                          onClick={() => handleAddCart(item)}
+                        >
                           <HiOutlinePlusCircle
                             color="white"
                             className="mr-2 h-5 w-5"
