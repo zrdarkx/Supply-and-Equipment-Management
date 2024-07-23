@@ -150,7 +150,7 @@ const Equipment = () => {
         {loading && <Loading />}
 
         {!loading && data.length <= 0 && (
-          <NoData title={"There's no supply, please add one."} />
+          <NoData title={"There's no equipment, please add one."} />
         )}
 
         {!loading && data.length >= 1 && (

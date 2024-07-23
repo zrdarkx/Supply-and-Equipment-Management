@@ -1,4 +1,5 @@
-import { Dropdown, Table, Tooltip } from "flowbite-react";
+import { Button, Dropdown, Table, Tooltip } from "flowbite-react";
+import { HiOutlineCog, HiTrash } from "react-icons/hi";
 
 export function SemEquipmentTable({
   data,
@@ -65,35 +66,38 @@ export function SemEquipmentTable({
                     {item.description}
                   </Table.Cell>{" "}
                   <Table.Cell className="bg-slate-800 rounded-lg text-white ">
-                    <Dropdown
-                      color={"info"}
-                      label="Action"
-                      dismissOnClick={false}
-                    >
-                      <Tooltip content="Update supply">
-                        <Dropdown.Item
-                          key={"update"}
+                    <div className="flex">
+                      <Tooltip content="Update office name">
+                        <Button
+                          className="mr-5"
                           onClick={() => {
                             setEquipModal(true);
                             handleUpdateEquipForm(item);
                             setIsUpdate(true);
                           }}
+                          gradientMonochrome="lime"
                         >
+                          <HiOutlineCog
+                            color="black"
+                            className="mr-2 h-5 w-5"
+                          />
                           Update
-                        </Dropdown.Item>
+                        </Button>
                       </Tooltip>
-                      <Tooltip content="Delete supply permanently">
-                        <Dropdown.Item
-                          key={"delete"}
+                      <Tooltip content="Delete the office permanently">
+                        <Button
                           onClick={() => {
                             setDeleteModal(true);
                             setSelectedEquip(item);
                           }}
+                          gradientMonochrome="failure"
                         >
+                          {" "}
+                          <HiTrash color="white" className="mr-2 h-5 w-5" />
                           Delete
-                        </Dropdown.Item>
-                      </Tooltip>{" "}
-                    </Dropdown>{" "}
+                        </Button>
+                      </Tooltip>
+                    </div>
                   </Table.Cell>{" "}
                 </Table.Row>
               );
