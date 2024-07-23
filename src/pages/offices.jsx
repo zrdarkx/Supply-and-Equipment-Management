@@ -83,7 +83,7 @@ const Offices = () => {
       />
       <div className="office-wrapper p-5">
         <ContentHeader
-          title="Offices"
+          title="Office"
           Icon={HiOfficeBuilding}
           event={() => {
             setAddOfficeModal(true);

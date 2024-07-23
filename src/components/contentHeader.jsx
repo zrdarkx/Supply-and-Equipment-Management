@@ -6,7 +6,7 @@ const ContentHeader = ({ event, title, Icon, tooltip }) => {
     <div className="content-header flex flex-row justify-end items-center mb-3">
       <div className="wrapper">
         <Tooltip content={tooltip}>
-          <Button onClick={event} gradientMonochrome="info">
+          <Button onClick={event} gradientMonochrome="success">
             <HiPlus color="white" className="mr-2 h-5 w-5" />
             Add {title}
           </Button>

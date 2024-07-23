@@ -53,10 +53,10 @@ export function SemOfficesTable({
                             setAddOfficeModal(true);
                             handleUpdateOfficeForm(item);
                           }}
-                          gradientMonochrome="lime"
+                          gradientMonochrome="info"
                         >
                           <HiOutlineCog
-                            color="black"
+                            color="white"
                             className="mr-2 h-5 w-5"
                           />
                           Update
