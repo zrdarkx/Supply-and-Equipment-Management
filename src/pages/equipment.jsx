@@ -15,6 +15,7 @@ import { SemEquipmentTable } from "../components/semEquipmentModal";
 import { ConfirmationModal } from "../components/confirmationModal";
 import useDeleteEquipment from "../hooks/useDeleteEquipment";
 import useUpdateEquipment from "../hooks/useUpdateEquipment";
+import { useSemStore } from "../zustand/store";
 
 const Equipment = () => {
   const [forms, setForms] = useState(EQUIPMENT_DEFAULT_VALUE);
@@ -23,12 +24,17 @@ const Equipment = () => {
   const [selectedEquip, setSelectedEquip] = useState(null);
   const [isUpdate, setIsUpdate] = useState(false);
 
+  const { currentUser } = useSemStore();
+  const isAdmin = currentUser.role == "Admin";
+
   // HOOKS
 
   const { addEquipment } = useAddEquipment();
   const { updateEquipment } = useUpdateEquipment();
   const { deleteEquipment } = useDeleteEquipment();
   const { data, loading } = useGetEquipment();
+
+  // LOCAL FUNCTION
 
   const handleUpdateForm = (event) => {
     const { name, value } = event.target;
@@ -136,16 +142,18 @@ const Equipment = () => {
       />
 
       <div className="wrapper p-5">
-        <ContentHeader
-          title="Equipment"
-          Icon={HiOutlineTable}
-          tooltip={"Add equipmente to the system"}
-          event={() => {
-            setEquipModal(true);
-            setIsUpdate(false);
-            setForms(EQUIPMENT_DEFAULT_VALUE);
-          }}
-        />
+        {isAdmin && (
+          <ContentHeader
+            title="Equipment"
+            Icon={HiOutlineTable}
+            tooltip={"Add equipmente to the system"}
+            event={() => {
+              setEquipModal(true);
+              setIsUpdate(false);
+              setForms(EQUIPMENT_DEFAULT_VALUE);
+            }}
+          />
+        )}
 
         {loading && <Loading />}
 

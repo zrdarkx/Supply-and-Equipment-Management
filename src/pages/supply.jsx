@@ -15,6 +15,7 @@ import useUpdateSupply from "../hooks/useUpdateSupply";
 import Loading from "../components/loading";
 import NoData from "../components/noData";
 import { SUPPLY_DEFAULT_VALUE } from "../utils/constant";
+import { useSemStore } from "../zustand/store";
 
 const Supply = () => {
   //State
@@ -25,6 +26,8 @@ const Supply = () => {
   const [isUpdate, setIsUpdate] = useState(false);
   const [forms, setForms] = useState(SUPPLY_DEFAULT_VALUE);
 
+  const { currentUser } = useSemStore();
+  const isAdmin = currentUser.role == "Admin";
   // Hooks
 
   const { addSupply } = useAddSupply();
@@ -156,12 +159,14 @@ const Supply = () => {
       />
 
       <div className="wrapper p-5">
-        <ContentHeader
-          title="Supply"
-          Icon={HiOutlineTable}
-          event={handleAddingSupply}
-          tooltip={"Add supply to the system"}
-        />
+        {isAdmin && (
+          <ContentHeader
+            title="Supply"
+            Icon={HiOutlineTable}
+            event={handleAddingSupply}
+            tooltip={"Add supply to the system"}
+          />
+        )}
 
         {loading && <Loading />}
 

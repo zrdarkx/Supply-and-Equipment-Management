@@ -20,7 +20,7 @@ const Login = () => {
 
   // Hooks
   const { validateUser } = useValidateUser();
-  const { setCurrentUser, currentUser } = useSemStore();
+  const { setCurrentUser, currentUser, setIsAdmin } = useSemStore();
   const navigation = useNavigate();
 
   const handleUpdateForm = (event) => {

@@ -1,5 +1,6 @@
 import { Button, Dropdown, Table, Tooltip } from "flowbite-react";
-import { HiOutlineCog, HiTrash } from "react-icons/hi";
+import { HiOutlineCog, HiOutlinePlusCircle, HiTrash } from "react-icons/hi";
+import { useSemStore } from "../zustand/store";
 
 export function SemEquipmentTable({
   data,
@@ -9,6 +10,8 @@ export function SemEquipmentTable({
   setIsUpdate,
   handleUpdateEquipForm,
 }) {
+  const { currentUser } = useSemStore();
+  const isAdmin = currentUser.role == "Admin";
   return (
     <div className="overflow-x-auto ">
       {data && (
@@ -65,40 +68,55 @@ export function SemEquipmentTable({
                   <Table.Cell className="bg-slate-800  text-white">
                     {item.description}
                   </Table.Cell>{" "}
-                  <Table.Cell className="bg-slate-800 rounded-lg text-white ">
-                    <div className="flex">
-                      <Tooltip content="Update office name">
-                        <Button
-                          className="mr-5"
-                          onClick={() => {
-                            setEquipModal(true);
-                            handleUpdateEquipForm(item);
-                            setIsUpdate(true);
-                          }}
-                          gradientMonochrome="info"
-                        >
-                          <HiOutlineCog
+                  {isAdmin && (
+                    <Table.Cell className="bg-slate-800 rounded-lg text-white ">
+                      <div className="flex">
+                        <Tooltip content="Update office name">
+                          <Button
+                            className="mr-5"
+                            onClick={() => {
+                              setEquipModal(true);
+                              handleUpdateEquipForm(item);
+                              setIsUpdate(true);
+                            }}
+                            gradientMonochrome="info"
+                          >
+                            <HiOutlineCog
+                              color="white"
+                              className="mr-2 h-5 w-5"
+                            />
+                            Update
+                          </Button>
+                        </Tooltip>
+                        <Tooltip content="Delete the office permanently">
+                          <Button
+                            onClick={() => {
+                              setDeleteModal(true);
+                              setSelectedEquip(item);
+                            }}
+                            gradientMonochrome="failure"
+                          >
+                            {" "}
+                            <HiTrash color="white" className="mr-2 h-5 w-5" />
+                            Delete
+                          </Button>
+                        </Tooltip>
+                      </div>
+                    </Table.Cell>
+                  )}
+                  {!isAdmin && (
+                    <Table.Cell className="bg-slate-800 rounded-lg text-white ">
+                      <Tooltip content="Add this item to your cart">
+                        <Button gradientMonochrome="info">
+                          <HiOutlinePlusCircle
                             color="white"
                             className="mr-2 h-5 w-5"
                           />
-                          Update
+                          Add to Cart
                         </Button>
                       </Tooltip>
-                      <Tooltip content="Delete the office permanently">
-                        <Button
-                          onClick={() => {
-                            setDeleteModal(true);
-                            setSelectedEquip(item);
-                          }}
-                          gradientMonochrome="failure"
-                        >
-                          {" "}
-                          <HiTrash color="white" className="mr-2 h-5 w-5" />
-                          Delete
-                        </Button>
-                      </Tooltip>
-                    </div>
-                  </Table.Cell>{" "}
+                    </Table.Cell>
+                  )}
                 </Table.Row>
               );
             })}
