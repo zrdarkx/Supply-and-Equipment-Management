@@ -90,7 +90,7 @@ const Offices = () => {
           setDeleteModal(false);
         }}
       />
-      <div className="office-wrapper p-5">
+      <div className="office-wrapper p-0 lg:p-5">
         <ContentHeader
           setSearch={setSearch}
           title="Office"

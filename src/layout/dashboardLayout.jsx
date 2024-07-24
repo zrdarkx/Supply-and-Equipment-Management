@@ -58,7 +58,7 @@ const DashboardLayout = ({ children }) => {
         setCartModal={setCartModal}
         handleOpenSidebar={() => setOpen(true)}
       />
-      <div className="w-full px-10">{children}</div>
+      <div className="w-full px-0 lg:px-10">{children}</div>
     </div>
   );
 };

@@ -9,9 +9,9 @@ const DashboardHeader = ({ handleOpenSidebar, setCartModal }) => {
   const isAdmin = currentUser.role == "Admin";
   const totalCartLength = cartSupply.length + cartEquipment.length;
   return (
-    <div className="header-wrapper flex items-center justify-between p-8 lg:mx-10">
+    <div className="header-wrapper flex items-center justify-between py-10 lg:mb-0 p-5 lg:p-8 lg:mx-10">
       <HiMenu
-        className="cursor-pointer"
+        className="cursor-pointer mr-5"
         onClick={handleOpenSidebar}
         size={30}
         color="white"

@@ -148,7 +148,7 @@ const Equipment = ({ cart }) => {
         handleClose={() => setDeleteModal(false)}
       />
 
-      <div className="wrapper p-5">
+      <div className="wrapper p-0 lg:p-5">
         <ContentHeader
           cart={cart}
           setSearch={setSearch}
