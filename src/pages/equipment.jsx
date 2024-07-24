@@ -150,6 +150,7 @@ const Equipment = ({ cart }) => {
 
       <div className="wrapper p-5">
         <ContentHeader
+          cart={cart}
           setSearch={setSearch}
           title="Equipment"
           Icon={HiOutlineTable}

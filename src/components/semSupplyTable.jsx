@@ -25,6 +25,15 @@ export function SemSupplyTable({
     }
   };
 
+  const handleRemoveCart = (item) => {
+    const newCarts = cartSupply.filter((cart) => {
+      if (cart.id !== item.id) {
+        return cart;
+      }
+    });
+    setCartSupply(newCarts);
+  };
+
   return (
     <div className="overflow-x-auto ">
       {data && (
@@ -55,11 +64,9 @@ export function SemSupplyTable({
               Estimated Useful Life
             </Table.HeadCell>
 
-            {!cart && (
-              <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-                Action
-              </Table.HeadCell>
-            )}
+            <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
+              Action
+            </Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
             {data.map((item, index) => {
@@ -136,6 +143,19 @@ export function SemSupplyTable({
                             className="mr-2 h-5 w-5"
                           />
                           Add to Cart
+                        </Button>
+                      </Tooltip>
+                    </Table.Cell>
+                  )}
+                  {cart && (
+                    <Table.Cell className="bg-slate-800  text-white ">
+                      <Tooltip content="Remove item from cart">
+                        <Button
+                          gradientMonochrome="failure"
+                          onClick={() => handleRemoveCart(item)}
+                        >
+                          <HiTrash color="white" className="mr-2 h-5 w-5" />
+                          Remove
                         </Button>
                       </Tooltip>
                     </Table.Cell>

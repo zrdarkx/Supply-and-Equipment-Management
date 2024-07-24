@@ -4,16 +4,18 @@ import { useSemStore } from "../zustand/store";
 import SemInput from "./semInput";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 
-const ContentHeader = ({ event, title, Icon, tooltip, setSearch }) => {
+const ContentHeader = ({ event, title, Icon, tooltip, setSearch, cart }) => {
   const { currentUser } = useSemStore();
   const isAdmin = currentUser.role == "Admin";
   return (
     <div className="content-header flex flex-row justify-between items-center mb-3">
-      <SemInput
-        event={(event) => setSearch(event.target.value)}
-        placeholder={"Search here..."}
-        icon={HiMagnifyingGlass}
-      />
+      {!cart && (
+        <SemInput
+          event={(event) => setSearch(event.target.value)}
+          placeholder={"Search here..."}
+          icon={HiMagnifyingGlass}
+        />
+      )}
 
       {isAdmin && (
         <div className="wrapper">

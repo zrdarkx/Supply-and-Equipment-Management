@@ -21,6 +21,7 @@ const Offices = () => {
   const [deleteModal, setDeleteModal] = useState(false);
   const [selectedOffice, setSelectedOffice] = useState(null);
   const [office, setOffice] = useState("");
+  const [search, setSearch] = useState("");
 
   // CRUD OFFICE
   const { addOffice } = useAddOffice();
@@ -44,6 +45,14 @@ const Offices = () => {
   const handleUpdateOfficeForm = (data) => {
     setOffice(data.officeName);
   };
+
+  const query = offices.filter((item) => {
+    const itemName = item?.officeName.toLowerCase();
+    const itemSearch = search?.toLowerCase();
+    if (itemName.startsWith(itemSearch)) {
+      return item;
+    }
+  });
 
   return (
     <>
@@ -83,6 +92,7 @@ const Offices = () => {
       />
       <div className="office-wrapper p-5">
         <ContentHeader
+          setSearch={setSearch}
           title="Office"
           Icon={HiOfficeBuilding}
           event={() => {
@@ -99,7 +109,7 @@ const Offices = () => {
             setAddOfficeModal={setAddOfficeModal}
             setDeleteModal={setDeleteModal}
             setSelectedOffice={setSelectedOffice}
-            data={offices}
+            data={query}
           />
         )}
         {!loading && offices.length <= 0 && (
