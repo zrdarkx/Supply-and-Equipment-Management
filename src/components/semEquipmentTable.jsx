@@ -25,6 +25,15 @@ export function SemEquipmentTable({
       toast.info("it's already in your cart.", { position: "bottom-right" });
     }
   };
+
+  const handleRemoveCart = (item) => {
+    const newCarts = cartEquipment.filter((cart) => {
+      if (cart.id !== item.id) {
+        return cart;
+      }
+    });
+    setCartEquipment(newCarts);
+  };
   return (
     <div className="overflow-x-auto ">
       {data && (
@@ -51,12 +60,9 @@ export function SemEquipmentTable({
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
               Description
             </Table.HeadCell>
-
-            {!cart && (
-              <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-                Action
-              </Table.HeadCell>
-            )}
+            <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
+              Action
+            </Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
             {data.map((item, index) => {
@@ -130,7 +136,20 @@ export function SemEquipmentTable({
                             color="white"
                             className="mr-2 h-5 w-5"
                           />
-                          Add to Cart
+                          Add
+                        </Button>
+                      </Tooltip>
+                    </Table.Cell>
+                  )}
+                  {cart && (
+                    <Table.Cell className="bg-slate-800  text-white ">
+                      <Tooltip content="Remove item from cart">
+                        <Button
+                          gradientMonochrome="failure"
+                          onClick={() => handleRemoveCart(item)}
+                        >
+                          <HiTrash color="white" className="mr-2 h-5 w-5" />
+                          Remove
                         </Button>
                       </Tooltip>
                     </Table.Cell>

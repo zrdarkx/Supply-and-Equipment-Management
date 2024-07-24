@@ -15,7 +15,7 @@ const MasterRecords = () => {
       {/* DEPARTMENT */}
 
       {!isAdmin && (
-        <div className="container">
+        <div className="container mx-auto">
           <Tabs variant="pills" className="mx-5">
             <Tabs.Item active title="Supply" icon={HiOutlineTable}>
               <Supply />
@@ -29,7 +29,7 @@ const MasterRecords = () => {
 
       {/* ADMIN */}
       {isAdmin && (
-        <div className="container">
+        <div className="container mx-auto">
           <Tabs variant="pills" className="mx-5">
             <Tabs.Item active title="Supply" icon={HiOutlineTable}>
               <Supply />

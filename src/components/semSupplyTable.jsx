@@ -142,7 +142,7 @@ export function SemSupplyTable({
                             color="white"
                             className="mr-2 h-5 w-5"
                           />
-                          Add to Cart
+                          Add
                         </Button>
                       </Tooltip>
                     </Table.Cell>
