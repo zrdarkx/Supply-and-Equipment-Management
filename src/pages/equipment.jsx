@@ -2,10 +2,8 @@ import { HiOutlineTable } from "react-icons/hi";
 import ContentHeader from "../components/contentHeader";
 import NoData from "../components/noData";
 import Loading from "../components/semInput";
-
 import { useState } from "react";
 import { EQUIPMENT_DEFAULT_VALUE } from "../utils/constant";
-import { Button } from "flowbite-react";
 import useAddEquipment from "../hooks/useAddEquipment";
 import { toast } from "react-toastify";
 import useGetEquipment from "../hooks/useGetEquipment";
