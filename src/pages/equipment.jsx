@@ -1,7 +1,5 @@
 import { HiOutlineTable } from "react-icons/hi";
 import ContentHeader from "../components/contentHeader";
-import SemModal from "../components/semModal";
-import SemInput from "../components/semInput";
 import NoData from "../components/noData";
 import Loading from "../components/semInput";
 
@@ -16,6 +14,7 @@ import { ConfirmationModal } from "../components/confirmationModal";
 import useDeleteEquipment from "../hooks/useDeleteEquipment";
 import useUpdateEquipment from "../hooks/useUpdateEquipment";
 import { useSemStore } from "../zustand/store";
+import AddEquipmentModal from "../components/addEquipmentModal";
 
 const Equipment = ({ cart }) => {
   const [forms, setForms] = useState(EQUIPMENT_DEFAULT_VALUE);
@@ -72,76 +71,17 @@ const Equipment = ({ cart }) => {
 
   return (
     <>
-      <SemModal
+      <AddEquipmentModal
         size="5xl"
         title={isUpdate ? "Update Equipment" : "Add Equipment"}
         open={equipModal}
         handleClose={() => setEquipModal(false)}
-      >
-        <div className="flex flex-row">
-          <div className="basis-6/12 mx-3">
-            <SemInput
-              value={forms.name}
-              color={"gray"}
-              name={"name"}
-              label="Name"
-              placeholder="Enter name"
-              event={handleUpdateForm}
-            />
-            <SemInput
-              value={forms.quantity}
-              name={"quantity"}
-              color={"gray"}
-              label="Quantity"
-              placeholder="Enter quantity"
-              event={handleUpdateForm}
-            />
-            <SemInput
-              value={forms.unit}
-              name={"unit"}
-              color={"gray"}
-              label="Unit"
-              placeholder="Enter unit"
-              event={handleUpdateForm}
-            />
-            <SemInput
-              value={forms.unitCost}
-              name={"unitCost"}
-              color={"gray"}
-              label="Unit Cost"
-              placeholder="Enter unit cost"
-              event={handleUpdateForm}
-            />
-          </div>
-          <div className="basis-6/12">
-            <SemInput
-              value={forms.description}
-              name={"description"}
-              color={"gray"}
-              label="Description"
-              placeholder="Enter description"
-              event={handleUpdateForm}
-            />
+        forms={forms}
+        handleUpdateForm={handleUpdateForm}
+        handleSubmit={handleSubmit}
+        isUpdate={isUpdate}
+      />
 
-            <SemInput
-              value={forms.propertyNumber}
-              name={"propertyNumber"}
-              color={"gray"}
-              label="Property Number"
-              placeholder="Enter inventory number"
-              event={handleUpdateForm}
-            />
-          </div>{" "}
-        </div>
-
-        <Button
-          onClick={handleSubmit}
-          gradientMonochrome="info"
-          className="w-full mt-5 py-2"
-        >
-          {isUpdate ? "Update Equipment" : "Add Equipment"}
-        </Button>
-      </SemModal>
       <ConfirmationModal
         open={deleteModal}
         event={handleDeleteEquip}
