@@ -67,6 +67,12 @@ const Equipment = ({ cart }) => {
     }
   });
 
+  const handleAddingEquipment = () => {
+    setEquipModal(true);
+    setIsUpdate(false);
+    setForms(EQUIPMENT_DEFAULT_VALUE);
+  };
+
   return (
     <>
       <AddEquipmentModal
@@ -93,11 +99,7 @@ const Equipment = ({ cart }) => {
           title="Equipment"
           Icon={HiOutlineTable}
           tooltip={"Add equipmente to the system"}
-          event={() => {
-            setEquipModal(true);
-            setIsUpdate(false);
-            setForms(EQUIPMENT_DEFAULT_VALUE);
-          }}
+          event={handleAddingEquipment}
         />
 
         {loading && <Loading />}

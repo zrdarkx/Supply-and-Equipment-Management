@@ -1,10 +1,6 @@
-import { HiOfficeBuilding, HiOutlineTable, HiViewGrid } from "react-icons/hi";
+import { HiOutlineTable } from "react-icons/hi";
 import ContentHeader from "../components/contentHeader";
-import DashboardLayout from "../layout/dashboardLayout";
-import SemModal from "../components/semModal";
-import SemInput from "../components/semInput";
 import { useState } from "react";
-import { Button, Tabs } from "flowbite-react";
 import useAddSupply from "../hooks/useAddSupply";
 import { toast } from "react-toastify";
 import useGetSupply from "../hooks/useGetSupply";

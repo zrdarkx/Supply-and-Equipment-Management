@@ -46,6 +46,8 @@ const Login = () => {
     }, 2000);
   };
 
+  //If has user in localstorage, set the currentUser to the user save in localstorage
+
   useEffect(() => {
     const output = localStorage.getItem("user");
     const data = JSON.parse(output);
