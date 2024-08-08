@@ -8,15 +8,32 @@ import Supply from "../pages/supply";
 import Equipment from "../pages/equipment";
 import { useSemStore } from "../zustand/store";
 import NoData from "../components/noData";
+import useAddTransaction from "../hooks/useAddTransaction";
+import { toast } from "react-toastify";
 
 const DashboardLayout = ({ children }) => {
   const [isOpen, setOpen] = useState(false);
   const [cartModal, setCartModal] = useState(false);
 
-  const { cartSupply, cartEquipment } = useSemStore();
+  const {
+    cartSupply,
+    cartEquipment,
+    currentUser,
+    setCartEquipment,
+    setCartSupply,
+  } = useSemStore();
+  const { addTransaction } = useAddTransaction();
 
   const isSupplyCartEmpty = cartSupply.length <= 0;
   const isEquipmentCartEmpty = cartEquipment.length <= 0;
+
+  const handleAddTransaction = () => {
+    addTransaction(cartSupply, cartEquipment, currentUser);
+    setCartModal(false);
+    toast.success("Success");
+    setCartEquipment([]);
+    setCartSupply([]);
+  };
 
   return (
     <div className="w-full min-h-screen bg-slate-950 pb-10">
@@ -49,7 +66,9 @@ const DashboardLayout = ({ children }) => {
           <Button color={"success"} className="w-full py-2 mx-3">
             Add Unique
           </Button>
-          <Button className="w-full py-2 mx-3">Finalize</Button>
+          <Button onClick={handleAddTransaction} className="w-full py-2 mx-3">
+            Finalize
+          </Button>
         </div>
       </SemModal>
 
