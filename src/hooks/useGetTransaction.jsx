@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../../firebase";
 
 const useGetTransaction = () => {
@@ -9,7 +9,8 @@ const useGetTransaction = () => {
   useEffect(() => {
     setLoading(true);
     const collectionRef = collection(db, "transaction");
-    onSnapshot(collectionRef, (snapshot) => {
+    const queryRef = query(collectionRef, orderBy("createdAt"));
+    onSnapshot(queryRef, (snapshot) => {
       const output = [];
       snapshot.docs.forEach((doc) => {
         output.push({ ...doc.data(), id: doc.id });

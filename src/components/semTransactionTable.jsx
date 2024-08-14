@@ -1,7 +1,47 @@
-import { Badge, Table } from "flowbite-react";
+import { Badge, Button, Table } from "flowbite-react";
 import moment from "moment";
+import useGetSupply from "../hooks/useGetSupply";
+import useGetEquipment from "../hooks/useGetEquipment";
+import { useSemStore } from "../zustand/store";
+import useUpdateTransaction from "../hooks/useUpdateTransaction";
 
 const SemTransactionTable = ({ data }) => {
+  const { data: supply } = useGetSupply();
+  const { data: equipment } = useGetEquipment();
+  const { currentUser } = useSemStore();
+  const { approveTransaction, rejectTransaction } = useUpdateTransaction();
+  const isAdmin = currentUser?.role == "Admin";
+
+  const handleGetSupply = (id) => {
+    const output = supply.filter((item) => {
+      if (item.id == id) {
+        return item;
+      }
+    });
+
+    return output[0];
+  };
+
+  const handleGetEquipment = (id) => {
+    const output = equipment.filter((item) => {
+      if (item.id == id) {
+        return item;
+      }
+    });
+
+    return output[0];
+  };
+
+  const getBadgeColor = (status) => {
+    if (status === "Pending") {
+      return "warning";
+    } else if (status === "Approve") {
+      return "green";
+    } else {
+      return "failure";
+    }
+  };
+
   return (
     <div className="overflow-x-auto">
       {data && (
@@ -16,12 +56,15 @@ const SemTransactionTable = ({ data }) => {
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
               Item Name
             </Table.HeadCell>
+            <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
+              Quantity
+            </Table.HeadCell>
 
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
               Category
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Approve By
+              Review By
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
               Created At
@@ -29,12 +72,27 @@ const SemTransactionTable = ({ data }) => {
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
               Status
             </Table.HeadCell>
+            {isAdmin && (
+              <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
+                Action
+              </Table.HeadCell>
+            )}
           </Table.Head>
           <Table.Body className="divide-y">
             {data.map((item) => {
               const user = JSON.parse(item.currentUser);
               const firebaseDate = item.item.createdAt;
               const date = moment(firebaseDate?.toDate()).format("LLL");
+              const badgeColor = getBadgeColor(item.status);
+
+              let finalItem = undefined;
+
+              if (item.item.category == "supply") {
+                finalItem = handleGetSupply(item.item.id);
+              } else {
+                finalItem = handleGetEquipment(item.item.id);
+              }
+
               return (
                 <Table.Row key={item.id}>
                   <Table.Cell className="bg-slate-800  text-white">
@@ -44,24 +102,57 @@ const SemTransactionTable = ({ data }) => {
                     {user.office}
                   </Table.Cell>
                   <Table.Cell className="bg-slate-800  text-white">
-                    {item.item.name}
+                    {finalItem?.name}
+                  </Table.Cell>
+                  <Table.Cell className="bg-slate-800  text-white">
+                    {finalItem?.quantity}
                   </Table.Cell>
 
                   <Table.Cell className="bg-slate-800  text-white">
-                    {item.item.category}
+                    {finalItem?.category}
                   </Table.Cell>
 
                   <Table.Cell className="bg-slate-800  text-white">
-                    {item.approveBy ? item.approveBy : "Waiting for approval"}
+                    {item.reviewBy ? item.reviewBy : "Waiting for approval"}
                   </Table.Cell>
                   <Table.Cell className="bg-slate-800  text-white">
                     {date}
                   </Table.Cell>
-                  <Table.Cell className="bg-slate-800  text-white text-center flex justify-start items-center">
-                    <Badge color="info" size={"lg"}>
+                  <Table.Cell className="bg-slate-800  text-white">
+                    <Badge color={badgeColor} size={"lg"}>
                       {item.status}
                     </Badge>
                   </Table.Cell>
+                  {isAdmin && (
+                    <Table.Cell className="bg-slate-800  text-white flex items-center justify-start">
+                      <Button
+                        disabled={
+                          item.status == "Approve" || item.status === "Rejected"
+                        }
+                        onClick={() =>
+                          approveTransaction(
+                            item.id,
+                            finalItem.id,
+                            finalItem.category,
+                            currentUser
+                          )
+                        }
+                        className="mr-2"
+                        gradientMonochrome="success"
+                      >
+                        Approve
+                      </Button>
+                      <Button
+                        onClick={() => rejectTransaction(item.id, currentUser)}
+                        disabled={
+                          item.status == "Approve" || item.status === "Rejected"
+                        }
+                        gradientMonochrome="failure"
+                      >
+                        Reject
+                      </Button>
+                    </Table.Cell>
+                  )}
                 </Table.Row>
               );
             })}

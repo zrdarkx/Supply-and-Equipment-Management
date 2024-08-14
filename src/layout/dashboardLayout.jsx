@@ -10,10 +10,13 @@ import { useSemStore } from "../zustand/store";
 import NoData from "../components/noData";
 import useAddTransaction from "../hooks/useAddTransaction";
 import { toast } from "react-toastify";
+import RisFormRow from "../components/risFormRow";
+import RisFormDummyRow from "../components/risFormDummyRow";
 
 const DashboardLayout = ({ children }) => {
   const [isOpen, setOpen] = useState(false);
   const [cartModal, setCartModal] = useState(false);
+  const [risForm, setRisForm] = useState(false);
 
   const {
     cartSupply,
@@ -66,9 +69,102 @@ const DashboardLayout = ({ children }) => {
           <Button color={"success"} className="w-full py-2 mx-3">
             Add Unique
           </Button>
-          <Button onClick={handleAddTransaction} className="w-full py-2 mx-3">
-            Finalize
+          <Button onClick={() => setRisForm(true)} className="w-full py-2 mx-3">
+            Finalize Supply
           </Button>
+        </div>
+      </SemModal>
+      <SemModal
+        title={`RIS Form`}
+        size={"6xl"}
+        open={risForm}
+        handleClose={() => setRisForm(false)}
+      >
+        <div className="container mx-auto p-5">
+          <div className="wrapper">
+            <h1 className="font-bold text-center text-2xl">
+              REQUISITION AND ISSUE SLIP{" "}
+            </h1>
+            <div className="flex justify-between items-center mt-2">
+              <h1>Entity Name :CNSC </h1>
+              <h1>Fund Cluster : 07 - Trust Receipts fund</h1>
+            </div>
+          </div>
+          <div className="border border-slate-950 flex">
+            <div className="basis-8/12 border border-slate-950 p-2">
+              <div className="flex flex-col ml-3">
+                <h1>Division: OVPRE </h1>
+                <h1>Office: FTO </h1>
+              </div>
+            </div>
+            <div className="basis-4/12 border border-slate-950">
+              <div className="flex flex-col ml-3">
+                <h1>Responsibility Center Code: ___________</h1>
+                <h1>RIS No.: _____</h1>
+              </div>
+            </div>
+          </div>
+          <div className="border border-slate-950 flex border-t-0">
+            <div className="basis-6/12 border border-slate-950 p-2 text-center">
+              <h1>Requisition </h1>
+            </div>
+            <div className="basis-2/12 border border-slate-950 p-2 text-center">
+              <h1>Stock Available?</h1>
+            </div>
+            <div className="basis-4/12 border border-slate-950 p-2 text-center">
+              <h1>Issue</h1>
+            </div>
+          </div>
+          <div className="border border-slate-950 flex border-t-0">
+            <div className="basis-1/12 border border-slate-950 p-2 text-center">
+              <h1>Stock No. </h1>
+            </div>
+            <div className="basis-1/12 border border-slate-950 p-2 text-center">
+              <h1>Unit</h1>
+            </div>
+            <div className="basis-3/12 border border-slate-950 p-2 text-center">
+              <h1>Description</h1>
+            </div>
+
+            <div className="basis-1/12 border border-slate-950 p-2 text-center">
+              <h1>Quantity</h1>
+            </div>
+            <div className="basis-1/12 border border-slate-950 p-2 text-center">
+              <h1>Yes</h1>
+            </div>
+            <div className="basis-1/12 border border-slate-950 p-2 text-center">
+              <h1>No</h1>
+            </div>
+            <div className="basis-2/12 border border-slate-950 p-2 text-center">
+              <h1>Quantity</h1>
+            </div>
+            <div className="basis-2/12 border border-slate-950 p-2 text-center">
+              <h1>Remarks</h1>
+            </div>
+          </div>
+          {cartSupply.map((item) => {
+            console.log(item);
+            return (
+              <RisFormRow
+                stockNo={item.inventoryNumber}
+                unit={item.unit}
+                decription={item.name + " | " + item.description}
+                rQuantity={item.quantity}
+                stockAvailable={item.quantity !== 0 ? true : false}
+                iQuantity={item.quantity}
+                remarks={item.remarks}
+              />
+            );
+          })}
+
+          <RisFormDummyRow />
+          <div className="border border-slate-950 p-10 text-center">
+            <h1>
+              Purpose: Other supplies and materials to be used for Survey,
+              Research, Exploration and Development expenses.{" "}
+            </h1>
+          </div>
+          <Button className="w-full mt-5 py-3">Submit</Button>
         </div>
       </SemModal>
 
