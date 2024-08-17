@@ -29,7 +29,19 @@ const useAddTransaction = () => {
     });
   };
 
-  return { addTransaction, addSupplyTransaction };
+  const addEquipmentTransaction = (equipment, currentUser) => {
+    const colRef = collection(db, "transaction");
+
+    addDoc(colRef, {
+      currentUser: JSON.stringify(currentUser),
+      item: equipment,
+      createdAt: serverTimestamp(),
+      status: "Pending",
+      category: "Equipment",
+    });
+  };
+
+  return { addTransaction, addSupplyTransaction, addEquipmentTransaction };
 };
 
 export default useAddTransaction;

@@ -5,7 +5,7 @@ import useGetEquipment from "../hooks/useGetEquipment";
 import { useSemStore } from "../zustand/store";
 import useUpdateTransaction from "../hooks/useUpdateTransaction";
 
-const SemTransactionTable = ({ data, setCurrentTransaction }) => {
+const SemTransactionTable = ({ data, setCurrentTransaction, setRisForm }) => {
   const { data: supply } = useGetSupply();
   const { data: equipment } = useGetEquipment();
   const { currentUser } = useSemStore();
@@ -115,7 +115,12 @@ const SemTransactionTable = ({ data, setCurrentTransaction }) => {
                     </Badge>
                   </Table.Cell>
                   <Table.Cell className="bg-slate-800  text-white">
-                    <Button onClick={() => setCurrentTransaction(item)}>
+                    <Button
+                      onClick={() => {
+                        setCurrentTransaction(item);
+                        setRisForm(true);
+                      }}
+                    >
                       {" "}
                       View RIS Form
                     </Button>

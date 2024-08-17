@@ -18,6 +18,7 @@ const DashboardLayout = ({ children }) => {
   const [isOpen, setOpen] = useState(false);
   const [cartModal, setCartModal] = useState(false);
   const [risForm, setRisForm] = useState(false);
+  const [currentMode, setCurrentMode] = useState("Supply");
 
   const {
     cartSupply,
@@ -49,37 +50,68 @@ const DashboardLayout = ({ children }) => {
       >
         <div className="container">
           <Tabs variant="pills" className="mx-5 mb-5">
-            <Tabs.Item active title="Supply" icon={HiOutlineTable}>
+            <Tabs.Item
+              onClick={() => setCurrentMode("Supply")}
+              active
+              title="Supply"
+              icon={HiOutlineTable}
+            >
               {isSupplyCartEmpty ? (
                 <NoData title={"Your cart is empty try addding one."} />
               ) : (
                 <Supply cart={true} />
               )}
+              <div className="w-full flex flex-row mt-20">
+                <Button color={"success"} className="w-full py-2 mx-3">
+                  Add Unique
+                </Button>
+                <Button
+                  onClick={() => {
+                    setCurrentMode("Supply");
+                    setRisForm(true);
+                  }}
+                  className="w-full py-2 mx-3"
+                >
+                  Finalize Supply
+                </Button>
+              </div>
             </Tabs.Item>
-            <Tabs.Item title="Equipment" icon={HiViewGrid}>
+            <Tabs.Item
+              onClick={() => setCurrentMode("Equipment")}
+              title="Equipment"
+              icon={HiViewGrid}
+            >
               {isEquipmentCartEmpty ? (
                 <NoData title={"Your cart is empty try addding one."} />
               ) : (
                 <Equipment cart={true} />
               )}
+              <div className="w-full flex flex-row mt-20">
+                <Button color={"success"} className="w-full py-2 mx-3">
+                  Add Unique
+                </Button>
+                <Button
+                  onClick={() => {
+                    setCurrentMode("Equipment");
+                    setRisForm(true);
+                  }}
+                  className="w-full py-2 mx-3"
+                >
+                  Finalize Equipment
+                </Button>
+              </div>
             </Tabs.Item>
           </Tabs>
         </div>
-        <div className="w-full flex flex-row">
-          <Button color={"success"} className="w-full py-2 mx-3">
-            Add Unique
-          </Button>
-          <Button onClick={() => setRisForm(true)} className="w-full py-2 mx-3">
-            Finalize Supply
-          </Button>
-        </div>
       </SemModal>
       <RisFormModal
+        viewOnly={true}
         title={`RIS Form`}
         size={"6xl"}
         open={risForm}
         handleClose={() => setRisForm(false)}
-        data={cartSupply}
+        data={currentMode == "Supply" ? cartSupply : cartEquipment}
+        currentMode={currentMode}
       />
 
       <SemSidebar isOpen={isOpen} handleClose={() => setOpen(false)} />

@@ -8,12 +8,14 @@ import { HiMagnifyingGlass } from "react-icons/hi2";
 import { Button } from "flowbite-react";
 import { HiOutlineTable, HiUserCircle, HiViewGrid } from "react-icons/hi";
 import Loading from "../components/loading";
+import RisFormModal from "../components/risFormModal";
 
 const Transaction = () => {
   const { data, loading } = useGetTransaction();
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
   const [currentTransaction, setCurrentTransaction] = useState();
+  const [risForm, setRisForm] = useState(false);
 
   const filterByCategory = data.filter((item) => {
     if (item.item.category == category) {
@@ -24,6 +26,14 @@ const Transaction = () => {
   return (
     <DashboardLayout>
       {loading && <Loading />}
+
+      <RisFormModal
+        title={`RIS Form`}
+        size={"6xl"}
+        open={risForm}
+        handleClose={() => setRisForm(false)}
+        data={currentTransaction?.item}
+      />
 
       {!loading && (
         <div className="wrapper p-0 lg:p-5 m-5 lg:m-0">
@@ -54,6 +64,7 @@ const Transaction = () => {
 
           <SemTransactionTable
             setCurrentTransaction={setCurrentTransaction}
+            setRisForm={setRisForm}
             data={category !== "all" ? filterByCategory : data}
           />
         </div>

@@ -5,8 +5,17 @@ import RisFormRow from "./risFormRow";
 import useAddTransaction from "../hooks/useAddTransaction";
 import { useSemStore } from "../zustand/store";
 
-const RisFormModal = ({ title, size, open, handleClose, data }) => {
-  const { addTransaction, addSupplyTransaction } = useAddTransaction();
+const RisFormModal = ({
+  title,
+  size,
+  open,
+  handleClose,
+  data,
+  viewOnly,
+  currentMode,
+}) => {
+  const { addTransaction, addSupplyTransaction, addEquipmentTransaction } =
+    useAddTransaction();
   const { currentUser } = useSemStore();
 
   return (
@@ -73,8 +82,7 @@ const RisFormModal = ({ title, size, open, handleClose, data }) => {
             <h1>Remarks</h1>
           </div>
         </div>
-        {data.map((item) => {
-          console.log(item);
+        {data?.map((item) => {
           return (
             <RisFormRow
               key={item.id}
@@ -96,12 +104,22 @@ const RisFormModal = ({ title, size, open, handleClose, data }) => {
             Research, Exploration and Development expenses.{" "}
           </h1>
         </div>
-        <Button
-          onClick={() => addSupplyTransaction(data, currentUser)}
-          className="w-full mt-5 py-3"
-        >
-          Submit Supply RIS
-        </Button>
+        {viewOnly && currentMode == "Supply" && (
+          <Button
+            onClick={() => addSupplyTransaction(data, currentUser)}
+            className="w-full mt-5 py-3"
+          >
+            Submit Supply RIS
+          </Button>
+        )}
+        {viewOnly && currentMode == "Equipment" && (
+          <Button
+            onClick={() => addEquipmentTransaction(data, currentUser)}
+            className="w-full mt-5 py-3"
+          >
+            Submit Equipment RIS
+          </Button>
+        )}
       </div>
     </SemModal>
   );
