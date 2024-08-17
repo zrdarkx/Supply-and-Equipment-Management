@@ -2,14 +2,24 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
 const useUpdateTransaction = () => {
-  const approveTransaction = async (transactionID, currentUser) => {
+  const approveTransaction = async (transactionID, currentUser, items) => {
     const transRef = doc(db, "transaction", transactionID);
 
     updateDoc(transRef, {
       status: "Approve",
       reviewBy: currentUser.firstName + " " + currentUser.lastName,
     });
-    // updateDoc(itemRef, { quantity: item.quantity - 1 });
+
+    const handleMinusQuantity = async (item) => {
+      const itemRef = doc(db, item.category, item.id);
+      const docSnap = await getDoc(itemRef);
+      const output = docSnap.data();
+      updateDoc(itemRef, { quantity: output.quantity - 1 });
+    };
+
+    items.map((item) => {
+      handleMinusQuantity(item);
+    });
   };
 
   const rejectTransaction = (transactionID, currentUser) => {

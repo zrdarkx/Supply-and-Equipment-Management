@@ -15,7 +15,7 @@ const useGetTransaction = () => {
       snapshot.docs.forEach((doc) => {
         output.push({ ...doc.data(), id: doc.id });
       });
-      setData(output);
+      setData(output.reverse());
       setLoading(false);
     });
   }, []);

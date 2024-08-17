@@ -77,6 +77,7 @@ const SemTransactionTable = ({ data, setCurrentTransaction, setRisForm }) => {
           </Table.Head>
           <Table.Body className="divide-y">
             {data.map((item) => {
+              console.log(item);
               const user = JSON.parse(item.currentUser);
               const firebaseDate = item.createdAt;
               const date = moment(firebaseDate?.toDate()).format("LLL");
@@ -127,26 +128,34 @@ const SemTransactionTable = ({ data, setCurrentTransaction, setRisForm }) => {
                   </Table.Cell>
 
                   {isAdmin && (
-                    <Table.Cell className="bg-slate-800  text-white flex items-center justify-start">
-                      <Button
-                        disabled={
-                          item.status == "Approve" || item.status === "Rejected"
-                        }
-                        onClick={() => approveTransaction(item.id, currentUser)}
-                        className="mr-2"
-                        gradientMonochrome="success"
-                      >
-                        Approve
-                      </Button>
-                      <Button
-                        onClick={() => rejectTransaction(item.id, currentUser)}
-                        disabled={
-                          item.status == "Approve" || item.status === "Rejected"
-                        }
-                        gradientMonochrome="failure"
-                      >
-                        Reject
-                      </Button>
+                    <Table.Cell className="bg-slate-800  text-white ">
+                      <div className="wrapper flex">
+                        <Button
+                          disabled={
+                            item.status == "Approve" ||
+                            item.status === "Rejected"
+                          }
+                          onClick={() =>
+                            approveTransaction(item.id, currentUser, item.item)
+                          }
+                          className="mr-2"
+                          gradientMonochrome="success"
+                        >
+                          Approve
+                        </Button>
+                        <Button
+                          onClick={() =>
+                            rejectTransaction(item.id, currentUser)
+                          }
+                          disabled={
+                            item.status == "Approve" ||
+                            item.status === "Rejected"
+                          }
+                          gradientMonochrome="failure"
+                        >
+                          Reject
+                        </Button>
+                      </div>
                     </Table.Cell>
                   )}
                 </Table.Row>

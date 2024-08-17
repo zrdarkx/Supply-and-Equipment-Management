@@ -46,14 +46,14 @@ const Transaction = () => {
                 All
               </Button>
               <Button
-                color={category === "supply" ? "info" : "gray"}
+                color={category === "Supply" ? "info" : "gray"}
                 onClick={() => setCategory("Supply")}
               >
                 <HiOutlineTable className="mr-3 h-4 w-4" />
                 Supply
               </Button>
               <Button
-                color={category === "equipment" ? "info" : "gray"}
+                color={category === "Equipment" ? "info" : "gray"}
                 onClick={() => setCategory("Equipment")}
               >
                 <HiViewGrid className="mr-3 h-4 w-4" />
