@@ -18,7 +18,7 @@ const Transaction = () => {
   const [risForm, setRisForm] = useState(false);
 
   const filterByCategory = data.filter((item) => {
-    if (item.item.category == category) {
+    if (item.category == category) {
       return item;
     }
   });
@@ -47,14 +47,14 @@ const Transaction = () => {
               </Button>
               <Button
                 color={category === "supply" ? "info" : "gray"}
-                onClick={() => setCategory("supply")}
+                onClick={() => setCategory("Supply")}
               >
                 <HiOutlineTable className="mr-3 h-4 w-4" />
                 Supply
               </Button>
               <Button
                 color={category === "equipment" ? "info" : "gray"}
-                onClick={() => setCategory("equipment")}
+                onClick={() => setCategory("Equipment")}
               >
                 <HiViewGrid className="mr-3 h-4 w-4" />
                 Equipment

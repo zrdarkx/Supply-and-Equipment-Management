@@ -132,14 +132,7 @@ const SemTransactionTable = ({ data, setCurrentTransaction, setRisForm }) => {
                         disabled={
                           item.status == "Approve" || item.status === "Rejected"
                         }
-                        onClick={() =>
-                          approveTransaction(
-                            item.id,
-                            finalItem.id,
-                            finalItem.category,
-                            currentUser
-                          )
-                        }
+                        onClick={() => approveTransaction(item.id, currentUser)}
                         className="mr-2"
                         gradientMonochrome="success"
                       >
