@@ -13,9 +13,9 @@ const Transaction = () => {
   const { data, loading } = useGetTransaction();
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
+  const [currentTransaction, setCurrentTransaction] = useState();
 
   const filterByCategory = data.filter((item) => {
-    console.log(item);
     if (item.item.category == category) {
       return item;
     }
@@ -53,6 +53,7 @@ const Transaction = () => {
           </div>
 
           <SemTransactionTable
+            setCurrentTransaction={setCurrentTransaction}
             data={category !== "all" ? filterByCategory : data}
           />
         </div>

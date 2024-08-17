@@ -5,7 +5,7 @@ import useGetEquipment from "../hooks/useGetEquipment";
 import { useSemStore } from "../zustand/store";
 import useUpdateTransaction from "../hooks/useUpdateTransaction";
 
-const SemTransactionTable = ({ data }) => {
+const SemTransactionTable = ({ data, setCurrentTransaction }) => {
   const { data: supply } = useGetSupply();
   const { data: equipment } = useGetEquipment();
   const { currentUser } = useSemStore();
@@ -53,12 +53,6 @@ const SemTransactionTable = ({ data }) => {
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
               Office Name
             </Table.HeadCell>
-            <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Item Name
-            </Table.HeadCell>
-            <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Quantity
-            </Table.HeadCell>
 
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
               Category
@@ -71,6 +65,9 @@ const SemTransactionTable = ({ data }) => {
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
               Status
+            </Table.HeadCell>
+            <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
+              RIS Form
             </Table.HeadCell>
             {isAdmin && (
               <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
@@ -101,15 +98,9 @@ const SemTransactionTable = ({ data }) => {
                   <Table.Cell className="bg-slate-800  text-white">
                     {user.office}
                   </Table.Cell>
-                  <Table.Cell className="bg-slate-800  text-white">
-                    {finalItem?.name}
-                  </Table.Cell>
-                  <Table.Cell className="bg-slate-800  text-white">
-                    {finalItem?.quantity}
-                  </Table.Cell>
 
                   <Table.Cell className="bg-slate-800  text-white">
-                    {finalItem?.category}
+                    {item.category}
                   </Table.Cell>
 
                   <Table.Cell className="bg-slate-800  text-white">
@@ -123,6 +114,13 @@ const SemTransactionTable = ({ data }) => {
                       {item.status}
                     </Badge>
                   </Table.Cell>
+                  <Table.Cell className="bg-slate-800  text-white">
+                    <Button onClick={() => setCurrentTransaction(item)}>
+                      {" "}
+                      View RIS Form
+                    </Button>
+                  </Table.Cell>
+
                   {isAdmin && (
                     <Table.Cell className="bg-slate-800  text-white flex items-center justify-start">
                       <Button
