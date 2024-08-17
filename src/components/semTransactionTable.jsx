@@ -78,7 +78,7 @@ const SemTransactionTable = ({ data, setCurrentTransaction, setRisForm }) => {
           <Table.Body className="divide-y">
             {data.map((item) => {
               const user = JSON.parse(item.currentUser);
-              const firebaseDate = item.item.createdAt;
+              const firebaseDate = item.createdAt;
               const date = moment(firebaseDate?.toDate()).format("LLL");
               const badgeColor = getBadgeColor(item.status);
 
