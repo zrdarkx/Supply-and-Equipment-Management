@@ -160,14 +160,16 @@ const RisFormModal = ({
           </Button>
         </div>
       )}
-      <Button
-        onClick={() => {
-          toPDF();
-        }}
-        className="w-full mt-5 py-3 mr-5"
-      >
-        Download <HiDownload className="mx-3" size={20} />
-      </Button>
+      {!viewOnly && (
+        <Button
+          onClick={() => {
+            toPDF();
+          }}
+          className="w-full mt-5 py-3 mr-5"
+        >
+          Download <HiDownload className="mx-3" size={20} />
+        </Button>
+      )}
     </SemModal>
   );
 };
