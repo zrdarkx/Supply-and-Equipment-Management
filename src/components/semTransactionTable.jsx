@@ -5,7 +5,12 @@ import useGetEquipment from "../hooks/useGetEquipment";
 import { useSemStore } from "../zustand/store";
 import useUpdateTransaction from "../hooks/useUpdateTransaction";
 
-const SemTransactionTable = ({ data, setCurrentTransaction, setRisForm }) => {
+const SemTransactionTable = ({
+  data,
+  setCurrentTransaction,
+  setRisForm,
+  setIcsForm,
+}) => {
   const { data: supply } = useGetSupply();
   const { data: equipment } = useGetEquipment();
   const { currentUser } = useSemStore();
@@ -53,7 +58,6 @@ const SemTransactionTable = ({ data, setCurrentTransaction, setRisForm }) => {
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
               Office Name
             </Table.HeadCell>
-
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
               Category
             </Table.HeadCell>
@@ -66,6 +70,10 @@ const SemTransactionTable = ({ data, setCurrentTransaction, setRisForm }) => {
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
               Status
             </Table.HeadCell>
+            <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
+              RIS Form
+            </Table.HeadCell>
+
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
               RIS Form
             </Table.HeadCell>
@@ -126,6 +134,20 @@ const SemTransactionTable = ({ data, setCurrentTransaction, setRisForm }) => {
                       View RIS Form
                     </Button>
                   </Table.Cell>
+
+                  {item.category == "Supply" && (
+                    <Table.Cell className="bg-slate-800  text-white">
+                      <Button
+                        onClick={() => {
+                          setCurrentTransaction(item);
+                          setIcsForm(true);
+                        }}
+                      >
+                        {" "}
+                        View ICS Form
+                      </Button>
+                    </Table.Cell>
+                  )}
 
                   {isAdmin && (
                     <Table.Cell className="bg-slate-800  text-white ">

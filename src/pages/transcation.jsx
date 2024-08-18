@@ -9,6 +9,7 @@ import { Button } from "flowbite-react";
 import { HiOutlineTable, HiUserCircle, HiViewGrid } from "react-icons/hi";
 import Loading from "../components/loading";
 import RisFormModal from "../components/risFormModal";
+import IcsFormModal from "../components/IcsFormModal";
 
 const Transaction = () => {
   const { data, loading } = useGetTransaction();
@@ -16,6 +17,7 @@ const Transaction = () => {
   const [category, setCategory] = useState("all");
   const [currentTransaction, setCurrentTransaction] = useState();
   const [risForm, setRisForm] = useState(false);
+  const [icsForm, setIcsForm] = useState(false);
 
   const filterByCategory = data.filter((item) => {
     if (item.category == category) {
@@ -33,6 +35,14 @@ const Transaction = () => {
         open={risForm}
         handleClose={() => setRisForm(false)}
         data={currentTransaction?.item}
+      />
+
+      <IcsFormModal
+        title={`ICS Form`}
+        size={"6xl"}
+        open={icsForm}
+        handleClose={() => setIcsForm(false)}
+        data={currentTransaction}
       />
 
       {!loading && (
@@ -64,6 +74,7 @@ const Transaction = () => {
 
           <SemTransactionTable
             setCurrentTransaction={setCurrentTransaction}
+            setIcsForm={setIcsForm}
             setRisForm={setRisForm}
             data={category !== "all" ? filterByCategory : data}
           />

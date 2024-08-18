@@ -1,4 +1,4 @@
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
 const useUpdateTransaction = () => {
@@ -8,6 +8,7 @@ const useUpdateTransaction = () => {
     updateDoc(transRef, {
       status: "Approve",
       reviewBy: currentUser.firstName + " " + currentUser.lastName,
+      reviewDate: serverTimestamp(),
     });
 
     const handleMinusQuantity = async (item) => {
