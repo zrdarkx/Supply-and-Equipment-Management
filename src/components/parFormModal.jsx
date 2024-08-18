@@ -7,6 +7,8 @@ import { useSemStore } from "../zustand/store";
 import IcsFormRowDummy from "./icsFormRowDummy";
 import moment from "moment";
 import ParFormDummyRow from "./parFormDummyRow";
+import { HiDownload } from "react-icons/hi";
+import { usePDF } from "react-to-pdf";
 
 const ParFormModal = ({
   title,
@@ -24,9 +26,11 @@ const ParFormModal = ({
   const firebaseDate = data?.reviewDate;
   const date = moment(firebaseDate?.toDate()).format("LLL");
 
+  const { toPDF, targetRef } = usePDF({ filename: "par.pdf" });
+
   return (
     <SemModal title={title} size={size} open={open} handleClose={handleClose}>
-      <div className="container mx-auto p-2">
+      <div ref={targetRef} className="container mx-auto p-2">
         <div className="wrapper mb-10">
           <h1 className="font-bold text-center text-2xl mb-10">
             PROPERTY ACKNOWLEDGMENT RECEIPT{" "}
@@ -111,23 +115,15 @@ const ParFormModal = ({
             </div>
           </div>
         </div>
-        {viewOnly && currentMode == "Supply" && (
-          <Button
-            onClick={() => addSupplyTransaction(data, currentUser)}
-            className="w-full mt-5 py-3"
-          >
-            Submit Supply RIS
-          </Button>
-        )}
-        {viewOnly && currentMode == "Equipment" && (
-          <Button
-            onClick={() => addEquipmentTransaction(data, currentUser)}
-            className="w-full mt-5 py-3"
-          >
-            Submit Equipment RIS
-          </Button>
-        )}
       </div>
+      <Button
+        onClick={() => {
+          toPDF();
+        }}
+        className="w-full mt-5 py-3 mr-5"
+      >
+        Download <HiDownload className="mx-3" size={20} />
+      </Button>
     </SemModal>
   );
 };
