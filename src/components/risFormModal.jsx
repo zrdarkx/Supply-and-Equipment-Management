@@ -4,6 +4,7 @@ import SemModal from "./semModal";
 import RisFormRow from "./risFormRow";
 import useAddTransaction from "../hooks/useAddTransaction";
 import { useSemStore } from "../zustand/store";
+import { toast } from "react-toastify";
 
 const RisFormModal = ({
   title,
@@ -13,6 +14,7 @@ const RisFormModal = ({
   data,
   viewOnly,
   currentMode,
+  setCartModal,
 }) => {
   const { addTransaction, addSupplyTransaction, addEquipmentTransaction } =
     useAddTransaction();
@@ -86,7 +88,7 @@ const RisFormModal = ({
           return (
             <RisFormRow
               key={item.id}
-              stockNo={item.inventoryNumber}
+              stockNo={item.inventoryNumber || item.propertyNumber}
               unit={item.unit}
               decription={item.name + " | " + item.description}
               rQuantity={item.quantity}
@@ -106,7 +108,12 @@ const RisFormModal = ({
         </div>
         {viewOnly && currentMode == "Supply" && (
           <Button
-            onClick={() => addSupplyTransaction(data, currentUser)}
+            onClick={() => {
+              addSupplyTransaction(data, currentUser);
+              setCartModal(false);
+              handleClose();
+              toast.success("Succesfully added transaction");
+            }}
             className="w-full mt-5 py-3"
           >
             Submit Supply RIS
@@ -114,7 +121,12 @@ const RisFormModal = ({
         )}
         {viewOnly && currentMode == "Equipment" && (
           <Button
-            onClick={() => addEquipmentTransaction(data, currentUser)}
+            onClick={() => {
+              addEquipmentTransaction(data, currentUser);
+              setCartModal(false);
+              handleClose();
+              toast.success("Succesfully added transaction");
+            }}
             className="w-full mt-5 py-3"
           >
             Submit Equipment RIS

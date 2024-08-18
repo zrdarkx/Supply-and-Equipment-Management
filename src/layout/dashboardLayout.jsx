@@ -31,14 +31,6 @@ const DashboardLayout = ({ children }) => {
   const isSupplyCartEmpty = cartSupply.length <= 0;
   const isEquipmentCartEmpty = cartEquipment.length <= 0;
 
-  const handleAddTransaction = () => {
-    addTransaction(cartSupply, cartEquipment, currentUser);
-    setCartModal(false);
-    toast.success("Success");
-    setCartEquipment([]);
-    setCartSupply([]);
-  };
-
   return (
     <div className="w-full min-h-screen bg-slate-950 pb-10">
       <SemModal
@@ -112,6 +104,7 @@ const DashboardLayout = ({ children }) => {
         handleClose={() => setRisForm(false)}
         data={currentMode == "Supply" ? cartSupply : cartEquipment}
         currentMode={currentMode}
+        setCartModal={setCartModal}
       />
 
       <SemSidebar isOpen={isOpen} handleClose={() => setOpen(false)} />

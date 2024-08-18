@@ -1,4 +1,4 @@
-import { Badge, Button, Table } from "flowbite-react";
+import { Badge, Button, Dropdown, Table, Tooltip } from "flowbite-react";
 import moment from "moment";
 import useGetSupply from "../hooks/useGetSupply";
 import useGetEquipment from "../hooks/useGetEquipment";
@@ -71,12 +71,9 @@ const SemTransactionTable = ({
               Status
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              RIS Form
+              Form
             </Table.HeadCell>
 
-            <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              RIS Form
-            </Table.HeadCell>
             {isAdmin && (
               <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
                 Action
@@ -107,11 +104,9 @@ const SemTransactionTable = ({
                   <Table.Cell className="bg-slate-800  text-white">
                     {user.office}
                   </Table.Cell>
-
                   <Table.Cell className="bg-slate-800  text-white">
                     {item.category}
                   </Table.Cell>
-
                   <Table.Cell className="bg-slate-800  text-white">
                     {item.reviewBy ? item.reviewBy : "Waiting for approval"}
                   </Table.Cell>
@@ -123,32 +118,54 @@ const SemTransactionTable = ({
                       {item.status}
                     </Badge>
                   </Table.Cell>
+
                   <Table.Cell className="bg-slate-800  text-white">
-                    <Button
-                      onClick={() => {
-                        setCurrentTransaction(item);
-                        setRisForm(true);
-                      }}
+                    <Dropdown
+                      placement="left"
+                      label="Forms"
+                      dismissOnClick={false}
                     >
-                      {" "}
-                      View RIS Form
-                    </Button>
-                  </Table.Cell>
-
-                  {item.category == "Supply" && (
-                    <Table.Cell className="bg-slate-800  text-white">
-                      <Button
-                        onClick={() => {
-                          setCurrentTransaction(item);
-                          setIcsForm(true);
-                        }}
+                      <Tooltip
+                        content="You can now view your RIS form"
+                        placement="left"
                       >
-                        {" "}
-                        View ICS Form
-                      </Button>
-                    </Table.Cell>
-                  )}
+                        <Dropdown.Item
+                          onClick={() => {
+                            setCurrentTransaction(item);
+                            setRisForm(true);
+                          }}
+                        >
+                          View RIS Form
+                        </Dropdown.Item>
+                      </Tooltip>
 
+                      <Tooltip
+                        placement="left"
+                        content={
+                          item.status !== "Approve"
+                            ? "Your document is not approve yet"
+                            : "You can now view your ICS form"
+                        }
+                      >
+                        <Dropdown.Item
+                          style={{
+                            cursor:
+                              item.status !== "Approve"
+                                ? "not-allowed"
+                                : "pointer",
+                          }}
+                          disabled={item.status !== "Approve"}
+                          onClick={() => {
+                            setCurrentTransaction(item);
+                            setIcsForm(true);
+                          }}
+                        >
+                          {" "}
+                          View ICS Form
+                        </Dropdown.Item>
+                      </Tooltip>
+                    </Dropdown>
+                  </Table.Cell>
                   {isAdmin && (
                     <Table.Cell className="bg-slate-800  text-white ">
                       <div className="wrapper flex">
