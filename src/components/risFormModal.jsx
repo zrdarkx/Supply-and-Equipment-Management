@@ -5,6 +5,8 @@ import RisFormRow from "./risFormRow";
 import useAddTransaction from "../hooks/useAddTransaction";
 import { useSemStore } from "../zustand/store";
 import { toast } from "react-toastify";
+import { HiDownload } from "react-icons/hi";
+import { usePDF } from "react-to-pdf";
 
 const RisFormModal = ({
   title,
@@ -19,10 +21,11 @@ const RisFormModal = ({
   const { addTransaction, addSupplyTransaction, addEquipmentTransaction } =
     useAddTransaction();
   const { currentUser, setCartSupply, setCartEquipment } = useSemStore();
+  const { toPDF, targetRef } = usePDF({ filename: "ris.pdf" });
 
   return (
     <SemModal title={title} size={size} open={open} handleClose={handleClose}>
-      <div className="container mx-auto p-2">
+      <div ref={targetRef} className="container mx-auto p-2">
         <div className="wrapper">
           <h1 className="font-bold text-center text-2xl">
             REQUISITION AND ISSUE SLIP{" "}
@@ -106,8 +109,19 @@ const RisFormModal = ({
             Research, Exploration and Development expenses.{" "}
           </h1>
         </div>
-        {viewOnly && currentMode == "Supply" && (
+      </div>
+      {viewOnly && currentMode == "Supply" && (
+        <div className="flex">
           <Button
+            onClick={() => {
+              toPDF();
+            }}
+            className="w-full mt-5 py-3 mr-5"
+          >
+            Download <HiDownload className="mx-3" size={20} />
+          </Button>
+          <Button
+            color={"success"}
             onClick={() => {
               addSupplyTransaction(data, currentUser);
               setCartModal(false);
@@ -119,9 +133,20 @@ const RisFormModal = ({
           >
             Submit Supply RIS
           </Button>
-        )}
-        {viewOnly && currentMode == "Equipment" && (
+        </div>
+      )}
+      {viewOnly && currentMode == "Equipment" && (
+        <div className="flex">
           <Button
+            onClick={() => {
+              toPDF();
+            }}
+            className="w-full mt-5 py-3 mr-5"
+          >
+            Download <HiDownload className="mx-3" size={20} />
+          </Button>
+          <Button
+            color={"success"}
             onClick={() => {
               addEquipmentTransaction(data, currentUser);
               setCartModal(false);
@@ -133,8 +158,16 @@ const RisFormModal = ({
           >
             Submit Equipment RIS
           </Button>
-        )}
-      </div>
+        </div>
+      )}
+      <Button
+        onClick={() => {
+          toPDF();
+        }}
+        className="w-full mt-5 py-3 mr-5"
+      >
+        Download <HiDownload className="mx-3" size={20} />
+      </Button>
     </SemModal>
   );
 };
