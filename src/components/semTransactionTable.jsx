@@ -10,6 +10,7 @@ const SemTransactionTable = ({
   setCurrentTransaction,
   setRisForm,
   setIcsForm,
+  setParForm,
 }) => {
   const { data: supply } = useGetSupply();
   const { data: equipment } = useGetEquipment();
@@ -47,6 +48,8 @@ const SemTransactionTable = ({
     }
   };
 
+  console.log(data);
+
   return (
     <div className="overflow-x-auto">
       {data && (
@@ -81,8 +84,7 @@ const SemTransactionTable = ({
             )}
           </Table.Head>
           <Table.Body className="divide-y">
-            {data.map((item) => {
-              console.log(item);
+            {data?.map((item) => {
               const user = JSON.parse(item.currentUser);
               const firebaseDate = item.createdAt;
               const date = moment(firebaseDate?.toDate()).format("LLL");
@@ -147,22 +149,43 @@ const SemTransactionTable = ({
                             : "You can now view your ICS form"
                         }
                       >
-                        <Dropdown.Item
-                          style={{
-                            cursor:
-                              item.status !== "Approve"
-                                ? "not-allowed"
-                                : "pointer",
-                          }}
-                          disabled={item.status !== "Approve"}
-                          onClick={() => {
-                            setCurrentTransaction(item);
-                            setIcsForm(true);
-                          }}
-                        >
-                          {" "}
-                          View ICS Form
-                        </Dropdown.Item>
+                        {item.category == "Supply" && (
+                          <Dropdown.Item
+                            style={{
+                              cursor:
+                                item.status !== "Approve"
+                                  ? "not-allowed"
+                                  : "pointer",
+                            }}
+                            disabled={item.status !== "Approve"}
+                            onClick={() => {
+                              setCurrentTransaction(item);
+                              setIcsForm(true);
+                            }}
+                          >
+                            {" "}
+                            View ICS Form
+                          </Dropdown.Item>
+                        )}
+
+                        {item.category == "Equipment" && (
+                          <Dropdown.Item
+                            style={{
+                              cursor:
+                                item.status !== "Approve"
+                                  ? "not-allowed"
+                                  : "pointer",
+                            }}
+                            disabled={item.status !== "Approve"}
+                            onClick={() => {
+                              setCurrentTransaction(item);
+                              setParForm(true);
+                            }}
+                          >
+                            {" "}
+                            View PAR Form
+                          </Dropdown.Item>
+                        )}
                       </Tooltip>
                     </Dropdown>
                   </Table.Cell>

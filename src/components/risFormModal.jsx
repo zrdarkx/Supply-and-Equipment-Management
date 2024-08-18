@@ -18,7 +18,7 @@ const RisFormModal = ({
 }) => {
   const { addTransaction, addSupplyTransaction, addEquipmentTransaction } =
     useAddTransaction();
-  const { currentUser } = useSemStore();
+  const { currentUser, setCartSupply, setCartEquipment } = useSemStore();
 
   return (
     <SemModal title={title} size={size} open={open} handleClose={handleClose}>
@@ -113,6 +113,7 @@ const RisFormModal = ({
               setCartModal(false);
               handleClose();
               toast.success("Succesfully added transaction");
+              setCartSupply([]);
             }}
             className="w-full mt-5 py-3"
           >
@@ -126,6 +127,7 @@ const RisFormModal = ({
               setCartModal(false);
               handleClose();
               toast.success("Succesfully added transaction");
+              setCartEquipment([]);
             }}
             className="w-full mt-5 py-3"
           >

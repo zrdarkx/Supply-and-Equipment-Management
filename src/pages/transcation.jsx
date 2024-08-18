@@ -10,6 +10,7 @@ import { HiOutlineTable, HiUserCircle, HiViewGrid } from "react-icons/hi";
 import Loading from "../components/loading";
 import RisFormModal from "../components/risFormModal";
 import IcsFormModal from "../components/IcsFormModal";
+import ParFormModal from "../components/parFormModal";
 
 const Transaction = () => {
   const { data, loading } = useGetTransaction();
@@ -18,6 +19,7 @@ const Transaction = () => {
   const [currentTransaction, setCurrentTransaction] = useState();
   const [risForm, setRisForm] = useState(false);
   const [icsForm, setIcsForm] = useState(false);
+  const [parForm, setParForm] = useState(false);
 
   const filterByCategory = data.filter((item) => {
     if (item.category == category) {
@@ -42,6 +44,14 @@ const Transaction = () => {
         size={"6xl"}
         open={icsForm}
         handleClose={() => setIcsForm(false)}
+        data={currentTransaction}
+      />
+
+      <ParFormModal
+        title={`PAR Form`}
+        size={"6xl"}
+        open={parForm}
+        handleClose={() => setParForm(false)}
         data={currentTransaction}
       />
 
@@ -76,6 +86,7 @@ const Transaction = () => {
             setCurrentTransaction={setCurrentTransaction}
             setIcsForm={setIcsForm}
             setRisForm={setRisForm}
+            setParForm={setParForm}
             data={category !== "all" ? filterByCategory : data}
           />
         </div>
