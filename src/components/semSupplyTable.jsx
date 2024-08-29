@@ -47,6 +47,15 @@ export function SemSupplyTable({
     });
     setCartSupply(cartSupplyCopy);
   };
+  const handleDecrement = (data) => {
+    const cartSupplyCopy = [...cartSupply];
+    cartSupplyCopy.map((item) => {
+      if (item.id == data.id) {
+        item.borrowedQuantity = parseInt(item.borrowedQuantity) - 1;
+      }
+    });
+    setCartSupply(cartSupplyCopy);
+  };
 
   return (
     <div className="overflow-x-auto ">
@@ -182,7 +191,12 @@ export function SemSupplyTable({
                   {cart && (
                     <Table.Cell className="bg-slate-800  text-white ">
                       <div className="flex justify-center items-center">
-                        <Button>-</Button>
+                        <Button
+                          disabled={item.borrowedQuantity == 1}
+                          onClick={() => handleDecrement(item)}
+                        >
+                          -
+                        </Button>
                         <h1 className="mx-3">
                           {item.borrowedQuantity ? item.borrowedQuantity : 1}
                         </h1>
