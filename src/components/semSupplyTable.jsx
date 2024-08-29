@@ -34,6 +34,20 @@ export function SemSupplyTable({
     setCartSupply(newCarts);
   };
 
+  const handleIncrement = (data) => {
+    const cartSupplyCopy = [...cartSupply];
+    cartSupplyCopy.map((item) => {
+      if (item.id == data.id) {
+        if (item.borrowedQuantity == undefined) {
+          item.borrowedQuantity = 2;
+        } else {
+          item.borrowedQuantity = parseInt(item.borrowedQuantity) + 1;
+        }
+      }
+    });
+    setCartSupply(cartSupplyCopy);
+  };
+
   return (
     <div className="overflow-x-auto ">
       {data && (
@@ -67,6 +81,11 @@ export function SemSupplyTable({
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
               Action
             </Table.HeadCell>
+            {cart && (
+              <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
+                Borrowed Quantity
+              </Table.HeadCell>
+            )}
           </Table.Head>
           <Table.Body className="divide-y">
             {data.map((item, index) => {
@@ -158,6 +177,17 @@ export function SemSupplyTable({
                           Remove
                         </Button>
                       </Tooltip>
+                    </Table.Cell>
+                  )}
+                  {cart && (
+                    <Table.Cell className="bg-slate-800  text-white ">
+                      <div className="flex justify-center items-center">
+                        <Button>-</Button>
+                        <h1 className="mx-3">
+                          {item.borrowedQuantity ? item.borrowedQuantity : 1}
+                        </h1>
+                        <Button onClick={() => handleIncrement(item)}>+</Button>
+                      </div>
                     </Table.Cell>
                   )}
                 </Table.Row>

@@ -94,7 +94,7 @@ const RisFormModal = ({
               stockNo={item.inventoryNumber || item.propertyNumber}
               unit={item.unit}
               decription={item.name + " | " + item.description}
-              rQuantity={item.quantity}
+              rQuantity={item.borrowedQuantity ? item.borrowedQuantity : 1}
               stockAvailable={item.quantity !== 0 ? true : false}
               iQuantity={item.quantity}
               remarks={item.remarks}
