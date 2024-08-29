@@ -54,9 +54,9 @@ const DashboardLayout = ({ children }) => {
                 <Supply cart={true} />
               )}
               <div className="w-full flex flex-row mt-20">
-                <Button color={"success"} className="w-full py-2 mx-3">
+                {/* <Button color={"success"} className="w-full py-2 mx-3">
                   Add Unique
-                </Button>
+                </Button> */}
                 <Button
                   onClick={() => {
                     setCurrentMode("Supply");
@@ -79,9 +79,9 @@ const DashboardLayout = ({ children }) => {
                 <Equipment cart={true} />
               )}
               <div className="w-full flex flex-row mt-20">
-                <Button color={"success"} className="w-full py-2 mx-3">
+                {/* <Button color={"success"} className="w-full py-2 mx-3">
                   Add Unique
-                </Button>
+                </Button> */}
                 <Button
                   onClick={() => {
                     setCurrentMode("Equipment");
