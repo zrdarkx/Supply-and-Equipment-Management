@@ -32,7 +32,7 @@ const Transaction = () => {
       {loading && <Loading />}
 
       <RisFormModal
-        title={`RIS Form`}
+        title={`Formulario SEM`}
         size={"6xl"}
         open={risForm}
         handleClose={() => setRisForm(false)}
@@ -40,7 +40,7 @@ const Transaction = () => {
       />
 
       <IcsFormModal
-        title={`ICS Form`}
+        title={`Formulario RCI`}
         size={"6xl"}
         open={icsForm}
         handleClose={() => setIcsForm(false)}
@@ -48,7 +48,7 @@ const Transaction = () => {
       />
 
       <ParFormModal
-        title={`PAR Form`}
+        title={`Formulario RRB`}
         size={"6xl"}
         open={parForm}
         handleClose={() => setParForm(false)}
@@ -63,21 +63,21 @@ const Transaction = () => {
                 color={category === "all" ? "info" : "gray"}
                 onClick={() => setCategory("all")}
               >
-                All
+                Todos
               </Button>
               <Button
                 color={category === "Supply" ? "info" : "gray"}
                 onClick={() => setCategory("Supply")}
               >
                 <HiOutlineTable className="mr-3 h-4 w-4" />
-                Supply
+                Suministros
               </Button>
               <Button
                 color={category === "Equipment" ? "info" : "gray"}
                 onClick={() => setCategory("Equipment")}
               >
                 <HiViewGrid className="mr-3 h-4 w-4" />
-                Equipment
+                Equipo
               </Button>
             </Button.Group>
           </div>

@@ -17,20 +17,22 @@ const DashboardHeader = ({ handleOpenSidebar, setCartModal }) => {
         color="white"
       />
 
-      <div className="user-wrapper  flex-row flex items-center">
+      <div className="user-wrapper flex-row flex items-center">
         <div className="wrapper mr-10">
-          <p className="text-blue-500 text-xs lg:text-sm">Logged in as</p>
+          <p className="text-blue-500 text-xs lg:text-sm">Conectado como</p>
           <h1 className="text-white text-sm lg:text-xl">
             {currentUser?.firstName} {currentUser?.lastName} -{" "}
             <span className="font-bold">{currentUser?.role}</span>{" "}
           </h1>
         </div>
         {isAdmin ? (
-          <Tooltip content={`Email used: ${currentUser?.email}`}>
+          <Tooltip
+            content={`Correo electrónico utilizado: ${currentUser?.email}`}
+          >
             <FaUserCircle size={30} color="white" />
           </Tooltip>
         ) : (
-          <Tooltip content={"Your item cart"}>
+          <Tooltip content={"Tu carrito de artículos"}>
             <div className="flex cursor-pointer">
               <HiShoppingCart
                 onClick={() => setCartModal(true)}

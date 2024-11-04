@@ -82,7 +82,7 @@ const Supply = ({ cart }) => {
       {/* SUPPLY MODAL */}
       <AddSupplyModal
         size="5xl"
-        title={isUpdate ? "Update Supply" : "Add Supply"}
+        title={isUpdate ? "Actualizar Suministro" : "Agregar Suministro"}
         open={supplyModal}
         handleClose={() => setSupplyModal(false)}
         forms={forms}
@@ -100,16 +100,16 @@ const Supply = ({ cart }) => {
         <ContentHeader
           cart={cart}
           setSearch={setSearch}
-          title="Supply"
+          title="Suministros"
           Icon={HiOutlineTable}
           event={handleAddingSupply}
-          tooltip={"Add supply to the system"}
+          tooltip={"Agregar suministro al sistema"}
         />
 
         {loading && <Loading />}
 
         {!loading && data.length <= 0 && (
-          <NoData title={"There's no supply, please add one."} />
+          <NoData title={"No hay suministros, por favor agrega uno."} />
         )}
 
         {!loading && data.length >= 1 && (

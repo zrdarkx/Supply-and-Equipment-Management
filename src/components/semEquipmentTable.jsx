@@ -20,9 +20,11 @@ export function SemEquipmentTable({
     if (!isAdded) {
       const newItem = [...cartEquipment, item];
       setCartEquipment(newItem);
-      toast.success("Successfull added to cart.", { position: "bottom-right" });
+      toast.success("Agregado al carrito con éxito.", {
+        position: "bottom-right",
+      });
     } else {
-      toast.info("it's already in your cart.", { position: "bottom-right" });
+      toast.info("Ya está en tu carrito.", { position: "bottom-right" });
     }
   };
 
@@ -66,29 +68,29 @@ export function SemEquipmentTable({
               #
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Property Number
+              Número de Equipo
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Name
+              Nombre
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Quantity
+              Cantidad
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Unit
+              Unidad
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Unit Cost
+              Costo Unitario
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Description
+              Descripción
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Action
+              Acción
             </Table.HeadCell>
             {cart && (
               <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-                Borrowed Quantity
+                Cantidad Solicitada
               </Table.HeadCell>
             )}
           </Table.Head>
@@ -120,7 +122,7 @@ export function SemEquipmentTable({
                   {isAdmin && (
                     <Table.Cell className="bg-slate-800 rounded-lg text-white ">
                       <div className="flex">
-                        <Tooltip content="Update office name">
+                        <Tooltip content="Actualizar nombre de la oficina">
                           <Button
                             className="mr-5"
                             onClick={() => {
@@ -134,10 +136,10 @@ export function SemEquipmentTable({
                               color="white"
                               className="mr-2 h-5 w-5"
                             />
-                            Update
+                            Actualizar
                           </Button>
                         </Tooltip>
-                        <Tooltip content="Delete the office permanently">
+                        <Tooltip content="Eliminar la oficina de forma permanente">
                           <Button
                             onClick={() => {
                               setDeleteModal(true);
@@ -147,7 +149,7 @@ export function SemEquipmentTable({
                           >
                             {" "}
                             <HiTrash color="white" className="mr-2 h-5 w-5" />
-                            Delete
+                            Eliminar
                           </Button>
                         </Tooltip>
                       </div>
@@ -155,7 +157,7 @@ export function SemEquipmentTable({
                   )}
                   {!isAdmin && !cart && (
                     <Table.Cell className="bg-slate-800 rounded-lg text-white ">
-                      <Tooltip content="Add this item to your cart">
+                      <Tooltip content="Agregar este artículo a tu carrito">
                         <Button
                           gradientMonochrome="info"
                           onClick={() => handleAddCart(item)}
@@ -164,20 +166,20 @@ export function SemEquipmentTable({
                             color="white"
                             className="mr-2 h-5 w-5"
                           />
-                          Add
+                          Agregar
                         </Button>
                       </Tooltip>
                     </Table.Cell>
                   )}
                   {cart && (
                     <Table.Cell className="bg-slate-800  text-white ">
-                      <Tooltip content="Remove item from cart">
+                      <Tooltip content="Eliminar artículo del carrito">
                         <Button
                           gradientMonochrome="failure"
                           onClick={() => handleRemoveCart(item)}
                         >
                           <HiTrash color="white" className="mr-2 h-5 w-5" />
-                          Remove
+                          Eliminar
                         </Button>
                       </Tooltip>
                     </Table.Cell>

@@ -39,9 +39,9 @@ const SemTransactionTable = ({
   };
 
   const getBadgeColor = (status) => {
-    if (status === "Pending") {
+    if (status === "Pendiente") {
       return "warning";
-    } else if (status === "Approve") {
+    } else if (status === "Aprobado") {
       return "green";
     } else {
       return "failure";
@@ -56,30 +56,30 @@ const SemTransactionTable = ({
         <Table>
           <Table.Head>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              User
+              Usuario
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Office Name
+              Nombre de la Oficina
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Category
+              Categoría
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Review By
+              Revisado por
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Created At
+              Creado el
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Status
+              Estado
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Form
+              Formulario
             </Table.HeadCell>
 
             {isAdmin && (
               <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-                Action
+                Acción
               </Table.HeadCell>
             )}
           </Table.Head>
@@ -110,7 +110,7 @@ const SemTransactionTable = ({
                     {item.category}
                   </Table.Cell>
                   <Table.Cell className="bg-slate-800  text-white">
-                    {item.reviewBy ? item.reviewBy : "Waiting for approval"}
+                    {item.reviewBy ? item.reviewBy : "Pendiente de aprobación"}
                   </Table.Cell>
                   <Table.Cell className="bg-slate-800  text-white">
                     {date}
@@ -124,11 +124,11 @@ const SemTransactionTable = ({
                   <Table.Cell className="bg-slate-800  text-white">
                     <Dropdown
                       placement="left"
-                      label="Forms"
+                      label="Formularios"
                       dismissOnClick={false}
                     >
                       <Tooltip
-                        content="You can now view your RIS form"
+                        content="Puedes ver el formulario de SEM ahora"
                         placement="left"
                       >
                         <Dropdown.Item
@@ -137,34 +137,34 @@ const SemTransactionTable = ({
                             setRisForm(true);
                           }}
                         >
-                          View RIS Form
+                          Ver Formulario de SEM
                         </Dropdown.Item>
                       </Tooltip>
 
                       <Tooltip
                         placement="left"
                         content={
-                          item.status !== "Approve"
-                            ? "Your document is not approve yet"
-                            : "You can now view your ICS form"
+                          item.status !== "Aprobado"
+                            ? "Tu documento aún no está aprobado"
+                            : "Puedes ver el formulario de RCI ahora"
                         }
                       >
                         {item.category == "Supply" && (
                           <Dropdown.Item
                             style={{
                               cursor:
-                                item.status !== "Approve"
+                                item.status !== "Aprobado"
                                   ? "not-allowed"
                                   : "pointer",
                             }}
-                            disabled={item.status !== "Approve"}
+                            disabled={item.status !== "Aprobado"}
                             onClick={() => {
                               setCurrentTransaction(item);
                               setIcsForm(true);
                             }}
                           >
                             {" "}
-                            View ICS Form
+                            Ver Formulario de RCI
                           </Dropdown.Item>
                         )}
 
@@ -172,18 +172,18 @@ const SemTransactionTable = ({
                           <Dropdown.Item
                             style={{
                               cursor:
-                                item.status !== "Approve"
+                                item.status !== "Aprobado"
                                   ? "not-allowed"
                                   : "pointer",
                             }}
-                            disabled={item.status !== "Approve"}
+                            disabled={item.status !== "Aprobado"}
                             onClick={() => {
                               setCurrentTransaction(item);
                               setParForm(true);
                             }}
                           >
                             {" "}
-                            View PAR Form
+                            Ver Formulario de RRB
                           </Dropdown.Item>
                         )}
                       </Tooltip>
@@ -194,8 +194,8 @@ const SemTransactionTable = ({
                       <div className="wrapper flex">
                         <Button
                           disabled={
-                            item.status == "Approve" ||
-                            item.status === "Rejected"
+                            item.status == "Aprobado" ||
+                            item.status === "Rechazado"
                           }
                           onClick={() =>
                             approveTransaction(item.id, currentUser, item.item)
@@ -203,19 +203,19 @@ const SemTransactionTable = ({
                           className="mr-2"
                           gradientMonochrome="success"
                         >
-                          Approve
+                          Aprobar
                         </Button>
                         <Button
                           onClick={() =>
                             rejectTransaction(item.id, currentUser)
                           }
                           disabled={
-                            item.status == "Approve" ||
-                            item.status === "Rejected"
+                            item.status == "Aprobado" ||
+                            item.status === "Rechazado"
                           }
                           gradientMonochrome="failure"
                         >
-                          Reject
+                          Rechazar
                         </Button>
                       </div>
                     </Table.Cell>

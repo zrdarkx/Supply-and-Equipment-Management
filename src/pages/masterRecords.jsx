@@ -17,10 +17,10 @@ const MasterRecords = () => {
       {!isAdmin && (
         <div className="container mx-auto">
           <Tabs variant="pills" className="mx-5">
-            <Tabs.Item active title="Supply" icon={HiOutlineTable}>
+            <Tabs.Item active title="Suministros" icon={HiOutlineTable}>
               <Supply />
             </Tabs.Item>
-            <Tabs.Item title="Equipment" icon={HiViewGrid}>
+            <Tabs.Item title="Equipo" icon={HiViewGrid}>
               <Equipment />
             </Tabs.Item>
           </Tabs>
@@ -31,13 +31,13 @@ const MasterRecords = () => {
       {isAdmin && (
         <div className="container mx-auto">
           <Tabs variant="pills" className="mx-5">
-            <Tabs.Item active title="Supply" icon={HiOutlineTable}>
+            <Tabs.Item active title="Suministros" icon={HiOutlineTable}>
               <Supply />
             </Tabs.Item>
-            <Tabs.Item title="Equipment" icon={HiViewGrid}>
+            <Tabs.Item title="Equipo" icon={HiViewGrid}>
               <Equipment />
             </Tabs.Item>
-            <Tabs.Item title="Office" icon={HiOfficeBuilding}>
+            <Tabs.Item title="Oficinas" icon={HiOfficeBuilding}>
               <Offices />
             </Tabs.Item>
           </Tabs>

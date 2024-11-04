@@ -18,16 +18,16 @@ export function SemOfficesTable({
         <Table striped>
           <Table.Head>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Office ID
+              ID de Oficina
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Office Name
+              Nombre de la Oficina
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Created At
+              Creada el
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Action
+              Acción
             </Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
@@ -49,7 +49,7 @@ export function SemOfficesTable({
                   {isAdmin && (
                     <Table.Cell className="bg-slate-800  text-white">
                       <div className="flex flex-row justify-center items-center">
-                        <Tooltip content="Update office name">
+                        <Tooltip content="Actualizar nombre de la oficina">
                           <Button
                             className="mr-5"
                             onClick={() => {
@@ -63,10 +63,10 @@ export function SemOfficesTable({
                               color="white"
                               className="mr-2 h-5 w-5"
                             />
-                            Update
+                            Actualizar
                           </Button>
                         </Tooltip>
-                        <Tooltip content="Delete the office permanently">
+                        <Tooltip content="Eliminar la oficina de forma permanente">
                           <Button
                             onClick={() => {
                               setSelectedOffice(item.id);
@@ -76,7 +76,7 @@ export function SemOfficesTable({
                           >
                             {" "}
                             <HiTrash color="white" className="mr-2 h-5 w-5" />
-                            Delete
+                            Eliminar
                           </Button>
                         </Tooltip>
                       </div>

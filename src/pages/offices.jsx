@@ -57,7 +57,9 @@ const Offices = () => {
   return (
     <>
       <SemModal
-        title={selectedOffice ? "Update office name" : "Add office"}
+        title={
+          selectedOffice ? "Actualizar nombre de la oficina" : "Agregar oficina"
+        }
         open={addOfficeModal}
         handleClose={() => {
           setAddOfficeModal(false);
@@ -68,15 +70,17 @@ const Offices = () => {
           value={office}
           event={(event) => setOffice(event.target.value)}
           color={"info"}
-          label="Office Name"
-          placeholder="Enter office name"
+          label="Nombre de la Oficina"
+          placeholder="Ingrese el nombre de la oficina"
         />
         <Button
           onClick={handleOfficeEvent}
           gradientMonochrome={selectedOffice ? "info" : "info"}
           className="w-full mt-5 py-2"
         >
-          {selectedOffice ? "Update office name" : "Add Office"}
+          {selectedOffice
+            ? "Actualizar nombre de la oficina"
+            : "Agregar Oficina"}
         </Button>
       </SemModal>
       <ConfirmationModal
@@ -93,13 +97,13 @@ const Offices = () => {
       <div className="office-wrapper p-0 lg:p-5">
         <ContentHeader
           setSearch={setSearch}
-          title="Office"
+          title="Oficinas"
           Icon={HiOfficeBuilding}
           event={() => {
             setAddOfficeModal(true);
             setOffice("");
           }}
-          tooltip={"Add office to the system"}
+          tooltip={"Agregar oficina al sistema"}
         />
 
         {loading && <Loading />}
@@ -113,7 +117,7 @@ const Offices = () => {
           />
         )}
         {!loading && offices.length <= 0 && (
-          <NoData title={"There's no office, please add one."} />
+          <NoData title={"No hay oficinas, por favor agrega una."} />
         )}
       </div>
     </>

@@ -25,7 +25,16 @@ const SemSidebar = ({ isOpen, handleClose }) => {
 
   return (
     <Drawer open={isOpen} onClose={handleClose}>
-      <SemTitle title={"Menu"} color={"black"} />
+      {/* Logo */}
+      <div className="flex justify-center mb-4">
+        <img
+          src="https://jn31a1.com/wp-content/uploads/2022/06/logo.png"
+          alt="Logo"
+          className="h-16"
+        />
+      </div>
+
+      <SemTitle title={"Menú"} color={"black"} />
 
       <Drawer.Items className="mt-5">
         <Sidebar>
@@ -33,12 +42,12 @@ const SemSidebar = ({ isOpen, handleClose }) => {
             <Sidebar.ItemGroup>
               <Link to={"/transaction"}>
                 <Sidebar.Item className="my-3" icon={HiOutlineServer}>
-                  Transaction
+                  Transacciones
                 </Sidebar.Item>
               </Link>
               <Link to={"/master-records"}>
                 <Sidebar.Item className="my-3" icon={HiFolder}>
-                  Master Records
+                  Registros Maestros
                 </Sidebar.Item>
               </Link>
               <Sidebar.Item
@@ -49,7 +58,7 @@ const SemSidebar = ({ isOpen, handleClose }) => {
                 }}
                 icon={HiLogout}
               >
-                Logout
+                Cerrar Sesión
               </Sidebar.Item>
             </Sidebar.ItemGroup>
           </Sidebar.Items>

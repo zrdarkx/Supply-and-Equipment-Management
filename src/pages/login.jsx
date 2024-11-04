@@ -64,25 +64,25 @@ const Login = () => {
         <div className="basis-full lg:basis-6/12 flex justify-center items-center ">
           <div className="content bg-slate-800 min-h-5/6 w-4/6 rounded-lg">
             <div className="title-wrapper m-10">
-              <SemTitle color={"white"} title={"Login"} />
+              <SemTitle color={"white"} title={"Inicio de Sesión"} />
             </div>
             <form className="form-wrapper m-10" onSubmit={handleSubmitForm}>
               <div className="my-3">
                 <SemInput
-                  label={"Email"}
+                  label={"Correo Electrónico"}
                   id={"email"}
                   name={"email"}
-                  placeholder={"Please enter your email"}
+                  placeholder={"Ingrese su correo electrónico"}
                   icon={HiMail}
                   event={handleUpdateForm}
                 />
               </div>
               <div className="my-3">
                 <SemInput
-                  label={"Password"}
+                  label={"Contraseña"}
                   id={"password"}
                   name={"password"}
-                  placeholder={"Please enter your password"}
+                  placeholder={"Ingrese su contraseña"}
                   icon={HiLockClosed}
                   event={handleUpdateForm}
                   type={"password"}
@@ -95,13 +95,13 @@ const Login = () => {
                   className="w-full "
                 >
                   <HiLogin className="mr-2 h-5 w-5" />
-                  Login
+                  Iniciar Sesión
                 </Button>
                 <HR.Text />
                 <Link to={"/signup"}>
                   <Button gradientMonochrome="success" className="w-full">
                     <HiUserAdd className="mr-2 h-5 w-5" />
-                    Create Account
+                    Crear Cuenta
                   </Button>
                 </Link>
               </div>

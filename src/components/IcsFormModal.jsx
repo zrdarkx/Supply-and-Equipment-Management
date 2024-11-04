@@ -31,36 +31,36 @@ const IcsFormModal = ({
       <div ref={targetRef} className="container mx-auto p-2">
         <div className="wrapper mb-10">
           <h1 className="font-bold text-center text-2xl mb-10">
-            INVENTORY CUSTODIAN SLIP{" "}
+            RECIBO DE CUSTODIA DE INVENTARIO{" "}
           </h1>
           <div className="flex justify-between items-center mt-2">
-            <h1>Entity Name: Camarines Norte State College</h1>
-            <h1>Fund Cluster : 01 - Regular Agency Fund</h1>
-            <h1>ICS No.: _____</h1>
+            <h1>Nombre de la Entidad: J&N 31 A1 IMPORTACIONES, C.A.</h1>
+            <h1>Grupo de Fondos : 01 - Fondo de la Empresa Regular</h1>
+            <h1>Número de RCI: #</h1>
           </div>
         </div>
 
         <div className="border border-slate-950 flex border-t-0">
           <div className="basis-1/12 border border-slate-950 p-2 text-center">
-            <h1>Quantity </h1>
+            <h1>Cantidad </h1>
           </div>
           <div className="basis-1/12 border border-slate-950 p-2 text-center">
-            <h1>Unit</h1>
+            <h1>Unidad</h1>
           </div>
           <div className="basis-1/12 border border-slate-950 p-2 text-center">
-            <h1>Unit Cost</h1>
+            <h1>Costo Unitario</h1>
           </div>
           <div className="basis-1/12 border border-slate-950 p-2 text-center">
-            <h1>Total Cost</h1>
+            <h1>Costo Total</h1>
           </div>
           <div className="basis-4/12 border border-slate-950 p-2 text-center">
-            <h1>Description</h1>
+            <h1>Descripción</h1>
           </div>
           <div className="basis-2/12 border border-slate-950 p-2 text-center">
-            <h1>Inventory Item No.</h1>
+            <h1>Número de Inventario</h1>
           </div>
           <div className="basis-2/12 border border-slate-950 p-2 text-center">
-            <h1>Estimated Useful Life</h1>
+            <h1>Vida Útil Estimada</h1>
           </div>
         </div>
 
@@ -99,19 +99,20 @@ const IcsFormModal = ({
           <div className="flex">
             <div className="basis-6/12">
               <div className="wrapper">
-                <h1>Received from: {data?.reviewBy}</h1>
-                <h1 className="font-bold">Admin Officer</h1>
+                <h1>Recibido de: {data?.reviewBy}</h1>
+                <h1 className="font-bold">Oficial de Administración</h1>
                 <h1>{date}</h1>
               </div>
             </div>
             <div className="basis-6/12">
               <div className="wrapper">
                 <h1>
-                  Received By:{" "}
+                  Recibido por:{" "}
                   {currentUser.firstName + " " + currentUser.lastName}
                 </h1>
                 <h1 className="font-bold">
-                  {currentUser.office} | Deparment Supply Coordinator
+                  {currentUser.office} | Coordinador de Suministros del
+                  Departamento
                 </h1>
                 <h1>{date}</h1>
               </div>
@@ -125,7 +126,7 @@ const IcsFormModal = ({
         }}
         className="w-full mt-5 py-3 mr-5"
       >
-        Download <HiDownload className="mx-3" size={20} />
+        Descargar <HiDownload className="mx-3" size={20} />
       </Button>
     </SemModal>
   );

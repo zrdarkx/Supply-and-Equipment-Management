@@ -20,32 +20,32 @@ const AddEquipmentModal = ({
             value={forms.name}
             color={"gray"}
             name={"name"}
-            label="Name"
-            placeholder="Enter name"
+            label="Nombre"
+            placeholder="Ingrese nombre"
             event={handleUpdateForm}
           />
           <SemInput
             value={forms.quantity}
             name={"quantity"}
             color={"gray"}
-            label="Quantity"
-            placeholder="Enter quantity"
+            label="Cantidad"
+            placeholder="Ingrese cantidad"
             event={handleUpdateForm}
           />
           <SemInput
             value={forms.unit}
             name={"unit"}
             color={"gray"}
-            label="Unit"
-            placeholder="Enter unit"
+            label="Unidad"
+            placeholder="Ingrese unidad"
             event={handleUpdateForm}
           />
           <SemInput
             value={forms.unitCost}
             name={"unitCost"}
             color={"gray"}
-            label="Unit Cost"
-            placeholder="Enter unit cost"
+            label="Costo Unitario"
+            placeholder="Ingrese costo unitario"
             event={handleUpdateForm}
           />
         </div>
@@ -54,8 +54,8 @@ const AddEquipmentModal = ({
             value={forms.description}
             name={"description"}
             color={"gray"}
-            label="Description"
-            placeholder="Enter description"
+            label="Descripción"
+            placeholder="Ingrese descripción"
             event={handleUpdateForm}
           />
 
@@ -63,8 +63,8 @@ const AddEquipmentModal = ({
             value={forms.propertyNumber}
             name={"propertyNumber"}
             color={"gray"}
-            label="Property Number"
-            placeholder="Enter inventory number"
+            label="Número de Propiedad"
+            placeholder="Ingrese número de propiedad"
             event={handleUpdateForm}
           />
         </div>{" "}
@@ -75,7 +75,7 @@ const AddEquipmentModal = ({
         gradientMonochrome="info"
         className="w-full mt-5 py-2"
       >
-        {isUpdate ? "Update Equipment" : "Add Equipment"}
+        {isUpdate ? "Actualizar Equipo" : "Agregar Equipo"}
       </Button>
     </SemModal>
   );

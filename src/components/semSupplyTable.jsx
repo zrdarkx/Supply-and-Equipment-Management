@@ -1,4 +1,5 @@
-import { Button, Dropdown, Table, Tooltip } from "flowbite-react";
+import { Button, Table, Tooltip } from "flowbite-react";
+import moment from "moment";
 import { HiOutlineCog, HiOutlinePlusCircle, HiTrash } from "react-icons/hi";
 import { useSemStore } from "../zustand/store";
 import { toast } from "react-toastify";
@@ -19,9 +20,11 @@ export function SemSupplyTable({
     if (!isAdded) {
       const newItem = [...cartSupply, item];
       setCartSupply(newItem);
-      toast.success("Successfull added to cart.", { position: "bottom-right" });
+      toast.success("Agregado al carrito con éxito.", {
+        position: "bottom-right",
+      });
     } else {
-      toast.info("it's already in your cart.", { position: "bottom-right" });
+      toast.info("Ya está en tu carrito.", { position: "bottom-right" });
     }
   };
 
@@ -66,33 +69,33 @@ export function SemSupplyTable({
               #
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Inventory Number
+              Número de Inventario
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Name
+              Nombre
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Quantity
+              Cantidad
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Unit
+              Unidad
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Unit Cost
+              Costo Unitario
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Description
+              Descripción
             </Table.HeadCell>
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Estimated Useful Life
+              Vida Útil Estimada
             </Table.HeadCell>
 
             <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-              Action
+              Acción
             </Table.HeadCell>
             {cart && (
               <Table.HeadCell className="bg-transparent text-gray-200 bg-slate-500">
-                Borrowed Quantity
+                Cantidad Solicitada
               </Table.HeadCell>
             )}
           </Table.Head>
@@ -128,7 +131,7 @@ export function SemSupplyTable({
                   {isAdmin && (
                     <Table.Cell className="bg-slate-800 rounded-lg text-white ">
                       <div className="flex">
-                        <Tooltip content="Update this supply">
+                        <Tooltip content="Actualizar este suministro">
                           <Button
                             className="mr-5"
                             onClick={() => {
@@ -141,10 +144,10 @@ export function SemSupplyTable({
                               color="white"
                               className="mr-2 h-5 w-5"
                             />
-                            Update
+                            Actualizar
                           </Button>
                         </Tooltip>
-                        <Tooltip content="Delete this supply permanently">
+                        <Tooltip content="Eliminar este suministro de forma permanente">
                           <Button
                             onClick={() => {
                               setDeleteModal(true);
@@ -153,7 +156,7 @@ export function SemSupplyTable({
                             gradientMonochrome="failure"
                           >
                             <HiTrash color="white" className="mr-2 h-5 w-5" />
-                            Delete
+                            Eliminar
                           </Button>
                         </Tooltip>
                       </div>
@@ -161,7 +164,7 @@ export function SemSupplyTable({
                   )}
                   {!isAdmin && !cart && (
                     <Table.Cell className="bg-slate-800 rounded-lg text-white ">
-                      <Tooltip content="Add this item to your cart">
+                      <Tooltip content="Agregar este artículo a tu carrito">
                         <Button
                           gradientMonochrome="info"
                           onClick={() => handleAddCart(item)}
@@ -170,20 +173,20 @@ export function SemSupplyTable({
                             color="white"
                             className="mr-2 h-5 w-5"
                           />
-                          Add
+                          Agregar
                         </Button>
                       </Tooltip>
                     </Table.Cell>
                   )}
                   {cart && (
                     <Table.Cell className="bg-slate-800  text-white ">
-                      <Tooltip content="Remove item from cart">
+                      <Tooltip content="Eliminar artículo del carrito">
                         <Button
                           gradientMonochrome="failure"
                           onClick={() => handleRemoveCart(item)}
                         >
                           <HiTrash color="white" className="mr-2 h-5 w-5" />
-                          Remove
+                          Eliminar
                         </Button>
                       </Tooltip>
                     </Table.Cell>

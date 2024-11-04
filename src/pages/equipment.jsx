@@ -77,7 +77,7 @@ const Equipment = ({ cart }) => {
     <>
       <AddEquipmentModal
         size="5xl"
-        title={isUpdate ? "Update Equipment" : "Add Equipment"}
+        title={isUpdate ? "Actualizar Equipo" : "Agregar Equipo"}
         open={equipModal}
         handleClose={() => setEquipModal(false)}
         forms={forms}
@@ -96,16 +96,16 @@ const Equipment = ({ cart }) => {
         <ContentHeader
           cart={cart}
           setSearch={setSearch}
-          title="Equipment"
+          title="Equipo"
           Icon={HiOutlineTable}
-          tooltip={"Add equipmente to the system"}
+          tooltip={"Agregar equipo al sistema"}
           event={handleAddingEquipment}
         />
 
         {loading && <Loading />}
 
         {!loading && data.length <= 0 && (
-          <NoData title={"There's no equipment, please add one."} />
+          <NoData title={"No hay equipo, por favor agrega uno."} />
         )}
 
         {!loading && data.length >= 1 && (
