@@ -9,6 +9,7 @@ import useValidateUser from "../hooks/useValidateUser";
 import { toast } from "react-toastify";
 import { useSemStore } from "../zustand/store";
 import ScreenLoading from "../components/screenLoading";
+import ImageCarousel from "../components/ImageCarousel";
 
 const Login = () => {
   const [forms, setForms] = useState({
@@ -58,11 +59,18 @@ const Login = () => {
     <div className="w-full bg-slate-950 min-h-screen flex flex-row">
       {loading && <ScreenLoading />}
       <>
-        <div className="basis-6/12 hidden lg:flex justify-center items-center flex-col">
-          <LandingAnimation />
+        <div className="basis-6/12 lg:flex justify-center items-center flex-col">
+          <ImageCarousel />
         </div>
         <div className="basis-full lg:basis-6/12 flex justify-center items-center ">
           <div className="content bg-slate-800 min-h-5/6 w-4/6 rounded-lg">
+            <div className="flex justify-center m-10">
+              <img
+                src="https://jn31a1.com/wp-content/uploads/2022/06/logo.png"
+                alt="Logo"
+                className="h-32"
+              />
+            </div>
             <div className="title-wrapper m-10">
               <SemTitle color={"white"} title={"Inicio de Sesión"} />
             </div>
