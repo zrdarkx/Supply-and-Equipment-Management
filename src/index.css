@@ -5,3 +5,17 @@
 #\:rp\:\:tabpanel-0 {
   padding: 0 !important;
 }
+
+:root {
+  --ast-global-color-0: #2fc1ff; /* Azul vibrante */
+  --ast-global-color-1: #08acf2; /* Azul claro */
+  --ast-global-color-2: #101218; /* Gris oscuro */
+  --ast-global-color-3: #4c5253; /* Gris oscuro */
+  --ast-global-color-4: #f3f6f6; /* Gris claro */
+  --ast-global-color-5: #ffffff; /* Blanco */
+
+  --tw-color-slate-950: #0e1116;
+  --tw-color-slate-800: #1e293b;
+  --tw-color-gray-200: #e5e7eb;
+  --tw-color-white: #ffffff;
+}

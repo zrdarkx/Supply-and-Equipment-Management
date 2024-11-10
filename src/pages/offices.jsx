@@ -34,11 +34,11 @@ const Offices = () => {
       updateOffice(selectedOffice, office);
       setAddOfficeModal(false);
       setSelectedOffice(null);
-      toast.success("Updated office name successfully");
+      toast.success("Nombre de la oficina actualizado correctamente");
     } else {
       addOffice(office);
       setAddOfficeModal(false);
-      toast.success("Added office successfully");
+      toast.success("Oficina agregada correctamente");
     }
   };
 
@@ -80,7 +80,7 @@ const Offices = () => {
         >
           {selectedOffice
             ? "Actualizar nombre de la oficina"
-            : "Agregar Oficina"}
+            : "Agregar Oficina"}{" "}
         </Button>
       </SemModal>
       <ConfirmationModal

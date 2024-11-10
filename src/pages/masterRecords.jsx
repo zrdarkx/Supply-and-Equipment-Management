@@ -20,7 +20,7 @@ const MasterRecords = () => {
             <Tabs.Item active title="Suministros" icon={HiOutlineTable}>
               <Supply />
             </Tabs.Item>
-            <Tabs.Item title="Equipo" icon={HiViewGrid}>
+            <Tabs.Item title="Equipos" icon={HiViewGrid}>
               <Equipment />
             </Tabs.Item>
           </Tabs>
@@ -34,7 +34,7 @@ const MasterRecords = () => {
             <Tabs.Item active title="Suministros" icon={HiOutlineTable}>
               <Supply />
             </Tabs.Item>
-            <Tabs.Item title="Equipo" icon={HiViewGrid}>
+            <Tabs.Item title="Equipos" icon={HiViewGrid}>
               <Equipment />
             </Tabs.Item>
             <Tabs.Item title="Oficinas" icon={HiOfficeBuilding}>

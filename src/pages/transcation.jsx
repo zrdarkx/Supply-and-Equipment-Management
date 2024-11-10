@@ -77,7 +77,7 @@ const Transaction = () => {
                 onClick={() => setCategory("Equipment")}
               >
                 <HiViewGrid className="mr-3 h-4 w-4" />
-                Equipo
+                Equipos
               </Button>
             </Button.Group>
           </div>

@@ -32,7 +32,7 @@ const DashboardHeader = ({ handleOpenSidebar, setCartModal }) => {
             <FaUserCircle size={30} color="white" />
           </Tooltip>
         ) : (
-          <Tooltip content={"Tu carrito de artículos"}>
+          <Tooltip content={"Tus solicitudes"}>
             <div className="flex cursor-pointer">
               <HiShoppingCart
                 onClick={() => setCartModal(true)}

@@ -36,7 +36,7 @@ const Login = () => {
     setTimeout(() => {
       const res = validateUser(forms);
       if (!res) {
-        toast.error("Email or Password is incorrect.");
+        toast.error("El correo electrónico o la contraseña son incorrectos.");
         setLoading(false);
         return;
       }
@@ -47,7 +47,7 @@ const Login = () => {
     }, 2000);
   };
 
-  //If has user in localstorage, set the currentUser to the user save in localstorage
+  // Si hay un usuario en el almacenamiento local, establece el currentUser al usuario guardado en el almacenamiento local
 
   useEffect(() => {
     const output = localStorage.getItem("user");
