@@ -15,6 +15,7 @@ import { ConfirmationModal } from "../components/confirmationModal";
 import useUpdateOffice from "../hooks/useUpdateOffice";
 import NoData from "../components/noData";
 import Loading from "../components/loading";
+import OfficeReport from "../components/officeReport";
 
 const Offices = () => {
   const [addOfficeModal, setAddOfficeModal] = useState(false);
@@ -22,6 +23,7 @@ const Offices = () => {
   const [selectedOffice, setSelectedOffice] = useState(null);
   const [office, setOffice] = useState("");
   const [search, setSearch] = useState("");
+  const [officeReportOpen, setOfficeReportOpen] = useState(false);
 
   // CRUD OFFICE
   const { addOffice } = useAddOffice();
@@ -120,6 +122,23 @@ const Offices = () => {
           <NoData title={"No hay oficinas, por favor agrega una."} />
         )}
       </div>
+
+      <Button
+        color="success"
+        className="mb-2"
+        onClick={() => setOfficeReportOpen(true)}
+      >
+        Ver Reporte de Oficinas
+      </Button>
+
+      {officeReportOpen && (
+        <OfficeReport
+          title="Reporte de Oficinas"
+          size="6xl"
+          open={officeReportOpen}
+          handleClose={() => setOfficeReportOpen(false)}
+        />
+      )}
     </>
   );
 };

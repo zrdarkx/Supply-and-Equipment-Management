@@ -13,6 +13,8 @@ import NoData from "../components/noData";
 import { SUPPLY_DEFAULT_VALUE } from "../utils/constant";
 import { useSemStore } from "../zustand/store";
 import AddSupplyModal from "../components/addSupplyModal";
+import SupplyReport from "../components/supplyReport";
+import { Button } from "flowbite-react";
 
 const Supply = ({ cart }) => {
   //State
@@ -23,6 +25,7 @@ const Supply = ({ cart }) => {
   const [isUpdate, setIsUpdate] = useState(false);
   const [forms, setForms] = useState(SUPPLY_DEFAULT_VALUE);
   const [search, setSearch] = useState("");
+  const [supplyReportOpen, setSupplyReportOpen] = useState(false);
 
   // Hooks
 
@@ -123,6 +126,23 @@ const Supply = ({ cart }) => {
           />
         )}
       </div>
+
+      <Button
+        color="success"
+        className="mb-2"
+        onClick={() => setSupplyReportOpen(true)}
+      >
+        Ver Reporte de Suministros
+      </Button>
+
+      {supplyReportOpen && (
+        <SupplyReport
+          title="Reporte de Suministros"
+          size="6xl"
+          open={supplyReportOpen}
+          handleClose={() => setSupplyReportOpen(false)}
+        />
+      )}
     </>
   );
 };
