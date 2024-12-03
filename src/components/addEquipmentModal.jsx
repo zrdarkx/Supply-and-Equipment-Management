@@ -75,7 +75,9 @@ const AddEquipmentModal = ({
         gradientMonochrome="info"
         className="w-full mt-5 py-2"
       >
-        {isUpdate ? "Actualizar Equipo" : "Agregar Equipo"}
+        {isUpdate
+          ? "Actualizar Equipo o Servicio"
+          : "Agregar Equipo o Servicio"}
       </Button>
     </SemModal>
   );

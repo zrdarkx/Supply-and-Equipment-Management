@@ -8,7 +8,7 @@ const ScreenLoading = () => {
     >
       <div className="flex flex-col items-center justify-center">
         <Spinner size={"lg"} />
-        {/* <h1 className="text-white">Loading...</h1> */}
+        {/* <h1 className="text-white">Cargando...</h1> */}
       </div>
     </div>
   );

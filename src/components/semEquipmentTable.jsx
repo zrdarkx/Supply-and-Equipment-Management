@@ -20,11 +20,11 @@ export function SemEquipmentTable({
     if (!isAdded) {
       const newItem = [...cartEquipment, item];
       setCartEquipment(newItem);
-      toast.success("Agregado al carrito con éxito.", {
+      toast.success("Agregado a la solicitud con éxito.", {
         position: "bottom-right",
       });
     } else {
-      toast.info("Ya está en tu carrito.", { position: "bottom-right" });
+      toast.info("Ya está en tu solicitud.", { position: "bottom-right" });
     }
   };
 
@@ -157,7 +157,7 @@ export function SemEquipmentTable({
                   )}
                   {!isAdmin && !cart && (
                     <Table.Cell className="bg-slate-800 rounded-lg text-white ">
-                      <Tooltip content="Agregar este artículo a tu carrito">
+                      <Tooltip content="Agregar este equipo a tu solicitud">
                         <Button
                           gradientMonochrome="info"
                           onClick={() => handleAddCart(item)}
@@ -173,7 +173,7 @@ export function SemEquipmentTable({
                   )}
                   {cart && (
                     <Table.Cell className="bg-slate-800  text-white ">
-                      <Tooltip content="Eliminar artículo del carrito">
+                      <Tooltip content="Eliminar equipo de la solicitud">
                         <Button
                           gradientMonochrome="failure"
                           onClick={() => handleRemoveCart(item)}

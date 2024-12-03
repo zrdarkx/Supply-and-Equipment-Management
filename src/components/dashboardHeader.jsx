@@ -1,4 +1,4 @@
-import { HiMenu, HiShoppingCart } from "react-icons/hi";
+import { HiMenu, HiClipboardList } from "react-icons/hi";
 import SemTitle from "./semTitle";
 import { useSemStore } from "../zustand/store";
 import { FaUser, FaUserCircle } from "react-icons/fa";
@@ -14,13 +14,13 @@ const DashboardHeader = ({ handleOpenSidebar, setCartModal }) => {
         className="cursor-pointer mr-5"
         onClick={handleOpenSidebar}
         size={30}
-        color="white"
+        color="black"
       />
 
       <div className="user-wrapper flex-row flex items-center">
         <div className="wrapper mr-10">
           <p className="text-blue-500 text-xs lg:text-sm">Conectado como</p>
-          <h1 className="text-white text-sm lg:text-xl">
+          <h1 className="text-black text-sm lg:text-xl">
             {currentUser?.firstName} {currentUser?.lastName} -{" "}
             <span className="font-bold">{currentUser?.role}</span>{" "}
           </h1>
@@ -34,10 +34,10 @@ const DashboardHeader = ({ handleOpenSidebar, setCartModal }) => {
         ) : (
           <Tooltip content={"Tus solicitudes"}>
             <div className="flex cursor-pointer">
-              <HiShoppingCart
+              <HiClipboardList
                 onClick={() => setCartModal(true)}
                 size={30}
-                color="white"
+                color="black"
               />
               <Badge>{totalCartLength}</Badge>
             </div>

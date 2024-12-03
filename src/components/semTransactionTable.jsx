@@ -1,9 +1,11 @@
 import { Badge, Button, Dropdown, Table, Tooltip } from "flowbite-react";
 import moment from "moment";
+import "moment/locale/es";
 import useGetSupply from "../hooks/useGetSupply";
 import useGetEquipment from "../hooks/useGetEquipment";
 import { useSemStore } from "../zustand/store";
 import useUpdateTransaction from "../hooks/useUpdateTransaction";
+import useDeleteTransaction from "../hooks/useDeleteTransaction"; //Hook para Delete
 
 const SemTransactionTable = ({
   data,
@@ -16,6 +18,7 @@ const SemTransactionTable = ({
   const { data: equipment } = useGetEquipment();
   const { currentUser } = useSemStore();
   const { approveTransaction, rejectTransaction } = useUpdateTransaction();
+  const { deleteTransaction } = useDeleteTransaction(); // Obtén la función de eliminación aquí
   const isAdmin = currentUser?.role == "Admin";
 
   const handleGetSupply = (id) => {
@@ -87,7 +90,9 @@ const SemTransactionTable = ({
             {data?.map((item) => {
               const user = JSON.parse(item.currentUser);
               const firebaseDate = item.createdAt;
-              const date = moment(firebaseDate?.toDate()).format("LLL");
+              const date = moment(firebaseDate?.toDate()).format(
+                "DD / MM / YYYY, h:mm a"
+              );
               const badgeColor = getBadgeColor(item.status);
 
               let finalItem = undefined;
@@ -149,7 +154,7 @@ const SemTransactionTable = ({
                             : "Puedes ver el formulario de RCI ahora"
                         }
                       >
-                        {item.category == "Supply" && (
+                        {item.category == "Suministro" && (
                           <Dropdown.Item
                             style={{
                               cursor:
@@ -168,7 +173,7 @@ const SemTransactionTable = ({
                           </Dropdown.Item>
                         )}
 
-                        {item.category == "Equipment" && (
+                        {item.category == "Equipos" && (
                           <Dropdown.Item
                             style={{
                               cursor:
@@ -216,6 +221,13 @@ const SemTransactionTable = ({
                           gradientMonochrome="failure"
                         >
                           Rechazar
+                        </Button>
+                        <Button
+                          onClick={() => deleteTransaction(item.id)} // Agregar el botón para eliminar
+                          className="ml-2"
+                          gradientMonochrome="failure"
+                        >
+                          Eliminar
                         </Button>
                       </div>
                     </Table.Cell>

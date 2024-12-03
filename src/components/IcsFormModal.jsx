@@ -40,26 +40,26 @@ const IcsFormModal = ({
           </div>
         </div>
 
-        <div className="border border-slate-950 flex border-t-0">
-          <div className="basis-1/12 border border-slate-950 p-2 text-center">
+        <div className="border border-black flex border-t-0">
+          <div className="basis-1/12 border border-black p-2 text-center">
             <h1>Cantidad </h1>
           </div>
-          <div className="basis-1/12 border border-slate-950 p-2 text-center">
+          <div className="basis-1/12 border border-black p-2 text-center">
             <h1>Unidad</h1>
           </div>
-          <div className="basis-1/12 border border-slate-950 p-2 text-center">
+          <div className="basis-1/12 border border-black p-2 text-center">
             <h1>Costo Unitario</h1>
           </div>
-          <div className="basis-1/12 border border-slate-950 p-2 text-center">
+          <div className="basis-1/12 border border-black p-2 text-center">
             <h1>Costo Total</h1>
           </div>
-          <div className="basis-4/12 border border-slate-950 p-2 text-center">
+          <div className="basis-4/12 border border-black p-2 text-center">
             <h1>Descripción</h1>
           </div>
-          <div className="basis-2/12 border border-slate-950 p-2 text-center">
+          <div className="basis-2/12 border border-black p-2 text-center">
             <h1>Número de Inventario</h1>
           </div>
-          <div className="basis-2/12 border border-slate-950 p-2 text-center">
+          <div className="basis-2/12 border border-black p-2 text-center">
             <h1>Vida Útil Estimada</h1>
           </div>
         </div>
@@ -67,26 +67,26 @@ const IcsFormModal = ({
         {data?.item.map((item) => {
           console.log(item);
           return (
-            <div className="border border-slate-950 flex border-t-0">
-              <div className="basis-1/12 border border-slate-950 p-2 text-center">
+            <div className="border border-black flex border-t-0">
+              <div className="basis-1/12 border border-black p-2 text-center">
                 <h1>1</h1>
               </div>
-              <div className="basis-1/12 border border-slate-950 p-2 text-center">
+              <div className="basis-1/12 border border-black p-2 text-center">
                 <h1>{item.unit}</h1>
               </div>
-              <div className="basis-1/12 border border-slate-950 p-2 text-center">
+              <div className="basis-1/12 border border-black p-2 text-center">
                 <h1>{item.unitCost}</h1>
               </div>
-              <div className="basis-1/12 border border-slate-950 p-2 text-center">
+              <div className="basis-1/12 border border-black p-2 text-center">
                 <h1>{1 * parseInt(item.unitCost)}</h1>
               </div>
-              <div className="basis-4/12 border border-slate-950 p-2 text-center">
+              <div className="basis-4/12 border border-black p-2 text-center">
                 <h1>{item.name + " | " + item.description}</h1>
               </div>
-              <div className="basis-2/12 border border-slate-950 p-2 text-center">
+              <div className="basis-2/12 border border-black p-2 text-center">
                 <h1>{item.inventoryNumber}</h1>
               </div>
-              <div className="basis-2/12 border border-slate-950 p-2 text-center">
+              <div className="basis-2/12 border border-black p-2 text-center">
                 <h1>{item.estimatedUsefulLife}</h1>
               </div>
             </div>
@@ -95,7 +95,7 @@ const IcsFormModal = ({
 
         <IcsFormRowDummy />
 
-        <div className="border border-slate-950 p-10 text-center">
+        <div className="border border-black p-10 text-center">
           <div className="flex">
             <div className="basis-6/12">
               <div className="wrapper">

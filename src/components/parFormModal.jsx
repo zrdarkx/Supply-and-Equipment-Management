@@ -33,7 +33,7 @@ const ParFormModal = ({
       <div ref={targetRef} className="container mx-auto p-2">
         <div className="wrapper mb-10">
           <h1 className="font-bold text-center text-2xl mb-10">
-            RECIbo de RECONOCIMIENTO DE BIENES{" "}
+            RECIBO DE RECONOCIMIENTO DE BIENES{" "}
           </h1>
           <div className="flex justify-between items-center mt-2">
             <h1>Nombre de la Entidad: J&N 31 A1 IMPORTACIONES, C.A. </h1>
@@ -41,24 +41,24 @@ const ParFormModal = ({
           </div>
         </div>
 
-        <div className="border border-slate-950 flex border-t-0">
-          <div className="basis-1/12 border border-slate-950 p-2 text-center">
+        <div className="border border-black flex border-t-0">
+          <div className="basis-1/12 border border-black p-2 text-center">
             <h1>Cantidad </h1>
           </div>
-          <div className="basis-1/12 border border-slate-950 p-2 text-center">
+          <div className="basis-1/12 border border-black p-2 text-center">
             <h1>Unidad</h1>
           </div>
 
-          <div className="basis-4/12 border border-slate-950 p-2 text-center">
+          <div className="basis-4/12 border border-black p-2 text-center">
             <h1>Descripción</h1>
           </div>
-          <div className="basis-2/12 border border-slate-950 p-2 text-center">
+          <div className="basis-2/12 border border-black p-2 text-center">
             <h1>Número de Bien</h1>
           </div>
-          <div className="basis-2/12 border border-slate-950 p-2 text-center">
+          <div className="basis-2/12 border border-black p-2 text-center">
             <h1>Fecha de Adquisición</h1>
           </div>
-          <div className="basis-2/12 border border-slate-950 p-2 text-center">
+          <div className="basis-2/12 border border-black p-2 text-center">
             <h1>Monto</h1>
           </div>
         </div>
@@ -66,24 +66,24 @@ const ParFormModal = ({
         {data?.item.map((item) => {
           console.log(item);
           return (
-            <div className="border border-slate-950 flex border-t-0">
-              <div className="basis-1/12 border border-slate-950 p-2 text-center">
+            <div className="border border-black flex border-t-0">
+              <div className="basis-1/12 border border-black p-2 text-center">
                 <h1>1 </h1>
               </div>
-              <div className="basis-1/12 border border-slate-950 p-2 text-center">
+              <div className="basis-1/12 border border-black p-2 text-center">
                 <h1>{item.unit}</h1>
               </div>
 
-              <div className="basis-4/12 border border-slate-950 p-2 text-center">
-                <h1>{item.name + " | " + item.description}</h1>
+              <div className="basis-4/12 border border-black p-2 text-center">
+                <h1>{item.name}</h1>
               </div>
-              <div className="basis-2/12 border border-slate-950 p-2 text-center">
+              <div className="basis-2/12 border border-black p-2 text-center">
                 <h1>{item.propertyNumber}</h1>
               </div>
-              <div className="basis-2/12 border border-slate-950 p-2 text-center">
+              <div className="basis-2/12 border border-black p-2 text-center">
                 <h1>{date}</h1>
               </div>
-              <div className="basis-2/12 border border-slate-950 p-2 text-center">
+              <div className="basis-2/12 border border-black p-2 text-center">
                 <h1>{item.unitCost}</h1>
               </div>
             </div>
@@ -92,7 +92,7 @@ const ParFormModal = ({
 
         <ParFormDummyRow />
 
-        <div className="border border-slate-950 p-10 text-center">
+        <div className="border border-black p-10 text-center">
           <div className="flex">
             <div className="basis-6/12">
               <div className="wrapper">

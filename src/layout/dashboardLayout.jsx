@@ -18,7 +18,7 @@ const DashboardLayout = ({ children }) => {
   const [isOpen, setOpen] = useState(false);
   const [cartModal, setCartModal] = useState(false);
   const [risForm, setRisForm] = useState(false);
-  const [currentMode, setCurrentMode] = useState("Suministro");
+  const [currentMode, setCurrentMode] = useState("Supply");
 
   const {
     cartSupply,
@@ -35,7 +35,7 @@ const DashboardLayout = ({ children }) => {
     <div className="w-full min-h-screen bg-slate-950 pb-10">
       <SemModal
         dark={true}
-        title={`Solicitudes`}
+        title={`Tus solicitudes`}
         size={"xxl"}
         open={cartModal}
         handleClose={() => setCartModal(false)}
@@ -43,17 +43,13 @@ const DashboardLayout = ({ children }) => {
         <div className="container">
           <Tabs variant="pills" className="mx-5 mb-5">
             <Tabs.Item
-              onClick={() => setCurrentMode("Suministro")}
+              onClick={() => setCurrentMode("Supply")}
               active
               title="Suministros"
               icon={HiOutlineTable}
             >
               {isSupplyCartEmpty ? (
-                <NoData
-                  title={
-                    "Tus solicitud de suministros está vacío, intenta agregar un suministro del registro maestro."
-                  }
-                />
+                <NoData title={"Tu solicitud de suministros está vació."} />
               ) : (
                 <Supply cart={true} />
               )}
@@ -63,26 +59,22 @@ const DashboardLayout = ({ children }) => {
                 </Button> */}
                 <Button
                   onClick={() => {
-                    setCurrentMode("Suministro");
+                    setCurrentMode("Supply");
                     setRisForm(true);
                   }}
                   className="w-full py-2 mx-3"
                 >
-                  Finalizar Solicitud
+                  Finalizar Suministros
                 </Button>
               </div>
             </Tabs.Item>
             <Tabs.Item
-              onClick={() => setCurrentMode("Equipos")}
-              title="Equipos"
+              onClick={() => setCurrentMode("Equipment")}
+              title="Equipos y Servicios"
               icon={HiViewGrid}
             >
               {isEquipmentCartEmpty ? (
-                <NoData
-                  title={
-                    "Tu Solicitud de equipos está vacío, intenta agregar un equipo del registro maestro."
-                  }
-                />
+                <NoData title={"Tu solicitud de equipos está vació."} />
               ) : (
                 <Equipment cart={true} />
               )}
@@ -92,11 +84,12 @@ const DashboardLayout = ({ children }) => {
                 </Button> */}
                 <Button
                   onClick={() => {
-                    setCurrentMode("Equipos");
+                    setCurrentMode("Equipment");
+                    setRisForm(true);
                   }}
                   className="w-full py-2 mx-3"
                 >
-                  Finalizar Solicitud
+                  Finalizar Equipos
                 </Button>
               </div>
             </Tabs.Item>
@@ -105,11 +98,11 @@ const DashboardLayout = ({ children }) => {
       </SemModal>
       <RisFormModal
         viewOnly={true}
-        title={`Formulario SEM`}
+        title={`RIS Form`}
         size={"6xl"}
         open={risForm}
         handleClose={() => setRisForm(false)}
-        data={currentMode == "Suministro" ? cartSupply : cartEquipment}
+        data={currentMode == "Supply" ? cartSupply : cartEquipment}
         currentMode={currentMode}
         setCartModal={setCartModal}
       />

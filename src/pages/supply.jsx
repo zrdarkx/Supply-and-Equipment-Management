@@ -44,18 +44,18 @@ const Supply = ({ cart }) => {
     if (!isUpdate) {
       addSupply(forms);
       setSupplyModal(false);
-      toast.success("Supply added successfully.");
+      toast.success("Suministro añadido exitosamente.");
     } else {
       updateSupply(forms);
       setSupplyModal(false);
-      toast.success("Supply updated successfully.");
+      toast.success("Suministro modificado exitosamente.");
     }
   };
 
   const handleDeleteSupply = () => {
     deleteSupply(selectedSupply.id);
     setDeleteModal(false);
-    toast.success("Deleted successfully.");
+    toast.success("Suministro eliminado.");
   };
 
   const handleSelectedSupplyUpdate = (data) => {

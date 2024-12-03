@@ -6,7 +6,7 @@ const useUpdateTransaction = () => {
     const transRef = doc(db, "transaction", transactionID);
 
     updateDoc(transRef, {
-      status: "Approve",
+      status: "Aprobado",
       reviewBy: currentUser.firstName + " " + currentUser.lastName,
       reviewDate: serverTimestamp(),
     });
@@ -26,7 +26,7 @@ const useUpdateTransaction = () => {
   const rejectTransaction = (transactionID, currentUser) => {
     const transRef = doc(db, "transaction", transactionID);
     updateDoc(transRef, {
-      status: "Rejected",
+      status: "Rechazado",
       reviewBy: currentUser.firstName + " " + currentUser.lastName,
     });
   };

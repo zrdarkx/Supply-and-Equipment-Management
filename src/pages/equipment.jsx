@@ -13,6 +13,8 @@ import useDeleteEquipment from "../hooks/useDeleteEquipment";
 import useUpdateEquipment from "../hooks/useUpdateEquipment";
 import { useSemStore } from "../zustand/store";
 import AddEquipmentModal from "../components/addEquipmentModal";
+import EquipmentReport from "../components/equipmentReport";
+import { Button } from "flowbite-react";
 
 const Equipment = ({ cart }) => {
   const [forms, setForms] = useState(EQUIPMENT_DEFAULT_VALUE);
@@ -21,6 +23,7 @@ const Equipment = ({ cart }) => {
   const [selectedEquip, setSelectedEquip] = useState(null);
   const [isUpdate, setIsUpdate] = useState(false);
   const [search, setSearch] = useState("");
+  const [equipmentReportOpen, setEquipmentReportOpen] = useState(false);
 
   // HOOKS
 
@@ -41,10 +44,10 @@ const Equipment = ({ cart }) => {
   const handleSubmit = () => {
     if (isUpdate) {
       updateEquipment(forms);
-      toast.success("Equipment Updated.");
+      toast.success("Equipo Actualizado.");
     } else {
       addEquipment(forms);
-      toast.success("Equipment Added.");
+      toast.success("Equipo añadido.");
     }
 
     setEquipModal(false);
@@ -120,6 +123,23 @@ const Equipment = ({ cart }) => {
           />
         )}
       </div>
+
+      <Button
+        color="success"
+        className="mb-2"
+        onClick={() => setEquipmentReportOpen(true)}
+      >
+        Ver Reporte de Equipos
+      </Button>
+
+      {equipmentReportOpen && (
+        <EquipmentReport
+          title="Reporte de Equipos"
+          size="6xl"
+          open={equipmentReportOpen}
+          handleClose={() => setEquipmentReportOpen(false)}
+        />
+      )}
     </>
   );
 };
