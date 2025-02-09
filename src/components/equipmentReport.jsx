@@ -8,10 +8,6 @@ const EquipmentReport = ({ title, size, open, handleClose }) => {
   const { data, loading } = useGetEquipment();
   const { toPDF, targetRef } = usePDF({ filename: "equipment-report.pdf" });
 
-  const filteredEquipment = data.filter((item) =>
-    item.propertyNumber.startsWith("EQUIP-")
-  );
-
   return (
     <Modal show={open} size={size} popup={true} onClose={handleClose}>
       <Modal.Header>{title}</Modal.Header>
@@ -44,28 +40,37 @@ const EquipmentReport = ({ title, size, open, handleClose }) => {
             </div>
           </div>
 
-          {filteredEquipment.map((item) => (
-            <div className="border border-black flex border-t-0" key={item.id}>
-              <div className="basis-1/12 border border-black p-2 text-center">
-                <h1>{item.quantity}</h1>
-              </div>
-              <div className="basis-1/12 border border-black p-2 text-center">
-                <h1>{item.unit}</h1>
-              </div>
-              <div className="basis-4/12 border border-black p-2 text-center">
-                <h1>{item.description}</h1>
-              </div>
-              <div className="basis-2/12 border border-black p-2 text-center">
-                <h1>{item.propertyNumber}</h1>
-              </div>
-              <div className="basis-2/12 border border-black p-2 text-center">
-                <h1>{moment(item.createdAt.toDate()).format("LLL")}</h1>
-              </div>
-              <div className="basis-2/12 border border-black p-2 text-center">
-                <h1>{item.unitCost}</h1>
-              </div>
-            </div>
-          ))}
+          {data &&
+            !loading &&
+            data.map(
+              (
+                item // <--- Cambio aquí: Usamos data directamente
+              ) => (
+                <div
+                  className="border border-black flex border-t-0"
+                  key={item.id}
+                >
+                  <div className="basis-1/12 border border-black p-2 text-center">
+                    <h1>{item.quantity}</h1>
+                  </div>
+                  <div className="basis-1/12 border border-black p-2 text-center">
+                    <h1>{item.unit}</h1>
+                  </div>
+                  <div className="basis-4/12 border border-black p-2 text-center">
+                    <h1>{item.description}</h1>
+                  </div>
+                  <div className="basis-2/12 border border-black p-2 text-center">
+                    <h1>{item.propertyNumber}</h1>
+                  </div>
+                  <div className="basis-2/12 border border-black p-2 text-center">
+                    <h1>{moment(item.createdAt.toDate()).format("LLL")}</h1>
+                  </div>
+                  <div className="basis-2/12 border border-black p-2 text-center">
+                    <h1>{item.unitCost}</h1>
+                  </div>
+                </div>
+              )
+            )}
         </div>
       </Modal.Body>
       <Modal.Footer>

@@ -105,33 +105,48 @@ const SemTransactionTable = ({
   };
 
   const handleDeliverClick = (item) => {
+    console.log("handleDeliverClick - item:", item);
     setTransactionToDeliver(item);
     setConfirmDeliverOpen(true);
   };
 
-  const handleDeliverConfirm = () => {
-    deliverTransaction(
-      transactionToDeliver.id,
-      currentUser,
-      transactionToDeliver.item
-    );
-    setConfirmDeliverOpen(false);
-    setTransactionToDeliver(null);
+  const handleDeliverConfirm = async () => {
+    try {
+      // Pasa transactionToDeliver.item (que es el array)
+      await deliverTransaction(
+        transactionToDeliver.id,
+        currentUser,
+        transactionToDeliver.item // Ahora pasamos el array completo
+      );
+      setConfirmDeliverOpen(false);
+      setTransactionToDeliver(null);
+      // Refrescar datos!
+    } catch (error) {
+      console.error("Error en handleDeliverConfirm:", error);
+      alert("Error al entregar la transacción: " + error.message);
+    }
   };
 
   const handleReturnClick = (item) => {
+    console.log("handleReturnClick - item:", item);
     setTransactionToReturn(item);
     setConfirmReturnOpen(true);
   };
 
-  const handleReturnConfirm = () => {
-    returnTransaction(
-      transactionToReturn.id,
-      currentUser,
-      transactionToReturn.item
-    );
-    setConfirmReturnOpen(false);
-    setTransactionToReturn(null);
+  const handleReturnConfirm = async () => {
+    try {
+      // Pasa transactionToReturn.item (que es el array)
+      await returnTransaction(
+        transactionToReturn.id,
+        currentUser,
+        transactionToReturn.item
+      );
+      setConfirmReturnOpen(false);
+      setTransactionToReturn(null);
+    } catch (error) {
+      console.error("Error in handleReturnConfirm", error);
+      alert("Error al devolver la transacción: " + error.message);
+    }
   };
 
   return (
@@ -281,7 +296,13 @@ const SemTransactionTable = ({
                         dismissOnClick={false}
                       >
                         <Tooltip
-                          content="Puedes ver el formulario de SEM ahora"
+                          content={
+                            ["Aprobado", "Entregado", "Devuelto"].includes(
+                              item.status
+                            )
+                              ? "Puedes ver el formulario de SEM ahora"
+                              : "Puedes ver el formulario de SEM" // Changed message
+                          }
                           placement="left"
                         >
                           <Dropdown.Item
@@ -289,6 +310,7 @@ const SemTransactionTable = ({
                               setCurrentTransaction(item);
                               setRisForm(true);
                             }}
+                            // Removed style and disabled props for SEM form
                           >
                             Ver Formulario de SEM
                           </Dropdown.Item>
@@ -297,20 +319,31 @@ const SemTransactionTable = ({
                         <Tooltip
                           placement="left"
                           content={
-                            item.status !== "Aprobado"
-                              ? "Tu documento aún no está aprobado"
-                              : "Puedes ver el formulario de RCI ahora"
+                            ["Aprobado", "Entregado", "Devuelto"].includes(
+                              item.status
+                            )
+                              ? item.category === "Suministro"
+                                ? "Puedes ver el formulario de RCI ahora"
+                                : "Puedes ver el formulario de RRB ahora"
+                              : "Tu documento aún no está aprobado, entregado o devuelto"
                           }
                         >
                           {item.category === "Suministro" && (
                             <Dropdown.Item
                               style={{
-                                cursor:
-                                  item.status !== "Aprobado"
-                                    ? "not-allowed"
-                                    : "pointer",
+                                cursor: [
+                                  "Aprobado",
+                                  "Entregado",
+                                  "Devuelto",
+                                ].includes(item.status)
+                                  ? "pointer"
+                                  : "not-allowed",
                               }}
-                              disabled={item.status !== "Aprobado"}
+                              disabled={
+                                !["Aprobado", "Entregado", "Devuelto"].includes(
+                                  item.status
+                                )
+                              }
                               onClick={() => {
                                 setCurrentTransaction(item);
                                 setIcsForm(true);
@@ -323,12 +356,19 @@ const SemTransactionTable = ({
                           {item.category === "Equipos" && (
                             <Dropdown.Item
                               style={{
-                                cursor:
-                                  item.status !== "Aprobado"
-                                    ? "not-allowed"
-                                    : "pointer",
+                                cursor: [
+                                  "Aprobado",
+                                  "Entregado",
+                                  "Devuelto",
+                                ].includes(item.status)
+                                  ? "pointer"
+                                  : "not-allowed",
                               }}
-                              disabled={item.status !== "Aprobado"}
+                              disabled={
+                                !["Aprobado", "Entregado", "Devuelto"].includes(
+                                  item.status
+                                )
+                              }
                               onClick={() => {
                                 setCurrentTransaction(item);
                                 setParForm(true);
@@ -357,28 +397,18 @@ const SemTransactionTable = ({
                           >
                             Aprobar
                           </Button>
+
                           <Button
                             onClick={() => {
                               setSelectedTransaction(item);
-                              setConfirmRejectOpen(true);
+                              setRejectModalOpen(true);
                             }}
-                            disabled={
-                              item.status === "Aprobado" ||
-                              item.status === "Rechazado" ||
-                              item.status === "Entregado" ||
-                              item.status === "Devuelto"
-                            }
+                            disabled={item.status !== "Pendiente"}
                             gradientMonochrome="failure"
                           >
                             Rechazar
                           </Button>
-                          <Button
-                            onClick={() => handleDeleteClick(item)}
-                            className="ml-2"
-                            gradientMonochrome="failure"
-                          >
-                            Eliminar
-                          </Button>
+
                           <Button
                             onClick={() => handleDeliverClick(item)}
                             disabled={item.status !== "Aprobado"}
@@ -386,6 +416,14 @@ const SemTransactionTable = ({
                             gradientMonochrome="purple"
                           >
                             Entregar
+                          </Button>
+
+                          <Button
+                            onClick={() => handleDeleteClick(item)}
+                            className="ml-2"
+                            gradientMonochrome="failure"
+                          >
+                            Eliminar
                           </Button>
                         </div>
                       </Table.Cell>

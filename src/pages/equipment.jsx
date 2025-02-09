@@ -124,14 +124,6 @@ const Equipment = ({ cart }) => {
         )}
       </div>
 
-      <Button
-        color="success"
-        className="mb-2"
-        onClick={() => setEquipmentReportOpen(true)}
-      >
-        Ver Reporte de Equipos
-      </Button>
-
       {equipmentReportOpen && (
         <EquipmentReport
           title="Reporte de Equipos"
@@ -140,6 +132,14 @@ const Equipment = ({ cart }) => {
           handleClose={() => setEquipmentReportOpen(false)}
         />
       )}
+
+      <Button
+        color="success"
+        className="mb-2"
+        onClick={() => setEquipmentReportOpen(true)}
+      >
+        Ver Reporte de Equipos
+      </Button>
     </>
   );
 };
