@@ -9,6 +9,7 @@ import RisFormModal from "../components/risFormModal";
 import IcsFormModal from "../components/IcsFormModal";
 import ParFormModal from "../components/parFormModal";
 import ApprovedEquipmentReport from "../components/approvedEquipmentReport";
+import RejectReasonModal from "../components/RejectReasonModal";
 
 const Transaction = () => {
   const { data, loading } = useGetTransaction();
@@ -18,6 +19,8 @@ const Transaction = () => {
   const [icsForm, setIcsForm] = useState(false);
   const [parForm, setParForm] = useState(false);
   const [approvedReportOpen, setApprovedReportOpen] = useState(false);
+  const [rejectModalOpen, setRejectModalOpen] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] = useState();
 
   const filterByCategory = data.filter((item) => {
     if (item.category === category) {
@@ -30,24 +33,24 @@ const Transaction = () => {
       {loading && <Loading />}
 
       <RisFormModal
-        title={`Formulario SEM`}
-        size={"6xl"}
+        title="Formulario SEM"
+        size="6xl"
         open={risForm}
         handleClose={() => setRisForm(false)}
         data={currentTransaction?.item}
       />
 
       <IcsFormModal
-        title={`Formulario RCI`}
-        size={"6xl"}
+        title="Formulario RCI"
+        size="6xl"
         open={icsForm}
         handleClose={() => setIcsForm(false)}
         data={currentTransaction}
       />
 
       <ParFormModal
-        title={`Formulario RRB`}
-        size={"6xl"}
+        title="Formulario RRB"
+        size="6xl"
         open={parForm}
         handleClose={() => setParForm(false)}
         data={currentTransaction}
@@ -55,13 +58,21 @@ const Transaction = () => {
 
       {approvedReportOpen && (
         <ApprovedEquipmentReport
-          title={`Informe de Transacciones Aprobadas`}
-          size={"6xl"}
+          title="Informe de Transacciones Aprobadas"
+          size="6xl"
           open={approvedReportOpen}
           handleClose={() => setApprovedReportOpen(false)}
           data={currentTransaction}
         />
       )}
+
+      <RejectReasonModal
+        open={rejectModalOpen}
+        handleClose={() => setRejectModalOpen(false)}
+        onReject={(reason) => {
+          rejectTransaction(selectedTransaction?.id, currentUser, reason);
+        }}
+      />
 
       {!loading && (
         <div className="wrapper p-0 lg:p-5 m-5 lg:m-0">

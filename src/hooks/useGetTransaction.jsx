@@ -9,15 +9,17 @@ const useGetTransaction = () => {
   useEffect(() => {
     setLoading(true);
     const collectionRef = collection(db, "transaction");
-    const queryRef = query(collectionRef, orderBy("createdAt"));
-    onSnapshot(queryRef, (snapshot) => {
+    const queryRef = query(collectionRef, orderBy("createdAt", "desc"));
+    const unsubscribe = onSnapshot(queryRef, (snapshot) => {
       const output = [];
       snapshot.docs.forEach((doc) => {
         output.push({ ...doc.data(), id: doc.id });
       });
-      setData(output.reverse());
+      setData(output);
       setLoading(false);
     });
+
+    return () => unsubscribe();
   }, []);
 
   return { data, loading };

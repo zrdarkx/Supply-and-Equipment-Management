@@ -1,5 +1,4 @@
 import { Button, Modal } from "flowbite-react";
-import { useState } from "react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 export function ConfirmationModal({ open, handleClose, event }) {
@@ -17,7 +16,9 @@ export function ConfirmationModal({ open, handleClose, event }) {
               <Button color="failure" onClick={event}>
                 {"Sí, estoy seguro"}
               </Button>
-              <Button color="gray" onClick={() => setOpenModal(false)}>
+              <Button color="gray" onClick={handleClose}>
+                {" "}
+                {/* Usar handleClose */}
                 No, cancelar
               </Button>
             </div>
