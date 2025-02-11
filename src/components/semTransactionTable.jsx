@@ -10,7 +10,8 @@ import RejectReasonModal from "./RejectReasonModal";
 import { useState } from "react";
 import StatusTimestamps from "./StatusTimestamps";
 import { HiChevronDown, HiChevronUp } from "react-icons/hi";
-import CustomConfirmationModal from "./CustomConfirmationModal"; // Importa el nuevo modal
+import CustomConfirmationModal from "./CustomConfirmationModal";
+import EquipmentReturnModal from "./EquipmentReturnModal"; // Import the Equipment Return Modal
 
 const SemTransactionTable = ({
   data,
@@ -33,17 +34,17 @@ const SemTransactionTable = ({
   const [selectedTransaction, setSelectedTransaction] = useState();
   const [expandedRow, setExpandedRow] = useState(null);
 
-  // Estados para los modales de confirmación
+  // States for confirmation modals
   const [confirmApproveOpen, setConfirmApproveOpen] = useState(false);
   const [confirmRejectOpen, setConfirmRejectOpen] = useState(false);
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
   const [confirmDeliverOpen, setConfirmDeliverOpen] = useState(false);
-  const [confirmReturnOpen, setConfirmReturnOpen] = useState(false);
+  const [returnModalOpen, setReturnModalOpen] = useState(false); // State for the equipment return modal
 
   const [transactionToApprove, setTransactionToApprove] = useState(null);
   const [transactionToDelete, setTransactionToDelete] = useState(null);
   const [transactionToDeliver, setTransactionToDeliver] = useState(null);
-  const [transactionToReturn, setTransactionToReturn] = useState(null);
+  const [transactionToReturn, setTransactionToReturn] = useState(null); // State for the transaction to be returned
 
   const isAdmin = currentUser?.role === "Admin";
   const isSupplyCoordinator =
@@ -105,22 +106,19 @@ const SemTransactionTable = ({
   };
 
   const handleDeliverClick = (item) => {
-    console.log("handleDeliverClick - item:", item);
     setTransactionToDeliver(item);
     setConfirmDeliverOpen(true);
   };
 
   const handleDeliverConfirm = async () => {
     try {
-      // Pasa transactionToDeliver.item (que es el array)
       await deliverTransaction(
         transactionToDeliver.id,
         currentUser,
-        transactionToDeliver.item // Ahora pasamos el array completo
+        transactionToDeliver.item
       );
       setConfirmDeliverOpen(false);
       setTransactionToDeliver(null);
-      // Refrescar datos!
     } catch (error) {
       console.error("Error en handleDeliverConfirm:", error);
       alert("Error al entregar la transacción: " + error.message);
@@ -128,21 +126,21 @@ const SemTransactionTable = ({
   };
 
   const handleReturnClick = (item) => {
-    console.log("handleReturnClick - item:", item);
-    setTransactionToReturn(item);
-    setConfirmReturnOpen(true);
+    setTransactionToReturn(item); // Store the current transaction
+    setReturnModalOpen(true); // Open the observations modal
   };
 
-  const handleReturnConfirm = async () => {
+  const handleReturnConfirm = async (observation) => {
+    // Receives the observation
     try {
-      // Pasa transactionToReturn.item (que es el array)
       await returnTransaction(
         transactionToReturn.id,
         currentUser,
-        transactionToReturn.item
-      );
-      setConfirmReturnOpen(false);
-      setTransactionToReturn(null);
+        transactionToReturn.item,
+        observation
+      ); // Pass the observation
+      setReturnModalOpen(false);
+      setTransactionToReturn(null); // Clear the selected transaction
     } catch (error) {
       console.error("Error in handleReturnConfirm", error);
       alert("Error al devolver la transacción: " + error.message);
@@ -158,8 +156,14 @@ const SemTransactionTable = ({
           rejectTransaction(selectedTransaction?.id, currentUser, reason);
         }}
       />
+      {/* Add the new modal */}
+      <EquipmentReturnModal
+        open={returnModalOpen}
+        handleClose={() => setReturnModalOpen(false)}
+        onReturn={handleReturnConfirm} // Pass the confirmation function
+      />
 
-      {/* Modales de Confirmación */}
+      {/* Confirmation Modals */}
       <CustomConfirmationModal
         isOpen={confirmApproveOpen}
         onClose={() => setConfirmApproveOpen(false)}
@@ -178,7 +182,7 @@ const SemTransactionTable = ({
             selectedTransaction?.id,
             currentUser,
             "Razón por defecto"
-          ); // Puedes obtener la razón del modal RejectReasonModal si es necesario
+          );
           setConfirmRejectOpen(false);
         }}
         message="¿Está seguro de que desea rechazar esta transacción?"
@@ -196,13 +200,6 @@ const SemTransactionTable = ({
         onClose={() => setConfirmDeliverOpen(false)}
         onConfirm={handleDeliverConfirm}
         message="¿Está seguro de que desea marcar esta transacción como entregada?"
-      />
-
-      <CustomConfirmationModal
-        isOpen={confirmReturnOpen}
-        onClose={() => setConfirmReturnOpen(false)}
-        onConfirm={handleReturnConfirm}
-        message="¿Está seguro de que desea marcar esta transacción como devuelta?"
       />
 
       {data && (
@@ -310,7 +307,6 @@ const SemTransactionTable = ({
                               setCurrentTransaction(item);
                               setRisForm(true);
                             }}
-                            // Removed style and disabled props for SEM form
                           >
                             Ver Formulario de SEM
                           </Dropdown.Item>
@@ -435,14 +431,16 @@ const SemTransactionTable = ({
                       <Table.Cell colSpan={8} className="p-0">
                         <StatusTimestamps transaction={item} />
 
-                        {isSupplyCoordinator && item.status === "Entregado" && (
-                          <Button
-                            onClick={() => handleReturnClick(item)}
-                            gradientMonochrome="indigo"
-                          >
-                            Devolver
-                          </Button>
-                        )}
+                        {isAdmin &&
+                          item.status === "Entregado" &&
+                          item.category === "Equipos" && (
+                            <Button
+                              onClick={() => handleReturnClick(item)} // Open the modal
+                              gradientMonochrome="success"
+                            >
+                              Devolver Equipo
+                            </Button>
+                          )}
                       </Table.Cell>
                     </Table.Row>
                   )}

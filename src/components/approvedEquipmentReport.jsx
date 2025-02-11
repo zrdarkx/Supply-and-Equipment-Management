@@ -107,9 +107,9 @@ const ApprovedEquipmentReport = ({ title, size, open, handleClose }) => {
             }
 
             const equipmentItems = transaction.item || [];
-            // Get the *first* approval date, regardless of later status changes
-            const approvalDate = transaction?.reviewDate
-              ? moment(transaction.reviewDate.toDate()).format(
+
+            const approvalDate = transaction.approvedDate
+              ? moment(transaction.approvedDate.toDate()).format(
                   "DD/MM/YYYY HH:mm"
                 )
               : "N/A";
@@ -133,7 +133,14 @@ const ApprovedEquipmentReport = ({ title, size, open, handleClose }) => {
                   {transaction?.reviewBy || "N/A"}
                 </p>
                 <p>
+                  <strong>ID de Transacción:</strong> {transaction.id}
+                </p>
+                <p>
                   <strong>Fecha Aprobada:</strong> {approvalDate}
+                </p>
+                {/* Display Transaction Category */}
+                <p>
+                  <strong>Categoría:</strong> {transaction.category}
                 </p>
 
                 <h3 className="mt-2 font-semibold">Equipos Solicitados:</h3>

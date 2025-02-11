@@ -87,7 +87,13 @@ const useUpdateTransaction = () => {
     }
   };
 
-  const returnTransaction = async (transactionID, currentUser, items) => {
+  const returnTransaction = async (
+    transactionID,
+    currentUser,
+    items,
+    observation
+  ) => {
+    // Añade observation
     const transRef = doc(db, "transaction", transactionID);
 
     try {
@@ -119,11 +125,12 @@ const useUpdateTransaction = () => {
           }
         }
 
-        // 2. FASE DE ESCRITURA
+        // 2. FASE DE ESCRITURA  --  ¡AQUÍ SE AÑADE LA OBSERVACIÓN!
         transaction.update(transRef, {
           status: "Devuelto",
           returnedBy: currentUser.firstName + " " + currentUser.lastName,
           returnedDate: serverTimestamp(),
+          returnObservation: observation, // Guarda la observación
         });
 
         for (const itemUpdate of itemsToUpdate) {
