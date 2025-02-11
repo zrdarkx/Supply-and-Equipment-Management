@@ -12,11 +12,6 @@ const StatusTimestamps = ({ transaction }) => {
 
   return (
     <div className="p-4 bg-gray-100 dark:bg-gray-800">
-      {transaction.rejectionReason && (
-        <p className="text-red-500">
-          <strong>Motivo de rechazo:</strong> {transaction.rejectionReason}
-        </p>
-      )}
       <div className="grid grid-cols-2 gap-4 mt-2">
         <div>
           <p>

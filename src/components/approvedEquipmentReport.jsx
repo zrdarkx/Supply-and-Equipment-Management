@@ -138,9 +138,12 @@ const ApprovedEquipmentReport = ({ title, size, open, handleClose }) => {
                 <p>
                   <strong>Fecha Aprobada:</strong> {approvalDate}
                 </p>
-                {/* Display Transaction Category */}
                 <p>
                   <strong>Categoría:</strong> {transaction.category}
+                </p>
+                {/* Display Transaction Status */}
+                <p>
+                  <strong>Estado:</strong> {transaction.status}
                 </p>
 
                 <h3 className="mt-2 font-semibold">Equipos Solicitados:</h3>

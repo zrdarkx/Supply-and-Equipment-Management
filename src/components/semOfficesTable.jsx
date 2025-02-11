@@ -1,7 +1,11 @@
 import { Button, Table, Tooltip } from "flowbite-react";
 import moment from "moment";
+import "moment/locale/es"; // Importa la localización en español
 import { HiLogin, HiOutlineCog, HiTrash } from "react-icons/hi";
 import { useSemStore } from "../zustand/store";
+
+// Establece el locale a español
+moment.locale("es");
 
 export function SemOfficesTable({
   data,
@@ -12,6 +16,7 @@ export function SemOfficesTable({
 }) {
   const { currentUser } = useSemStore();
   const isAdmin = currentUser.role == "Admin";
+
   return (
     <div className="overflow-x-auto">
       {data && (
@@ -33,21 +38,22 @@ export function SemOfficesTable({
           <Table.Body className="divide-y">
             {data.map((item) => {
               const firebaseDate = item?.createdAt;
+              // Convierte la fecha de Firebase y la formatea según el locale español
               const date = moment(firebaseDate?.toDate()).format("LLL");
 
               return (
                 <Table.Row key={item.id}>
-                  <Table.Cell className="bg-slate-800  text-white">
+                  <Table.Cell className="bg-slate-800 text-white">
                     {item.id}
-                  </Table.Cell>{" "}
-                  <Table.Cell className="bg-slate-800  text-white font-bold">
+                  </Table.Cell>
+                  <Table.Cell className="bg-slate-800 text-white font-bold">
                     {item.officeName}
-                  </Table.Cell>{" "}
-                  <Table.Cell className="bg-slate-800  text-white">
+                  </Table.Cell>
+                  <Table.Cell className="bg-slate-800 text-white">
                     {date}
-                  </Table.Cell>{" "}
+                  </Table.Cell>
                   {isAdmin && (
-                    <Table.Cell className="bg-slate-800  text-white">
+                    <Table.Cell className="bg-slate-800 text-white">
                       <div className="flex flex-row justify-center items-center">
                         <Tooltip content="Actualizar nombre de la oficina">
                           <Button
@@ -74,7 +80,6 @@ export function SemOfficesTable({
                             }}
                             gradientMonochrome="failure"
                           >
-                            {" "}
                             <HiTrash color="white" className="mr-2 h-5 w-5" />
                             Eliminar
                           </Button>

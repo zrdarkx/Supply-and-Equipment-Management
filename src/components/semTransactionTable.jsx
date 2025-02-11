@@ -430,15 +430,39 @@ const SemTransactionTable = ({
                     <Table.Row className="!border-b-0 bg-gray-50 dark:bg-gray-800">
                       <Table.Cell colSpan={8} className="p-0">
                         <StatusTimestamps transaction={item} />
+                        {/* Display Rejection Reason */}
+                        {item.status === "Rechazado" && (
+                          <div className="p-4 bg-red-100 border-l-4 border-red-500">
+                            <p className="text-red-700 font-bold">
+                              Motivo de Rechazo:
+                            </p>
+                            <p>{item.rejectionReason}</p>
+                          </div>
+                        )}
+
+                        {/* Display Return observations */}
+                        {item.status === "Devuelto" && (
+                          <div className="p-4 bg-blue-100 border-l-4 border-blue-500">
+                            <p className="text-blue-700 font-bold">
+                              Observaciones de la devolución:
+                            </p>
+                            <p>{item.returnObservation}</p>{" "}
+                            {/*  Display observation here */}
+                          </div>
+                        )}
 
                         {isAdmin &&
                           item.status === "Entregado" &&
                           item.category === "Equipos" && (
                             <Button
                               onClick={() => handleReturnClick(item)} // Open the modal
-                              gradientMonochrome="success"
+                              gradientMonochrome="indigo"
+                              size="md"
+                              pill
+                              className="flex items-center gap-2 mt-4 ml-4"
                             >
-                              Devolver Equipo
+                              <HiArrowUturnLeft className="h-5 w-5" />
+                              Devolver
                             </Button>
                           )}
                       </Table.Cell>
