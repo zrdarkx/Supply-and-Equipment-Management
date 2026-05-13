@@ -15,6 +15,7 @@ import { ConfirmationModal } from "../components/confirmationModal";
 import useUpdateOffice from "../hooks/useUpdateOffice";
 import NoData from "../components/noData";
 import Loading from "../components/loading";
+import OfficeReport from "../components/officeReport";
 
 const Offices = () => {
   const [addOfficeModal, setAddOfficeModal] = useState(false);
@@ -22,6 +23,7 @@ const Offices = () => {
   const [selectedOffice, setSelectedOffice] = useState(null);
   const [office, setOffice] = useState("");
   const [search, setSearch] = useState("");
+  const [officeReportOpen, setOfficeReportOpen] = useState(false);
 
   // CRUD OFFICE
   const { addOffice } = useAddOffice();
@@ -34,11 +36,11 @@ const Offices = () => {
       updateOffice(selectedOffice, office);
       setAddOfficeModal(false);
       setSelectedOffice(null);
-      toast.success("Updated office name successfully");
+      toast.success("Nombre de la oficina actualizado correctamente");
     } else {
       addOffice(office);
       setAddOfficeModal(false);
-      toast.success("Added office successfully");
+      toast.success("Oficina agregada correctamente");
     }
   };
 
@@ -57,7 +59,9 @@ const Offices = () => {
   return (
     <>
       <SemModal
-        title={selectedOffice ? "Update office name" : "Add office"}
+        title={
+          selectedOffice ? "Actualizar nombre de la oficina" : "Agregar oficina"
+        }
         open={addOfficeModal}
         handleClose={() => {
           setAddOfficeModal(false);
@@ -68,15 +72,17 @@ const Offices = () => {
           value={office}
           event={(event) => setOffice(event.target.value)}
           color={"info"}
-          label="Office Name"
-          placeholder="Enter office name"
+          label="Nombre de la Oficina"
+          placeholder="Ingrese el nombre de la oficina"
         />
         <Button
           onClick={handleOfficeEvent}
           gradientMonochrome={selectedOffice ? "info" : "info"}
           className="w-full mt-5 py-2"
         >
-          {selectedOffice ? "Update office name" : "Add Office"}
+          {selectedOffice
+            ? "Actualizar nombre de la oficina"
+            : "Agregar Oficina"}{" "}
         </Button>
       </SemModal>
       <ConfirmationModal
@@ -93,13 +99,13 @@ const Offices = () => {
       <div className="office-wrapper p-0 lg:p-5">
         <ContentHeader
           setSearch={setSearch}
-          title="Office"
+          title="Oficinas"
           Icon={HiOfficeBuilding}
           event={() => {
             setAddOfficeModal(true);
             setOffice("");
           }}
-          tooltip={"Add office to the system"}
+          tooltip={"Agregar oficina al sistema"}
         />
 
         {loading && <Loading />}
@@ -113,9 +119,26 @@ const Offices = () => {
           />
         )}
         {!loading && offices.length <= 0 && (
-          <NoData title={"There's no office, please add one."} />
+          <NoData title={"No hay oficinas, por favor agrega una."} />
         )}
       </div>
+
+      <Button
+        color="success"
+        className="mb-2"
+        onClick={() => setOfficeReportOpen(true)}
+      >
+        Ver Reporte de Oficinas
+      </Button>
+
+      {officeReportOpen && (
+        <OfficeReport
+          title="Reporte de Oficinas"
+          size="6xl"
+          open={officeReportOpen}
+          handleClose={() => setOfficeReportOpen(false)}
+        />
+      )}
     </>
   );
 };

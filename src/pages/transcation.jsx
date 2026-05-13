@@ -1,28 +1,29 @@
 import { useState } from "react";
-import SemInput from "../components/semInput";
-import SemTitle from "../components/semTitle";
 import SemTransactionTable from "../components/semTransactionTable";
 import useGetTransaction from "../hooks/useGetTransaction";
 import DashboardLayout from "../layout/dashboardLayout";
-import { HiMagnifyingGlass } from "react-icons/hi2";
 import { Button } from "flowbite-react";
-import { HiOutlineTable, HiUserCircle, HiViewGrid } from "react-icons/hi";
+import { HiOutlineTable, HiViewGrid } from "react-icons/hi";
 import Loading from "../components/loading";
 import RisFormModal from "../components/risFormModal";
 import IcsFormModal from "../components/IcsFormModal";
 import ParFormModal from "../components/parFormModal";
+import ApprovedEquipmentReport from "../components/approvedEquipmentReport";
+import RejectReasonModal from "../components/RejectReasonModal";
 
 const Transaction = () => {
   const { data, loading } = useGetTransaction();
-  const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
   const [currentTransaction, setCurrentTransaction] = useState();
   const [risForm, setRisForm] = useState(false);
   const [icsForm, setIcsForm] = useState(false);
   const [parForm, setParForm] = useState(false);
+  const [approvedReportOpen, setApprovedReportOpen] = useState(false);
+  const [rejectModalOpen, setRejectModalOpen] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] = useState();
 
   const filterByCategory = data.filter((item) => {
-    if (item.category == category) {
+    if (item.category === category) {
       return item;
     }
   });
@@ -32,27 +33,45 @@ const Transaction = () => {
       {loading && <Loading />}
 
       <RisFormModal
-        title={`RIS Form`}
-        size={"6xl"}
+        title="Formulario SEM"
+        size="6xl"
         open={risForm}
         handleClose={() => setRisForm(false)}
         data={currentTransaction?.item}
       />
 
       <IcsFormModal
-        title={`ICS Form`}
-        size={"6xl"}
+        title="Formulario RCI"
+        size="6xl"
         open={icsForm}
         handleClose={() => setIcsForm(false)}
         data={currentTransaction}
       />
 
       <ParFormModal
-        title={`PAR Form`}
-        size={"6xl"}
+        title="Formulario RRB"
+        size="6xl"
         open={parForm}
         handleClose={() => setParForm(false)}
         data={currentTransaction}
+      />
+
+      {approvedReportOpen && (
+        <ApprovedEquipmentReport
+          title="Informe de Transacciones Aprobadas"
+          size="6xl"
+          open={approvedReportOpen}
+          handleClose={() => setApprovedReportOpen(false)}
+          data={currentTransaction}
+        />
+      )}
+
+      <RejectReasonModal
+        open={rejectModalOpen}
+        handleClose={() => setRejectModalOpen(false)}
+        onReject={(reason) => {
+          rejectTransaction(selectedTransaction?.id, currentUser, reason);
+        }}
       />
 
       {!loading && (
@@ -63,23 +82,30 @@ const Transaction = () => {
                 color={category === "all" ? "info" : "gray"}
                 onClick={() => setCategory("all")}
               >
-                All
+                Todos
               </Button>
               <Button
-                color={category === "Supply" ? "info" : "gray"}
-                onClick={() => setCategory("Supply")}
+                color={category === "Suministros" ? "info" : "gray"}
+                onClick={() => setCategory("Suministro")}
               >
                 <HiOutlineTable className="mr-3 h-4 w-4" />
-                Supply
+                Suministros
               </Button>
               <Button
-                color={category === "Equipment" ? "info" : "gray"}
-                onClick={() => setCategory("Equipment")}
+                color={category === "Equipos" ? "info" : "gray"}
+                onClick={() => setCategory("Equipos")}
               >
                 <HiViewGrid className="mr-3 h-4 w-4" />
-                Equipment
+                Equipos
               </Button>
             </Button.Group>
+            <Button
+              color="success"
+              className="mb-2"
+              onClick={() => setApprovedReportOpen(true)}
+            >
+              Ver Informe de Transacciones Aprobadas
+            </Button>
           </div>
 
           <SemTransactionTable

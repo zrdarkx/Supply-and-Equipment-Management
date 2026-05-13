@@ -13,6 +13,8 @@ import useDeleteEquipment from "../hooks/useDeleteEquipment";
 import useUpdateEquipment from "../hooks/useUpdateEquipment";
 import { useSemStore } from "../zustand/store";
 import AddEquipmentModal from "../components/addEquipmentModal";
+import EquipmentReport from "../components/equipmentReport";
+import { Button } from "flowbite-react";
 
 const Equipment = ({ cart }) => {
   const [forms, setForms] = useState(EQUIPMENT_DEFAULT_VALUE);
@@ -21,6 +23,7 @@ const Equipment = ({ cart }) => {
   const [selectedEquip, setSelectedEquip] = useState(null);
   const [isUpdate, setIsUpdate] = useState(false);
   const [search, setSearch] = useState("");
+  const [equipmentReportOpen, setEquipmentReportOpen] = useState(false);
 
   // HOOKS
 
@@ -41,10 +44,10 @@ const Equipment = ({ cart }) => {
   const handleSubmit = () => {
     if (isUpdate) {
       updateEquipment(forms);
-      toast.success("Equipment Updated.");
+      toast.success("Equipo Actualizado.");
     } else {
       addEquipment(forms);
-      toast.success("Equipment Added.");
+      toast.success("Equipo añadido.");
     }
 
     setEquipModal(false);
@@ -77,7 +80,7 @@ const Equipment = ({ cart }) => {
     <>
       <AddEquipmentModal
         size="5xl"
-        title={isUpdate ? "Update Equipment" : "Add Equipment"}
+        title={isUpdate ? "Actualizar Equipo" : "Agregar Equipo"}
         open={equipModal}
         handleClose={() => setEquipModal(false)}
         forms={forms}
@@ -96,16 +99,16 @@ const Equipment = ({ cart }) => {
         <ContentHeader
           cart={cart}
           setSearch={setSearch}
-          title="Equipment"
+          title="Equipo"
           Icon={HiOutlineTable}
-          tooltip={"Add equipmente to the system"}
+          tooltip={"Agregar equipo al sistema"}
           event={handleAddingEquipment}
         />
 
         {loading && <Loading />}
 
         {!loading && data.length <= 0 && (
-          <NoData title={"There's no equipment, please add one."} />
+          <NoData title={"No hay equipo, por favor agrega uno."} />
         )}
 
         {!loading && data.length >= 1 && (
@@ -120,6 +123,23 @@ const Equipment = ({ cart }) => {
           />
         )}
       </div>
+
+      {equipmentReportOpen && (
+        <EquipmentReport
+          title="Reporte de Equipos"
+          size="6xl"
+          open={equipmentReportOpen}
+          handleClose={() => setEquipmentReportOpen(false)}
+        />
+      )}
+
+      <Button
+        color="success"
+        className="mb-2"
+        onClick={() => setEquipmentReportOpen(true)}
+      >
+        Ver Reporte de Equipos
+      </Button>
     </>
   );
 };

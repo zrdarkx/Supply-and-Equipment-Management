@@ -13,6 +13,8 @@ import NoData from "../components/noData";
 import { SUPPLY_DEFAULT_VALUE } from "../utils/constant";
 import { useSemStore } from "../zustand/store";
 import AddSupplyModal from "../components/addSupplyModal";
+import SupplyReport from "../components/supplyReport";
+import { Button } from "flowbite-react";
 
 const Supply = ({ cart }) => {
   //State
@@ -23,6 +25,7 @@ const Supply = ({ cart }) => {
   const [isUpdate, setIsUpdate] = useState(false);
   const [forms, setForms] = useState(SUPPLY_DEFAULT_VALUE);
   const [search, setSearch] = useState("");
+  const [supplyReportOpen, setSupplyReportOpen] = useState(false);
 
   // Hooks
 
@@ -44,18 +47,18 @@ const Supply = ({ cart }) => {
     if (!isUpdate) {
       addSupply(forms);
       setSupplyModal(false);
-      toast.success("Supply added successfully.");
+      toast.success("Suministro añadido exitosamente.");
     } else {
       updateSupply(forms);
       setSupplyModal(false);
-      toast.success("Supply updated successfully.");
+      toast.success("Suministro modificado exitosamente.");
     }
   };
 
   const handleDeleteSupply = () => {
     deleteSupply(selectedSupply.id);
     setDeleteModal(false);
-    toast.success("Deleted successfully.");
+    toast.success("Suministro eliminado.");
   };
 
   const handleSelectedSupplyUpdate = (data) => {
@@ -82,7 +85,7 @@ const Supply = ({ cart }) => {
       {/* SUPPLY MODAL */}
       <AddSupplyModal
         size="5xl"
-        title={isUpdate ? "Update Supply" : "Add Supply"}
+        title={isUpdate ? "Actualizar Suministro" : "Agregar Suministro"}
         open={supplyModal}
         handleClose={() => setSupplyModal(false)}
         forms={forms}
@@ -100,16 +103,16 @@ const Supply = ({ cart }) => {
         <ContentHeader
           cart={cart}
           setSearch={setSearch}
-          title="Supply"
+          title="Suministros"
           Icon={HiOutlineTable}
           event={handleAddingSupply}
-          tooltip={"Add supply to the system"}
+          tooltip={"Agregar suministro al sistema"}
         />
 
         {loading && <Loading />}
 
         {!loading && data.length <= 0 && (
-          <NoData title={"There's no supply, please add one."} />
+          <NoData title={"No hay suministros, por favor agrega uno."} />
         )}
 
         {!loading && data.length >= 1 && (
@@ -123,6 +126,23 @@ const Supply = ({ cart }) => {
           />
         )}
       </div>
+
+      <Button
+        color="success"
+        className="mb-2"
+        onClick={() => setSupplyReportOpen(true)}
+      >
+        Ver Reporte de Suministros
+      </Button>
+
+      {supplyReportOpen && (
+        <SupplyReport
+          title="Reporte de Suministros"
+          size="6xl"
+          open={supplyReportOpen}
+          handleClose={() => setSupplyReportOpen(false)}
+        />
+      )}
     </>
   );
 };

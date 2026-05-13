@@ -28,63 +28,63 @@ const RisFormModal = ({
       <div ref={targetRef} className="container mx-auto p-2">
         <div className="wrapper">
           <h1 className="font-bold text-center text-2xl">
-            REQUISITION AND ISSUE SLIP{" "}
+            SOLICITUD Y ENTREGA DE MATERIALES{" "}
           </h1>
           <div className="flex justify-between items-center mt-2">
-            <h1>Entity Name :CNSC </h1>
-            <h1>Fund Cluster : 07 - Trust Receipts fund</h1>
+            <h1>Nombre de la Entidad : J&N 31 A1 Importaciones C.A. </h1>
+            <h1>Grupo de Fondos : Fondo de Recibos de Fideicomiso</h1>
           </div>
         </div>
-        <div className="border border-slate-950 flex">
-          <div className="basis-8/12 border border-slate-950 p-2">
+        <div className="border border-black flex">
+          <div className="basis-8/12 border border-black p-2">
             <div className="flex flex-col ml-3">
-              <h1>Division: OVPRE </h1>
-              <h1>Office: FTO </h1>
+              <h1>Oficina: {currentUser.office} </h1>
+              <h1>División: </h1>
             </div>
           </div>
-          <div className="basis-4/12 border border-slate-950">
+          <div className="basis-4/12 border border-black">
             <div className="flex flex-col ml-3">
-              <h1>Responsibility Center Code: ___________</h1>
-              <h1>RIS No.: _____</h1>
+              <h1>Código del Centro de Responsabilidad: ___________</h1>
+              <h1>Número de SEM: #</h1>
             </div>
           </div>
         </div>
-        <div className="border border-slate-950 flex border-t-0">
-          <div className="basis-6/12 border border-slate-950 p-2 text-center">
-            <h1>Requisition </h1>
+        <div className="border border-black flex border-t-0">
+          <div className="basis-6/12 border border-black p-2 text-center">
+            <h1>Solicitud </h1>
           </div>
-          <div className="basis-2/12 border border-slate-950 p-2 text-center">
-            <h1>Stock Available?</h1>
+          <div className="basis-2/12 border border-black p-2 text-center">
+            <h1>¿Existencias Disponibles?</h1>
           </div>
-          <div className="basis-4/12 border border-slate-950 p-2 text-center">
-            <h1>Issue</h1>
+          <div className="basis-4/12 border border-black p-2 text-center">
+            <h1>Entrega</h1>
           </div>
         </div>
-        <div className="border border-slate-950 flex border-t-0">
-          <div className="basis-1/12 border border-slate-950 p-2 text-center">
-            <h1>Stock No. </h1>
+        <div className="border border-black flex border-t-0">
+          <div className="basis-1/12 border border-black p-2 text-center">
+            <h1>Número de Inventario </h1>
           </div>
-          <div className="basis-1/12 border border-slate-950 p-2 text-center">
-            <h1>Unit</h1>
+          <div className="basis-1/12 border border-black p-2 text-center">
+            <h1>Unidad</h1>
           </div>
-          <div className="basis-3/12 border border-slate-950 p-2 text-center">
-            <h1>Description</h1>
+          <div className="basis-3/12 border border-black p-2 text-center">
+            <h1>Descripción</h1>
           </div>
 
-          <div className="basis-1/12 border border-slate-950 p-2 text-center">
-            <h1>Quantity</h1>
+          <div className="basis-1/12 border border-black p-2 text-center">
+            <h1>Cantidad</h1>
           </div>
-          <div className="basis-1/12 border border-slate-950 p-2 text-center">
-            <h1>Yes</h1>
+          <div className="basis-1/12 border border-black p-2 text-center">
+            <h1>Sí</h1>
           </div>
-          <div className="basis-1/12 border border-slate-950 p-2 text-center">
+          <div className="basis-1/12 border border-black p-2 text-center">
             <h1>No</h1>
           </div>
-          <div className="basis-2/12 border border-slate-950 p-2 text-center">
-            <h1>Quantity</h1>
+          <div className="basis-2/12 border border-black p-2 text-center">
+            <h1>Cantidad</h1>
           </div>
-          <div className="basis-2/12 border border-slate-950 p-2 text-center">
-            <h1>Remarks</h1>
+          <div className="basis-2/12 border border-black p-2 text-center">
+            <h1>Observaciones</h1>
           </div>
         </div>
         {data?.map((item) => {
@@ -93,7 +93,7 @@ const RisFormModal = ({
               key={item.id}
               stockNo={item.inventoryNumber || item.propertyNumber}
               unit={item.unit}
-              decription={item.name + " | " + item.description}
+              decription={item.name}
               rQuantity={item.borrowedQuantity ? item.borrowedQuantity : 1}
               stockAvailable={item.quantity !== 0 ? true : false}
               iQuantity={item.quantity}
@@ -103,10 +103,10 @@ const RisFormModal = ({
         })}
 
         <RisFormDummyRow />
-        <div className="border border-slate-950 p-10 text-center">
+        <div className="border border-black p-10 text-center">
           <h1>
-            Purpose: Other supplies and materials to be used for Survey,
-            Research, Exploration and Development expenses.{" "}
+            Propósito: Otros suministros y materiales que se utilizarán para los
+            gastos de estudios, investigación, exploración y desarrollo.{" "}
           </h1>
         </div>
       </div>
@@ -118,7 +118,7 @@ const RisFormModal = ({
             }}
             className="w-full mt-5 py-3 mr-5"
           >
-            Download <HiDownload className="mx-3" size={20} />
+            Descargar <HiDownload className="mx-3" size={20} />
           </Button>
           <Button
             color={"success"}
@@ -126,12 +126,12 @@ const RisFormModal = ({
               addSupplyTransaction(data, currentUser);
               setCartModal(false);
               handleClose();
-              toast.success("Succesfully added transaction");
+              toast.success("Transacción agregada correctamente");
               setCartSupply([]);
             }}
             className="w-full mt-5 py-3"
           >
-            Submit Supply RIS
+            Enviar SEM de Suministros
           </Button>
         </div>
       )}
@@ -143,7 +143,7 @@ const RisFormModal = ({
             }}
             className="w-full mt-5 py-3 mr-5"
           >
-            Download <HiDownload className="mx-3" size={20} />
+            Descargar <HiDownload className="mx-3" size={20} />
           </Button>
           <Button
             color={"success"}
@@ -151,12 +151,12 @@ const RisFormModal = ({
               addEquipmentTransaction(data, currentUser);
               setCartModal(false);
               handleClose();
-              toast.success("Succesfully added transaction");
+              toast.success("Transacción agregada correctamente");
               setCartEquipment([]);
             }}
             className="w-full mt-5 py-3"
           >
-            Submit Equipment RIS
+            Enviar SEM de Equipo
           </Button>
         </div>
       )}
@@ -167,7 +167,7 @@ const RisFormModal = ({
           }}
           className="w-full mt-5 py-3 mr-5"
         >
-          Download <HiDownload className="mx-3" size={20} />
+          Descargar <HiDownload className="mx-3" size={20} />
         </Button>
       )}
     </SemModal>

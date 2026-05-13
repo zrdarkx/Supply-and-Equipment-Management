@@ -12,7 +12,7 @@ const useAddTransaction = () => {
         currentUser: JSON.stringify(currentUser),
         item,
         createdAt: serverTimestamp(),
-        status: "Pending",
+        status: "Pendiente",
       });
     });
   };
@@ -24,8 +24,8 @@ const useAddTransaction = () => {
       currentUser: JSON.stringify(currentUser),
       item: supply,
       createdAt: serverTimestamp(),
-      status: "Pending",
-      category: "Supply",
+      status: "Pendiente",
+      category: "Suministro",
     });
   };
 
@@ -36,8 +36,8 @@ const useAddTransaction = () => {
       currentUser: JSON.stringify(currentUser),
       item: equipment,
       createdAt: serverTimestamp(),
-      status: "Pending",
-      category: "Equipment",
+      status: "Pendiente",
+      category: "Equipos",
     });
   };
 

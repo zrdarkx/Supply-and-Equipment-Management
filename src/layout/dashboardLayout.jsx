@@ -35,7 +35,7 @@ const DashboardLayout = ({ children }) => {
     <div className="w-full min-h-screen bg-slate-950 pb-10">
       <SemModal
         dark={true}
-        title={`Your Item Cart`}
+        title={`Tus solicitudes`}
         size={"xxl"}
         open={cartModal}
         handleClose={() => setCartModal(false)}
@@ -45,11 +45,11 @@ const DashboardLayout = ({ children }) => {
             <Tabs.Item
               onClick={() => setCurrentMode("Supply")}
               active
-              title="Supply"
+              title="Suministros"
               icon={HiOutlineTable}
             >
               {isSupplyCartEmpty ? (
-                <NoData title={"Your cart is empty try addding one."} />
+                <NoData title={"Tu solicitud de suministros está vació."} />
               ) : (
                 <Supply cart={true} />
               )}
@@ -64,17 +64,17 @@ const DashboardLayout = ({ children }) => {
                   }}
                   className="w-full py-2 mx-3"
                 >
-                  Finalize Supply
+                  Finalizar Suministros
                 </Button>
               </div>
             </Tabs.Item>
             <Tabs.Item
               onClick={() => setCurrentMode("Equipment")}
-              title="Equipment"
+              title="Equipos y Servicios"
               icon={HiViewGrid}
             >
               {isEquipmentCartEmpty ? (
-                <NoData title={"Your cart is empty try addding one."} />
+                <NoData title={"Tu solicitud de equipos está vació."} />
               ) : (
                 <Equipment cart={true} />
               )}
@@ -89,7 +89,7 @@ const DashboardLayout = ({ children }) => {
                   }}
                   className="w-full py-2 mx-3"
                 >
-                  Finalize Equipment
+                  Finalizar Equipos
                 </Button>
               </div>
             </Tabs.Item>

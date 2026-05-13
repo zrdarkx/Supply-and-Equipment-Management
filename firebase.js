@@ -5,12 +5,12 @@ import { getFirestore } from "firebase/firestore";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDfh17TZpIhggmwAu86Z4AagCsb-fG5HhE",
-  authDomain: "supply-and-equipment-8df9f.firebaseapp.com",
-  projectId: "supply-and-equipment-8df9f",
-  storageBucket: "supply-and-equipment-8df9f.appspot.com",
-  messagingSenderId: "224080937906",
-  appId: "1:224080937906:web:2e42711af2aee00b6a1aab",
+  apiKey: "AIzaSyClyGaGQ6G4W4dc_F6pHlKbfRWRuJ3CeE0",
+  authDomain: "equips-46b96.firebaseapp.com",
+  projectId: "equips-46b96",
+  storageBucket: "equips-46b96.appspot.com",
+  messagingSenderId: "695168182787",
+  appId: "1:695168182787:web:0a8d3ffeb86ec594713c36",
 };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

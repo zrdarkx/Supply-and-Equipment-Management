@@ -71,7 +71,7 @@ const Signup = () => {
   return (
     <div className="w-100 min-h-screen bg-slate-950 flex justify-center items-center">
       <div className="content bg-slate-800 min-h-5/6 w-5/6 rounded-lg p-10 my-5">
-        <SemTitle color={"white"} title={"Account Creation"} />
+        <SemTitle color={"white"} title={"Creación de Cuenta"} />
         <form
           className="forms flex flex-row flex-wrap lg:flex-nowrap mt-5"
           onSubmit={handleSubmitForm}
@@ -79,31 +79,31 @@ const Signup = () => {
           <div className="basis-full lg:basis-4/12 mr-5">
             <SemInput
               id={"firstName"}
-              label={"First Name"}
-              placeholder={"Enter your first name"}
+              label={"Nombre"}
+              placeholder={"Ingresa tu nombre"}
               icon={HiUser}
               event={handleUpdateForm}
               name={"firstName"}
             />
             <SemInput
               id={"middleName"}
-              label={"Middle Name"}
-              placeholder={"Enter your middle name"}
+              label={"Segundo Nombre"}
+              placeholder={"Ingresa tu segundo nombre"}
               icon={HiUser}
               event={handleUpdateForm}
               name={"middleName"}
             />
             <SemInput
               id={"lastName"}
-              label={"Last Name"}
-              placeholder={"Enter your last name"}
+              label={"Apellido"}
+              placeholder={"Ingresa tu apellido"}
               icon={HiUser}
               event={handleUpdateForm}
               name={"lastName"}
             />
             <SemInput
               id={"birthDate"}
-              label={"Birth Date"}
+              label={"Fecha de Nacimiento"}
               icon={HiCalendar}
               type={"date"}
               event={handleUpdateForm}
@@ -111,20 +111,25 @@ const Signup = () => {
             />
             <SemInput
               id={"contact"}
-              label={"Contact Number"}
+              label={"Número de Contacto"}
               icon={HiPhone}
-              addOn="+63"
-              placeholder={"Enter your contact number"}
+              addOn="+58"
+              placeholder={"Ingresa tu número de contacto"}
               event={handleUpdateForm}
               name={"contact"}
             />
           </div>
           <div className="basis-full lg:basis-4/12 mr-5">
             <SemSelect
-              label={"Gender"}
+              label={"Género"}
               icon={HiUsers}
               id={"gender"}
-              data={["Please select your gender", "Male", "Female", "Other"]}
+              data={[
+                "Por favor selecciona tu género",
+                "Masculino",
+                "Femenino",
+                "Otro",
+              ]}
               event={handleUpdateForm}
               name="gender"
             />
@@ -132,24 +137,24 @@ const Signup = () => {
             <SemInput
               type={"email"}
               id={"email"}
-              label={"Email"}
-              placeholder={"Enter your email"}
+              label={"Correo Electrónico"}
+              placeholder={"Ingresa tu correo electrónico"}
               icon={HiMail}
               event={handleUpdateForm}
               name="email"
             />
             <SemInput
               id={"address"}
-              label={"Address"}
-              placeholder={"Enter your address"}
+              label={"Dirección"}
+              placeholder={"Ingresa tu dirección"}
               icon={HiLocationMarker}
               event={handleUpdateForm}
               name="address"
             />
             <SemInput
               id={"password"}
-              label={"Password"}
-              placeholder={"Enter your password"}
+              label={"Contraseña"}
+              placeholder={"Ingresa tu contraseña"}
               icon={HiLockClosed}
               type={"password"}
               event={handleUpdateForm}
@@ -158,8 +163,8 @@ const Signup = () => {
             />
             <SemInput
               id={"confirmPassword"}
-              label={"Confirm Password"}
-              placeholder={"Confirm your password"}
+              label={"Confirmar Contraseña"}
+              placeholder={"Confirma tu contraseña"}
               icon={HiLockClosed}
               type={"password"}
               event={handleUpdateForm}
@@ -169,21 +174,21 @@ const Signup = () => {
           </div>
           <div className="basis-full lg:basis-4/12 mr-5">
             <SemSelect
-              label={"User Type"}
+              label={"Tipo de Usuario"}
               icon={HiUserGroup}
               id={"role"}
               data={[
-                "Please select your role",
-                "Department Supply Coordinator",
+                "Por favor selecciona tu rol",
+                "Coordinador de Suministros del Departamento",
                 "Admin",
               ]}
               event={handleUpdateForm}
               name="role"
             />
-            {forms.role == "Department Supply Coordinator" && (
+            {forms.role == "Coordinador de Suministros del Departamento" && (
               <SemSelect
                 offices={true}
-                label={"Offices"}
+                label={"Oficinas"}
                 icon={HiOfficeBuilding}
                 id={"role"}
                 data={offices}
@@ -199,13 +204,13 @@ const Signup = () => {
                 className="w-full "
               >
                 <HiUserAdd className="mr-2 h-5 w-5" />
-                Create Account
+                Crear Cuenta
               </Button>
               <HR.Text />
               <Link to={"/"}>
                 <Button gradientMonochrome="success" className="w-full">
                   <HiLogin className="mr-2 h-5 w-5" />
-                  Login
+                  Iniciar Sesión
                 </Button>
               </Link>
             </div>

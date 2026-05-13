@@ -12,7 +12,7 @@ const ContentHeader = ({ event, title, Icon, tooltip, setSearch, cart }) => {
       {!cart && (
         <SemInput
           event={(event) => setSearch(event.target.value)}
-          placeholder={"Search here..."}
+          placeholder={"Buscar aquí..."}
           icon={HiMagnifyingGlass}
         />
       )}
@@ -22,7 +22,7 @@ const ContentHeader = ({ event, title, Icon, tooltip, setSearch, cart }) => {
           <Tooltip content={tooltip}>
             <Button onClick={event} gradientMonochrome="success">
               <HiPlus color="white" className="mr-2 h-5 w-5" />
-              Add {title}
+              Agregar {title}
             </Button>
           </Tooltip>
         </div>

@@ -20,32 +20,32 @@ const AddSupplyModal = ({
             value={forms.name}
             color={"gray"}
             name={"name"}
-            label="Name"
-            placeholder="Enter name"
+            label="Nombre"
+            placeholder="Ingrese nombre"
             event={handleUpdateForm}
           />
           <SemInput
             value={forms.quantity}
             name={"quantity"}
             color={"gray"}
-            label="Quantity"
-            placeholder="Enter quantity"
+            label="Cantidad"
+            placeholder="Ingrese cantidad"
             event={handleUpdateForm}
           />
           <SemInput
             value={forms.unit}
             name={"unit"}
             color={"gray"}
-            label="Unit"
-            placeholder="Enter unit"
+            label="Unidad"
+            placeholder="Ingrese unidad"
             event={handleUpdateForm}
           />
           <SemInput
             value={forms.unitCost}
             name={"unitCost"}
             color={"gray"}
-            label="Unit Cost"
-            placeholder="Enter unit cost"
+            label="Costo Unitario"
+            placeholder="Ingrese costo unitario"
             event={handleUpdateForm}
           />
         </div>
@@ -54,24 +54,24 @@ const AddSupplyModal = ({
             value={forms.description}
             name={"description"}
             color={"gray"}
-            label="Description"
-            placeholder="Enter description"
+            label="Descripción"
+            placeholder="Ingrese descripción"
             event={handleUpdateForm}
           />
           <SemInput
             value={forms.estimatedUsefulLife}
             name={"estimatedUsefulLife"}
             color={"gray"}
-            label="Estimated Useful Life"
-            placeholder="Enter estimated useful life"
+            label="Vida Útil Estimada"
+            placeholder="Ingrese vida útil estimada"
             event={handleUpdateForm}
           />
           <SemInput
             value={forms.inventoryNumber}
             name={"inventoryNumber"}
             color={"gray"}
-            label="Inventory Number"
-            placeholder="Enter inventory number"
+            label="Número de Inventario"
+            placeholder="Ingrese número de inventario"
             event={handleUpdateForm}
           />
         </div>{" "}
@@ -82,7 +82,7 @@ const AddSupplyModal = ({
         gradientMonochrome="info"
         className="w-full mt-5 py-2"
       >
-        {isUpdate ? "Update Supply" : "Add Supply"}
+        {isUpdate ? "Actualizar Suministro" : "Agregar Suministro"}
       </Button>
     </SemModal>
   );
