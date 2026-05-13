@@ -1,5 +1,3 @@
-Este es el archivo `README.md` editado y traducido al español, integrando la terminología técnica y el contexto institucional de tu trabajo de grado:
-
 # Sistema de Información para la Gestión de Equipos Petroleros (SIGEP) - J&N31 A1 Importaciones C.A.
 
 Este sistema de información fue desarrollado bajo la metodología **DSDM (Dynamic Systems Development Method)** para optimizar los procesos de control, seguimiento y mantenimiento de activos en la empresa **J&N31 A1 Importaciones C.A.**, ubicada en Maturín, Estado Monagas. Reemplaza la gestión tradicional basada en hojas de cálculo por una solución centralizada y automatizada.
@@ -8,22 +6,19 @@ Este sistema de información fue desarrollado bajo la metodología **DSDM (Dynam
 
 ### Detalles de Usuario
 
-* 
 **Nombres y Apellidos** 
-
 
 * **Género y Fecha de Nacimiento**
 * **Datos de Contacto:** Teléfono y Dirección.
-* 
+  
 **Credenciales:** Correo electrónico y Contraseña (con validación en tiempo real).
 
-
 * **Roles del Sistema:**
-* 
+
 **Administrador:** Responsable de la gestión integral de la plataforma y control de registros maestros.
-* 
+
 **Coordinador de Suministros del Departamento:** Usuario operativo encargado de las solicitudes y gestión de inventario por oficina.
-* 
+
 **Asignación de Oficinas:** Los Coordinadores deben seleccionar su oficina correspondiente (previamente creada por el Administrador) al registrarse.
 
 
@@ -41,20 +36,18 @@ Interactúa con la plataforma para gestionar los recursos asignados a su oficina
 
 #### Paneles y Funcionalidades
 
-* **Transacciones:**
+**Transacciones:**
 * Crear solicitudes mediante el formulario **RIS** (Requisición e Informe de Suministros).
 
-* **Registros:**
-* 
+**Registros:**
+
 **Suministros:** Tabla para visualizar formularios **ICS** y **RIS** liberados, con barra de búsqueda.
 
-* 
 **Equipos:** Tabla para visualizar formularios **PAR** y **RIS** liberados.
 
-* 
 **Historial de Solicitudes:** Paneles específicos para solicitudes Aprobadas, Rechazadas y Pendientes.
 
-* **Escáner QR (Solo Equipos):**
+**Escáner QR (Solo Equipos):** (Falta por implementar)
 * Al aprobarse una solicitud de equipo, se genera un código QR que permite visualizar detalles técnicos al ser escaneado.
 * Opción de **Transferencia de Propiedad** dentro de los detalles del equipo.
 
@@ -66,12 +59,9 @@ Supervisa la información y controla los flujos de trabajo de la organización.
 
 * **Transacciones:**
 * Gestión de solicitudes pendientes enviadas por los Coordinadores.
-
 * Capacidad para **Aprobar** o **Rechazar** (con motivo de rechazo) las solicitudes.
-
 * **Registros Maestros (CRUD):**
 * Gestión completa (Crear, Leer, Actualizar, Eliminar) de **Suministros**, **Equipos** y **Oficinas**.
-
 * Visualización de registros aprobados y formas liberadas.
 
 ## Flujo del Proceso de Transacción
@@ -111,7 +101,5 @@ Supervisa la información y controla los flujos de trabajo de la organización.
 
 ## Stack Tecnológico
 
-* 
 **Frontend:** React JS, Vite, Bootstrap, HTML5, CSS3.
-* 
 **Backend/Base de Datos:** Node.js y Firebase (Cloud Firestore).
