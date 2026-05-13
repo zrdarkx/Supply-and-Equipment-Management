@@ -11,15 +11,15 @@ Este sistema de información fue desarrollado bajo la metodología **DSDM (Dynam
 * **Género y Fecha de Nacimiento**
 * **Datos de Contacto:** Teléfono y Dirección.
   
-**Credenciales:** Correo electrónico y Contraseña (con validación en tiempo real).
+**Credenciales:** Correo electrónico y Contraseña.
 
-* **Roles del Sistema:**
+**Roles del Sistema:**
 
-**Administrador:** Responsable de la gestión integral de la plataforma y control de registros maestros.
+* **Administrador:** Responsable de la gestión integral de la plataforma y control de registros maestros.
 
-**Coordinador de Suministros del Departamento:** Usuario operativo encargado de las solicitudes y gestión de inventario por oficina.
+* **Coordinador de Suministros del Departamento:** Usuario operativo encargado de las solicitudes y gestión de inventario por oficina.
 
-**Asignación de Oficinas:** Los Coordinadores deben seleccionar su oficina correspondiente (previamente creada por el Administrador) al registrarse.
+* **Asignación de Oficinas:** Los Coordinadores deben seleccionar su oficina correspondiente (previamente creada por el Administrador) al registrarse.
 
 
 
@@ -41,11 +41,11 @@ Interactúa con la plataforma para gestionar los recursos asignados a su oficina
 
 **Registros:**
 
-**Suministros:** Tabla para visualizar formularios **ICS** y **RIS** liberados, con barra de búsqueda.
+* **Suministros:** Tabla para visualizar formularios **ICS** y **RIS** liberados, con barra de búsqueda.
 
-**Equipos:** Tabla para visualizar formularios **PAR** y **RIS** liberados.
+* **Equipos:** Tabla para visualizar formularios **PAR** y **RIS** liberados.
 
-**Historial de Solicitudes:** Paneles específicos para solicitudes Aprobadas, Rechazadas y Pendientes.
+* **Historial de Solicitudes:** Paneles específicos para solicitudes Aprobadas, Rechazadas y Pendientes.
 
 **Escáner QR (Solo Equipos):** (Falta por implementar)
 * Al aprobarse una solicitud de equipo, se genera un código QR que permite visualizar detalles técnicos al ser escaneado.
